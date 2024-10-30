@@ -1,0 +1,32 @@
+###################################################################################
+######  RIEMANN INTEGRATION - SOLAR PRODUCTION
+###################################################################################
+
+- platform: integration  
+  unique_id: riemann_total_solar_kwh
+  name: Riemann total solar kwh
+  source: sensor.cerbo_gx_live_solar_production # victron_cerbo_live_solar_production
+  unit_prefix: k
+  round: 3
+
+- platform: integration
+  unique_id: total_power_consumed
+  name: Riemann total_power_consumed
+  source: sensor.total_power_consuming
+  unit_prefix: k
+  round: 3  
+
+- platform: integration
+  unique_id: total_battery_in_kwh
+  name: Riemann total_battery_in_kwh
+  source: sensor.live_battery_in
+  unit_prefix: k
+  round: 3
+
+- platform: integration
+  unique_id: total_battery_out_kwh
+  name: Riemann total_battery_out_kwh
+  source: sensor.live_battery_out
+  unit_prefix: k
+  round: 3
+  

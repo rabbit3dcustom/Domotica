@@ -1,0 +1,13 @@
+###################################################################################
+###################################################################################
+binary_sensor:
+###################################################################################
+  - platform: group
+    name: "Group Basement"
+    device_class: opening
+    entities:
+      - binary_sensor.01_snzb_04_garageindoor_door_opening
+      - binary_sensor.22_snzb_04_bsmntgym_window_opening
+      - binary_sensor.23_snzb_04_bsmntbathroom_window_opening
+      - binary_sensor.24_snzb_04_bsmntkitchen_window_opening   
+      - binary_sensor.25_snzb_04_bsmntstrgroom_window_opening   

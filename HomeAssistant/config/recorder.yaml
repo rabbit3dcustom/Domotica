@@ -1,0 +1,164 @@
+########################
+### THIS MANAGE THE HISTORICAL INFORMATION AND ONLY MAINTAIN
+#### the number of days of the first line.
+########################
+# Historical:
+# Check if the historical information is saved since 14th of July. Is the date is newer, then is a problem with home assistant.
+########################
+#Do not comment or HA will put the default number of days to 10
+# purge_keep_days: 10 #2024-08-08. Specify the number of history days to keep in recorder database after a purge.(Optional, default: 10)
+# purge_keep_days: 1825 #5 years of history.  #Do not comment or HA will put the default number of days to 10
+# purge_keep_days: 730 #2 years of history. 2024-07-20.
+# purge_keep_days: 365 #1 years of history. 2024-07-22.
+# purge_keep_days: 730 #2024-08-08. Specify the number of history days to keep in recorder database after a purge.(Optional, default: 10)
+purge_keep_days: 15 # 2024-08-17. Only 2 weeks to see easly the last status of everything. The influxDB is already running, let see the differences between influx and postgreSQL.
+auto_purge: true    # this automatically purge the database every night at 04:12 local time.
+auto_repack: true   # Automatically repack the database every second sunday after the auto purge.
+commit_interval: 5  # How often (in seconds) the events and state changes are committed to the database.(Optional, default: 5)
+
+# Database postgreSQL created on 2023-07-27 08:41:33.564291+02
+# 2023/07/29 7:47  - 214 MB
+# 2023/09/16 10:30  - 5408 MB
+# The influxDB is already running, let see the differences between influx and postgreSQL.
+# 2024-08-30T07:28:00.000Z - 9743 MB
+# 2024-08-31T22:44:00.000Z - 9772 MB
+
+db_url: !secret psql_string
+# db_retry_wait: 15 # (Optional, default: 3).The time in seconds, that the recorder sleeps when trying to connect to the database. Wait 15 seconds before retrying
+db_retry_wait: 3 # (Optional, default: 3).The time in seconds, that the recorder sleeps when trying to connect to the database. Wait 15 seconds before retrying
+db_max_retries: 5000 #(Optional, default: 10). The max amount of times, the recorder retries to connect to the database.
+
+exclude:
+  domains:
+#    - alarm_control_panel        
+    - automation
+#    - bodymiscale     
+    - button
+    - climate # Thermostat    
+    - counter
+    - conversation    
+#    - input_boolean    
+    - input_number  
+    - input_button
+    - input_select   
+    - input_datetime    
+    - light          
+    - number    
+    - person        
+    # - sun
+    - switch    
+    - weather
+    - trigger    
+    - timer
+    - vacuum  
+  #    - updater
+  #    - sensor
+  #    - updater
+  entities:
+    - input_number.number_3dprinters_maxservicehours
+    - binary_sensor.printers_are_printing
+    - input_number.number_3dprinters_delay_shutdown    
+    - sensor.tl_mr6400_wan_status
+    - sensor.asun3pro_octoprint_actual_tool0_temp
+    - sensor.asun3pro_octoprint_target_bed_temp
+    - sensor.asun3pro_octoprint_target_tool0_temp
+    - sensor.itaender3_octoprint_actual_tool0_temp
+    - sensor.emiliaa10m_octoprint_actual_tool0_temp
+    - sensor.emiliaa10m_octoprint_actual_tool1_temp
+    - sensor.emiliaa10m_octoprint_actual_bed_temp
+    - sensor.emiliaa10m_octoprint_target_bed_temp
+    - sensor.emiliaa10m_octoprint_target_tool0_temp
+    - sensor.emiliaa10m_octoprint_target_tool1_temp
+    - sensor.chispia10m_octoprint_actual_tool0_temp    
+    - sensor.chispia10m_octoprint_actual_tool1_temp
+    - sensor.chispia10m_octoprint_actual_bed_temp
+    - sensor.chispia10m_octoprint_target_bed_temp
+    - sensor.chispia10m_octoprint_target_tool0_temp
+    - sensor.chispia10m_octoprint_target_tool1_temp
+  entity_globs: 
+    # - binary_sensor.asun3pro_octoprint_*
+    # - sensor.asun3pro_octoprint_*
+    # - binary_sensor.itaender3_octoprint_*    
+    # - sensor.itaender3_octoprint_*
+    # - binary_sensor.emiliaa10m_octoprint_*
+    # - sensor.emiliaa10m_octoprint_*    
+    # - binary_sensor.chispia10m_octoprint_*
+    # - sensor.chispia10m_octoprint_*
+    - binary_sensor.rhinobox_octoprint_*
+    - sensor.rhinobox_octoprint_*
+    - binary_sensor.octoprint_*
+    - sensor.octoprint_*
+    - sensor.*_basicr2_* #sonoff basicR2 switches
+    - sensor.*_uptime*
+    - sensor.hp_officejet_*  #Printer
+    - sensor.hp_deskjet_* #Printer
+    - binary_sensor.22031116* # Mobile phone
+    - device_tracker.22031116* # Mobile phone
+    - sensor.22031116* # Mobile phone    
+    - binary_sensor.m2103k19g* # Mobile phone  ??
+    - device_tracker.m2103k19g* # Mobile phone  ??
+    - sensor.m2103k19g* # Mobile phone  ??
+    - sensor.tl_mr6400* # Router
+    - sensor.upnp* # Router    
+    - sensor.upnp_igd* # Router        
+    - binary_sensor.*_igd_* # Router
+    - sensor.*_connected_bssid*
+    - sensor.*_connected_ssid*
+    - sensor.*_rssi*
+    - sensor.*_lqi*
+    - sensor.*_signal*    
+  event_types:
+    - call_service # Don't record service calls
+
+include:
+  domains:
+    - alarm_control_panel      
+    # - automation    
+    - binary_sensor    
+    - bodymiscale    
+    # - button    
+    - camera    
+    # - climate # Thermostat
+    # - counter
+    # - conversation
+    - device_tracker    
+    - input_boolean    
+    # - input_button    
+    # - input_datetime
+    # - input_select
+    # - input_number    
+    # - switch
+    # - vacuum
+    # - light
+#    - number        
+    # - trigger    
+    - update
+    # - timer
+    - utility_meter
+    # - person
+    - update
+    - select    
+    - sensor    
+    - siren
+    - sun
+    # - weather
+    - template_sensors        
+    - zone     
+#  entities:
+#    - sensor.sensor_entrada_temperature
+#    - sensor.calefaccion_setpoint
+#    - sensor.day_night
+  # entity_globs:
+  #   sensor.*
+
+
+#HOW TO GET ALL THE DOMAINS TO HAVE THE HISTORICAL DATA: http://192.168.1.17:8123/developer-tools/template
+# domain: 
+# {%- set unique_domains = states | map(attribute='domain') |list | unique | list -%}
+# {%- for domain in unique_domains -%}
+# - {{domain + "\n"}}
+# {%- endfor -%}
+
+# {%- for d in states | groupby('domain') %}
+# {{ d[0] }}: {{ states[d[0]] | count  }}
+# {%- endfor %}

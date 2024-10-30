@@ -1,0 +1,103 @@
+
+###################################################################################
+###################################################################################
+
+# FULLY MIGRATE INSIDE HOME ASSITANT
+
+###################################################################################
+###################################################################################
+
+
+###################################################################################
+###################################################################################
+# automation:
+###################################################################################
+  # - alias: Heating - Turn off - Heating main room radiator   # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - type: opened
+  #       platform: device
+  #       device_id: a007eaa6ac2a614d000575e822eac4b8
+  #       entity_id: binary_sensor.10_snzb_04_mainroom_window_opening #5c69f605a3417430001bfa3618669885
+  #       domain: binary_sensor
+  #   condition:
+  #     - condition: device
+  #       type: is_on
+  #       device_id: 228670188383e0b212ac87524485974f
+  #       entity_id: switch.02_trvzb_mainroom_switch #fcb1e72f332265c65f7ffa1d2f0487cc
+  #       domain: switch
+  #   action:
+  #     - type: turn_off
+  #       device_id: 228670188383e0b212ac87524485974f
+  #       entity_id: switch.02_trvzb_mainroom_switch #fcb1e72f332265c65f7ffa1d2f0487cc
+  #       domain: switch
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Heating - Turn on - Heating main room radiator # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - type: not_opened
+  #       platform: device
+  #       device_id: a007eaa6ac2a614d000575e822eac4b8
+  #       entity_id: binary_sensor.10_snzb_04_mainroom_window_opening #5c69f605a3417430001bfa3618669885
+  #       domain: binary_sensor
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 228670188383e0b212ac87524485974f 
+  #       entity_id: switch.02_trvzb_mainroom_switch #fcb1e72f332265c65f7ffa1d2f0487cc
+  #       domain: switch
+  #   action:
+  #     - type: turn_on
+  #       device_id: 228670188383e0b212ac87524485974f 
+  #       entity_id: switch.02_trvzb_mainroom_switch #fcb1e72f332265c65f7ffa1d2f0487cc
+  #       domain: switch
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Heating - Turn off - Heating Sleepingroom radiator # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - type: opened
+  #       platform: device
+  #       device_id: 22b1358c43dc1e3be474fbd7d10525a7
+  #       entity_id: binary_sensor.02_snzb_04_sleepingroom_window_opening #4ca2d920f155045fd822c15b7303afa8
+  #       domain: binary_sensor
+  #   condition:
+  #     - condition: device
+  #       type: is_on
+  #       device_id: 7ce0e0a7def8f6693b4072bb1851bf4a
+  #       entity_id: switch.01_trvzb_sleepingroom_switch #bd07a530112468573493db57be866787
+  #       domain: switch
+  #   action:
+  #     - type: turn_off
+  #       device_id: 7ce0e0a7def8f6693b4072bb1851bf4a
+  #       entity_id: switch.01_trvzb_sleepingroom_switch #bd07a530112468573493db57be866787
+  #       domain: switch
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Heating - Turn on - Heating Sleepingroom radiator # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - type: not_opened
+  #       platform: device
+  #       device_id: 22b1358c43dc1e3be474fbd7d10525a7
+  #       entity_id: binary_sensor.02_snzb_04_sleepingroom_window_opening #4ca2d920f155045fd822c15b7303afa8
+  #       domain: binary_sensor
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 7ce0e0a7def8f6693b4072bb1851bf4a 
+  #       entity_id: switch.01_trvzb_sleepingroom_switch #bd07a530112468573493db57be866787
+  #       domain: switch
+  #   action:
+  #     - type: turn_on
+  #       device_id: 7ce0e0a7def8f6693b4072bb1851bf4a
+  #       entity_id: switch.01_trvzb_sleepingroom_switch #bd07a530112468573493db57be866787
+  #       domain: switch
+  #   mode: single

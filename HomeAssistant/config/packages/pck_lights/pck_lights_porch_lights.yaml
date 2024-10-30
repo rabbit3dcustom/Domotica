@@ -1,0 +1,136 @@
+# ###################################################################################
+input_datetime:
+# ###################################################################################
+  # enable_porch_lights_at_time:
+  #   name: "Enable porch lights at" #The lights will be automatically swith on from this hour
+  #   has_time: true
+  #   has_date: false
+  #   # initial: "18:00"
+  # disable_porch_lights_at_time:
+  #   name: "Disable porch lights at" #The lights will be blocked to be automatically swith on from this hour
+  #   has_time: true
+  #   has_date: false
+  #   # initial: "08:00"        
+
+  turnoff_porch_lights_at_time:
+    name: "Turn off porch lights at" #The lights will be turned off automatically when the hour is reached  # MIGRATE INSIDE HOME ASSITANT
+    has_time: true
+    has_date: false
+    # initial: "22:00"
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  # - alias: Lights - Turn on - Porch lights when Porch button pressed # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - device_id: 9d139c9acd8681657c6cc159ba5c147d
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_short_press
+  #       subtype: button
+  #       enabled: true          
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.02_zbminil2_porchelights_switch_switch
+  #       domain: switch
+  #       enabled: true
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.02_zbminil2_porchelights_switch_switch
+  #       enabled: true
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Lights - Turn off - Porch lights when Porch button pressed # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - device_id: 9d139c9acd8681657c6cc159ba5c147d
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_short_press
+  #       subtype: button
+  #       enabled: true          
+  #   condition:
+  #     - condition: device
+  #       type: is_on
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.02_zbminil2_porchelights_switch_switch
+  #       domain: switch
+  #       enabled: true        
+  #   action:
+  #     - service: switch.turn_off
+  #       target:
+  #         entity_id: switch.02_zbminil2_porchelights_switch_switch
+  #       enabled: true
+  #   mode: single 
+###################################################################################
+
+  # - alias: Lights - Turn on - Porch lights when dusk # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - platform: sun
+  #       event: sunset
+  #       offset: 0
+  #       enabled: true
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.02_zbminil2_porchelights_switch_switch
+  #       domain: switch      
+  #       enabled: true
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.02_zbminil2_porchelights_switch_switch        
+  #       enabled: true
+  #   mode: single
+###################################################################################
+
+  # - alias: Lights - Turn off - Porch lights when dawn # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - platform: sun
+  #       event: sunrise
+  #       offset: 0
+  #       enabled: true
+  #   condition:
+  #     - condition: device
+  #       type: is_on
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.02_zbminil2_porchelights_switch_switch
+  #       domain: switch
+  #       enabled: true
+  #   action:
+  #     - service: switch.turn_off
+  #       target:
+  #         entity_id: switch.02_zbminil2_porchelights_switch_switch        
+  #       enabled: true
+  #   mode: single 
+###################################################################################
+
+  # - alias: Lights - Turn off - Porch lights at - Turn off porch lights at # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #   - platform: time
+  #     at: input_datetime.turn_off_porch_lights_at
+  #   condition:
+  #   - condition: device
+  #     type: is_on
+  #     device_id: a6bb5c05f8f18be244d413a57a1bed80
+  #     entity_id: ad887d3cf5c62f49cba40e6837ddcb1d
+  #     domain: light
+  #   action:
+  #   - type: turn_off
+  #     device_id: a6bb5c05f8f18be244d413a57a1bed80
+  #     entity_id: ad887d3cf5c62f49cba40e6837ddcb1d
+  #     domain: light
+  #   mode: single
+  #     mode: single     
+###################################################################################

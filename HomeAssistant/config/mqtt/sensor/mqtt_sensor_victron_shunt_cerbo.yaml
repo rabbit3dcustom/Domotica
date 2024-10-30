@@ -1,0 +1,355 @@
+####################################################################################################################
+############# SHUNT
+####################################################################################################################
+
+- unique_id: victron_shunt_battery_soc
+  name: Battery SOC
+  state_class: measurement
+  device_class: battery
+  unit_of_measurement: "%"
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/Soc"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:car-battery
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}  
+
+# Estimated Time until battery is empty based on current load.
+# These calculations were copied from victrons code to mimic how they display it
+- unique_id: victron_shunt_battery_remaining_time_readable
+  name: Battery Remaining Time Readable
+  # state_class: measurement 
+  # device_class: duration
+  # unit_of_measurement: s    
+  icon: mdi:timer-sand
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/TimeToGo"
+  value_template: >
+    {% set battery_load = states('sensor.cerbo_gx_battery_load') | int(0) %}
+    {% if value_json is not defined %}
+      Error
+    {% elif value_json.value | is_number %}
+      {% set seconds = value_json.value | round(0) | int %}
+      {% set days = (seconds / 86400) | round(0, 'floor') | int %}
+      {% set hours = ((seconds - days * 86400) / 3600) | round(0, 'floor') | int %}
+      {% set minutes = ((seconds - hours * 3600) / 60) | round(0, 'floor') | int %}
+
+      {% if 2 > days >= 1 %}
+        {{days}} day
+      {% elif days >= 2 %}
+        {{days}} days
+      {% elif hours > 0 %}
+        {{hours}} h
+      {% elif minutes > 0 %}
+        {{minutes}} min
+      {% else %}
+        {{seconds}} secs
+      {% endif %}
+    {% else %}
+      ∞   
+    {% endif %}    
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}
+
+# Estimated Time until battery is empty based on current load.
+# These calculations were copied from victrons code to mimic how they display it
+- unique_id: victron_shunt_battery_remaining_time_seconds
+  name: Battery Remaining Time
+  # state_class: measurement 
+  # device_class: duration
+  # unit_of_measurement: s    
+  icon: mdi:timer-sand
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/TimeToGo"
+  value_template: >
+    {% set battery_load = states('sensor.cerbo_gx_battery_load') | int(0) %}
+    {% if value_json is not defined %}
+      Error
+    {% elif value_json.value | is_number %}
+      {% set seconds = value_json.value | round(0) | int %}
+        {{seconds}} secs
+    {% else %}
+      ∞   
+    {% endif %}    
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}           
+
+# DC section
+# ##################################################################################
+
+- unique_id: victron_shunt_battery_power
+  name: Battery Power
+  state_class: measurement
+  device_class: power
+  unit_of_measurement: W
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/Dc/0/Power"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:power-plug-battery
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}  
+
+- unique_id: victron_shunt_battery_current
+  name: Battery Current
+  state_class: measurement
+  device_class: current
+  unit_of_measurement: A
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/Dc/0/Current"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:current-dc
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}      
+
+- unique_id: victron_shunt_battery_voltage
+  name: Battery Voltage
+  state_class: measurement
+  device_class: voltage
+  unit_of_measurement: V
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/Dc/0/Voltage"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:current-dc
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}         
+
+# History section
+# ##################################################################################    
+
+- unique_id: victron_shunt_battery_history_dischargedenergy
+  name: Battery History Discharged Energy
+  state_class: measurement
+  device_class: energy
+  unit_of_measurement: kWh
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/DischargedEnergy"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:meter-electric
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}
+
+- unique_id: victron_shunt_battery_history_lastdischarge
+  name: Battery History Last Discharge
+  state_class: measurement
+  device_class: energy
+  unit_of_measurement: kWh
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/LastDischarge"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:meter-electric
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}    
+
+- unique_id: victron_shunt_battery_history_deepestdischarge
+  name: Battery History Deepest Discharge
+  state_class: measurement
+  device_class: energy
+  unit_of_measurement: kWh
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/DeepestDischarge"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:meter-electric
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}     
+
+- unique_id: victron_shunt_battery_history_avg_discharge
+  name: Battery History Avg Discharge
+  state_class: measurement
+  # device_class: current
+  unit_of_measurement: Ah
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/AverageDischarge"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:current-dc
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"} 
+
+- unique_id: victron_shunt_battery_history_secondssincelastfullcharge
+  name: Battery History Seconds Since Last Full Charge
+  # state_class: measurement
+  # device_class: current
+  # unit_of_measurement: Ah
+  unit_of_measurement: s  
+  icon: mdi:timer-sand  
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/TimeSinceLastFullCharge"
+  value_template: "{{ value_json.value | round(0) }}"
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"} 
+
+- unique_id: victron_shunt_battery_history_timesincelastfullcharge
+  name: Battery History Time Since Last Full Charge
+  # state_class: measurement
+  # device_class: current
+  # unit_of_measurement: Ah
+  # unit_of_measurement: s  
+  icon: mdi:timer-sand  
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/TimeSinceLastFullCharge"
+  value_template: >
+      {% set seconds = value_json.value | round(0) | int %}
+      {% set days = (seconds / 86400) | round(0, 'floor') | int %}
+      {% set hours = ((seconds - days * 86400) / 3600) | round(0, 'floor') | int %}
+      {% set minutes = ((seconds - hours * 3600) / 60) | round(0, 'floor') | int %}
+
+      {% if 2 > days >= 1 %}
+        {{days}} day
+      {% elif days >= 2 %}
+        {{days}} days
+      {% elif hours > 0 %}
+        {{hours}} h
+      {% elif minutes > 0 %}
+        {{minutes}} min
+      {% endif %}
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}     
+
+- unique_id: victron_shunt_battery_history_totalahdrawn
+  name: Battery History Total Ah Drawn
+  state_class: measurement
+  # device_class: current
+  unit_of_measurement: Ah
+  icon: mdi:current-dc 
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/TotalAhDrawn"
+  value_template: "{{ value_json.value | round(0) }}"
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}     
+
+- unique_id: victron_shunt_battery_history_chargecycles
+  name: Battery History Charge Cycles
+  # state_class: measurement
+  # device_class: current # not needed
+  # unit_of_measurement: Ah # not needed
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/ChargeCycles"
+  value_template: "{{ value_json.value | round(0) }}"
+  icon: mdi:counter
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}     
+
+
+- unique_id: victron_shunt_battery_history_maximumvoltage
+  name: Battery History Maximum Voltage
+  # state_class: measurement
+  # device_class: voltage
+  # unit_of_measurement: V
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/MaximumVoltage"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:flash-triangle
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}   
+
+
+- unique_id: victron_shunt_battery_history_fulldischarges
+  name: Battery History Full Discharges
+  # state_class: measurement
+  # device_class: current # not needed
+  # unit_of_measurement: Ah # not needed
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/FullDischarges"
+  value_template: "{{ value_json.value | round(0) }}"
+  icon: mdi:counter
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}         
+
+- unique_id: victron_shunt_battery_history_minimumvoltage
+  name: Battery History Minimum Voltage
+  # state_class: measurement
+  # device_class: voltage
+  # unit_of_measurement: V
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/MinimumVoltage"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:flash-triangle
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}        
+
+- unique_id: victron_shunt_battery_history_chargedenergy
+  name: Battery History Charged Energy
+  state_class: measurement
+  device_class: energy
+  unit_of_measurement: kWh
+  state_topic: "victron_env/N/c0619ab3baad/battery/288/History/ChargedEnergy"
+  value_template: "{{ value_json.value | round(2) }}"
+  icon: mdi:meter-electric
+  device: {
+    identifiers: [
+      "Victron SmartShunt 500A/50mV"
+    ],
+    manufacturer: "Victron Energy",
+    model: "SmartShunt 500A/50mV",
+    name: "SmartShunt500A"}
+
+
+ 
+

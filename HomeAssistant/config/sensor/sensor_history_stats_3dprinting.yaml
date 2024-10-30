@@ -1,0 +1,45 @@
+  ################################################
+  ######  HISTORY STATS - 3D PRINTING FARM
+  ################################################
+
+# Hours in printing state on for Asun3Pro
+- platform: history_stats
+  name: Hist-Stats-Asun3Pro-Total printing time Today
+  unique_id: hist_stats_asun3pro_total_printing_time_today
+  entity_id: binary_sensor.asun3pro_octoprint_printing
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+  end: "{{ now() }}"
+
+# Hours in printing state on for EmiliaA10M
+- platform: history_stats
+  name: Hist-Stats-EmiliaA10M-Total printing time Today
+  unique_id: hist_stats_emiliaa10m_total_printing_time_today
+  entity_id: binary_sensor.emiliaa10m_octoprint_printing
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+  end: "{{ now() }}"
+
+# Hours in printing state on for ChispiA10M
+- platform: history_stats
+  name: Hist-Stats-ChispiA10M-Total printing time Today
+  unique_id: hist_stats_chispia10m_total_printing_time_today
+  entity_id: binary_sensor.chispia10m_octoprint_printing
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+  end: "{{ now() }}"
+
+# Hours in printing state on for ItaEnder3
+- platform: history_stats
+  name: Hist-Stats-ItaEnder3-Total printing time Today
+  unique_id: hist_stats_itaender3_total_printing_time_today
+  entity_id: binary_sensor.itaender3_octoprint_printing
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+  end: "{{ now() }}"      
+
+  

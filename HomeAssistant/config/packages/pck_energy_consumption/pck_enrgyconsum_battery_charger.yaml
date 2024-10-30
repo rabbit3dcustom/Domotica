@@ -1,0 +1,148 @@
+###################################################################################
+###################################################################################
+input_number:
+  number_degrees_above:
+    name: Number-Degrees-Above
+    icon: mdi:format-rotate-90
+    min: 0
+    max: 360
+    #initial: 14
+    step: 1
+    mode: box
+    unit_of_measurement: º
+
+###################################################################################
+
+  number_degrees_below:
+    name: Number-Degrees-Below
+    icon: mdi:format-rotate-90
+    min: 0
+    max: 360
+    #initial: 10
+    step: 1
+    mode: box
+    unit_of_measurement: º    
+
+  number_powa_soc_100_volt:
+    name: Number-PoWa-SOC-100-volt
+    icon: mdi:battery-clock
+    min: 2.85
+    max: 4.2
+    #initial: 10
+    step: 0.01
+    mode: box
+    unit_of_measurement: v
+
+  number_print_soc_100_volt:
+    name: Number-Printer-SOC-100-volt
+    icon: mdi:battery-clock
+    min: 2.85
+    max: 4.2
+    #initial: 10
+    step: 0.01
+    mode: box
+    unit_of_measurement: v
+
+
+###################################################################################
+###################################################################################
+# automation:
+###################################################################################
+#   - alias: EnergyConsumption - Turn on - Power charger printers battery  # Not used any more
+#     description: ""
+#     trigger:
+#       - platform: sun
+#         event: sunset
+#         offset: 0
+#         enabled: false
+#     condition:
+#       - condition: device
+#         type: is_off
+#         device_id: 03d28742dcd5da5601c91b6558391a4a
+#         entity_id: switch.04_basicr2_chargerprinterbattery
+#         domain: switch
+#     action:
+#       - service: switch.turn_on
+#         target:
+#           entity_id: switch.04_basicr2_chargerprinterbattery
+#     mode: single
+# #    enabled: true
+
+###################################################################################
+#   - alias: EnergyConsumption - Turn off - Power charger printers battery # Not used any more
+#     description: ""
+#     trigger:
+#       - platform: sun
+#         event: sunrise
+#         offset: 0
+#         enabled: false
+#     condition:
+#       - condition: device
+#         type: is_on
+#         device_id: 03d28742dcd5da5601c91b6558391a4a
+#         entity_id: switch.04_basicr2_chargerprinterbattery
+#         domain: switch
+#     action:
+#       - service: switch.turn_off
+#         target:
+#           entity_id: switch.04_basicr2_chargerprinterbattery
+#     mode: single
+# #    enabled: true
+
+###################################################################################
+#   - alias: EnergyConsumption - Turn off - Power charger printers battery sun above XXdegrees  # MIGRATE INSIDE HOME ASSITANT
+#     description: ""
+#     trigger:
+#       # - type: value
+#       #   platform: device
+#       #   device_id: 2fe3288a377002e246adc32c8c53befe
+#       #   entity_id: sensor.sun_solar_elevation # 6d6494223d51afdbe95b10da156913ee
+#       #   domain: sensor
+#       #   above: 14
+#       #   enabled: false
+#       - platform: numeric_state
+#         entity_id:
+#           - sensor.sun_solar_elevation
+#         above: input_number.number_degrees_above
+#         enabled: true        
+#     condition:
+#       - condition: device
+#         type: is_on
+#         device_id: 03d28742dcd5da5601c91b6558391a4a
+#         entity_id: switch.04_basicr2_chargerprinterbattery
+#         domain: switch
+#     action:
+#       - service: switch.turn_off
+#         target:
+#           entity_id: switch.04_basicr2_chargerprinterbattery
+#     mode: single
+# #    enabled: true    
+###################################################################################
+#   - alias: EnergyConsumption - Turn on - Power charger printers battery sun below XX degrees # MIGRATE INSIDE HOME ASSITANT
+#     description: ""
+#     trigger:
+#       # - type: value
+#       #   platform: device
+#       #   device_id: 2fe3288a377002e246adc32c8c53befe
+#       #   entity_id: sensor.sun_solar_elevation # 6d6494223d51afdbe95b10da156913ee
+#       #   domain: sensor
+#       #   below: 10
+#       #   enabled: false        
+#       - platform: numeric_state
+#         entity_id:
+#           - sensor.sun_solar_elevation
+#         below: input_number.number_degrees_below
+#         enabled: true            
+#     condition:
+#       - condition: device
+#         type: is_off
+#         device_id: 03d28742dcd5da5601c91b6558391a4a
+#         entity_id: switch.04_basicr2_chargerprinterbattery
+#         domain: switch
+#     action:
+#       - service: switch.turn_on
+#         target:
+#           entity_id: switch.04_basicr2_chargerprinterbattery          
+#     mode: single
+# #    enabled: true
+###################################################################################

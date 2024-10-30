@@ -1,0 +1,18 @@
+###################################################################################
+###################################################################################
+binary_sensor:
+###################################################################################
+  - platform: group
+    name: "Group living room windows"
+    device_class: opening
+    entities:
+      - binary_sensor.12_snzb_04_lvngaircon_window_opening
+      - binary_sensor.13_snzb_04_lvngrghtfrplc_window_opening
+      - binary_sensor.14_snzb_04_lvnglftfrplc_window_opening
+      - binary_sensor.15_snzb_04_lvngpinetrees_window_opening
+      - binary_sensor.16_snzb_04_lvngstorright_window_opening
+      - binary_sensor.17_snzb_04_lvngstorleft_window_opening
+      - binary_sensor.18_snzb_04_lvngmiddle_window_opening
+      - binary_sensor.19_snzb_04_lvngsitting_window_opening
+      - binary_sensor.20_snzb_04_lvngmaindoor_window_opening
+

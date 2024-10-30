@@ -1,0 +1,11 @@
+  # eigenverbrauch_hourly_valid:
+  #   source: sensor.eigenverbrauch_strom
+  #   name: Eigenverbrauch (hourly)
+  #   cycle: hourly
+  #   periodically_resetting: false
+    
+  # eigenverbrauch_hourly_valid_2:
+  #   source: sensor.eigenverbrauch_strom
+  #   name: Eigenverbrauch hourly 2
+  #   cycle: hourly
+  #   periodically_resetting: false

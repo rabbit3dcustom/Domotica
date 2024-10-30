@@ -1,0 +1,58 @@
+###################################################################################
+###################################################################################
+timer:
+###################################################################################
+  timer_stairs_lights_on:
+    name: Timer-stairs-lights-on
+    icon: mdi:camera-timer
+    duration: "00:01:00"
+    restore: true
+
+###################################################################################
+input_datetime:
+###################################################################################
+  enable_stairs_lights_at_time:
+    name: "Enable stairs lights at" #20:00
+    has_time: true
+    has_date: false
+    # initial: "20:00"
+  disable_stairs_lights_at_time:
+    name: "Disable stairs lights at" #00:00
+    has_time: true
+    has_date: false
+    # initial: "00:00"    
+
+###################################################################################
+###################################################################################
+# automation:
+###################################################################################
+  # - alias: Turn stairs lighst on
+  #   description: ""
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - binary_sensor.mtn_basementhall_motion
+  #       to: "on"
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.01_zbmini_stairsbasement_switch
+  #     - service: timer.start
+  #       data: {}            
+  #       target:
+  #         entity_id: timer.timer_stairs_lights_on
+  #   mode: single
+
+  # - alias: Turn stairs lighst off
+  #   description: ""
+  #   mode: single    
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - timer.timer_stairs_lights_on
+  #       to: idle
+  #   action:
+  #     - service: switch.turn_off
+  #       data: {}      
+  #       target:
+  #         entity_id: switch.01_zbmini_stairsbasement_switch   

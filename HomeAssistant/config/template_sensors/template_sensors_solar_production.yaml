@@ -1,0 +1,42 @@
+################################################
+######  Watts SENSORS
+################################################
+- sensor:
+  - name: total_power_consuming
+    unique_id: total_power_consuming
+    state_class: measurement
+    device_class: power
+    unit_of_measurement: "W"      
+    state: >
+      {% set dc_loads = states('sensor.cerbo_gx_ac_loads') | int(0) %}
+      {% set ac_loads = states('sensor.cerbo_gx_dc_loads') | int(0) %}
+      {{ dc_loads + ac_loads }}
+
+- sensor:
+  - name: live_battery_out
+    unique_id: live_battery_out
+    unit_of_measurement: "W"
+    state_class: measurement
+    device_class: power
+    state: > # Only returns a value when load on battery is negative (consuming)
+      {% set battery_load = states('sensor.cerbo_gx_battery_load') | int(0) %}
+      {% if battery_load < 0 %}
+        {{ battery_load | abs }}
+      {% else %}
+        0
+      {% endif %}
+
+- sensor:
+  - name: live_battery_in
+    unique_id: live_battery_in
+    unit_of_measurement: "W"
+    state_class: measurement
+    device_class: power
+    state: > # Only returns a value when load on battery is positive (charging)
+      {% set battery_load = states('sensor.cerbo_gx_battery_load') | int(0) %}
+      {% if battery_load >= 0 %}
+        {{ battery_load | abs }}
+      {% else %}
+        0
+      {% endif %}
+

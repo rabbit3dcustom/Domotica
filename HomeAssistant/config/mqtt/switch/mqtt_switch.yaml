@@ -1,0 +1,50 @@
+# - name: "01-ZBMINI-StairsBasement-Switch"
+#   command_topic: "cmnd/tasmota_01-SonoffZigbeePro/ZbSend"
+#   # device_class: "outlet"    
+#   device_class: "switch"  
+#   object_id: "01_zbmini_stairsbasement_switch"
+#   unique_id: "01_zbmini_stairsbasement_switch"
+#   payload_on: '{"Device": "01-ZBMINI-StairsBasement-Switch", "Send":{"Power": 1}}'
+#   payload_off: '{"Device": "01-ZBMINI-StairsBasement-Switch", "Send":{"Power": 0}}'
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-ZBMINI-StairsBasement-Switch/SENSOR"
+#   state_off: 0
+#   state_on: 1
+#   # value_template: '{{ json_value.Power }}'
+#   value_template: >
+#     {% if 'Power' in value_json %} {{ value_json.Power }}
+#     {% else %} {{ states('sensor.01_zbmini_stairsbasement_switch') }}
+#     {% endif %}
+
+# - name: "01-ZBMINIL2-BasementHall-Switch"
+#   command_topic: "cmnd/tasmota_01-SonoffZigbeePro/ZbSend"
+#   # device_class: "outlet"    
+#   device_class: "switch"  
+#   object_id: "01_zbminil2_basementhall_switch"
+#   unique_id: "01_zbminil2_basementhall_switch"
+#   payload_on: '{"Device": "01-ZBMINIL2-BasementHall-Switch", "Send":{"Power": 1}}'
+#   payload_off: '{"Device": "01-ZBMINIL2-BasementHall-Switch", "Send":{"Power": 0}}'
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-ZBMINIL2-BasementHall-Switch/SENSOR"
+#   state_off: 0
+#   state_on: 1
+#   # value_template: '{{ json_value.Power }}'
+#   value_template: >
+#     {% if 'Power' in value_json %} {{ value_json.Power }}
+#     {% else %} {{ states('sensor.01_zbminil2_basementhall_switch') }}
+#     {% endif %}    
+
+# - name: "01-HEIMAN-Siren-MainFloor"
+#   command_topic: "cmnd/tasmota_01-SonoffZigbeePro/ZbSend"
+#   # device_class: "outlet"    
+#   device_class: "switch"  
+#   object_id: "01_heiman_siren_mainfloor"
+#   unique_id: "01_heiman_siren_mainfloor"
+#   payload_on: '{"Device": "01-HEIMAN-Siren-MainFloor", "Send":{"warning": {"mode": "fire", "level": "low", "strobe_level": "very_high", "strobe": true, "strobe_duty_cycle": 1, "duration": 1 }}'
+#   payload_off: '{"Device": "01-HEIMAN-Siren-MainFloor", "Send":{"warning": {"mode": "stop"}}'
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-HEIMAN-Siren-MainFloor/SENSOR"
+#   state_off: 0
+#   state_on: 1
+#   # value_template: '{{ json_value.Power }}'
+#   value_template: >
+#     {% if 'Power' in value_json %} {{ value_json.Power }}
+#     {% else %} {{ states('sensor.01_heiman_siren_mainfloor') }}
+#     {% endif %}    

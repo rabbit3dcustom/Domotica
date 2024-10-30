@@ -1,0 +1,127 @@
+###################################################################################
+###################################################################################
+input_select:
+  front_wing_siren01_status:
+    name: Front wing siren01 status
+    options:
+    - "off"
+    - "notification"
+    - "ring"
+    # initial: "off"
+    icon: mdi:alarm-bell  
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  - alias: Security-Siren main floor-Off status
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - input_select.front_wing_siren01_status
+        to: "off"
+    condition: []
+    action:
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_siren_level
+        type: select_option
+        option: Low level sound
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_siren_tone
+        type: select_option
+        option: Stop
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_strobe_level
+        type: select_option
+        option: Low level strobe
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_strobe
+        type: select_option
+        option: No Strobe
+      - service: siren.turn_off
+        data: {}
+        target:
+          entity_id: siren.heiman_warningdevice_ef_3_0_siren
+        enabled: true   
+###################################################################################
+  - alias: Security-Siren main floor-Notification status
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - input_select.front_wing_siren01_status
+        to: "notification"
+    condition: []
+    action:
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_siren_level
+        type: select_option
+        option: Low level sound
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_siren_tone
+        type: select_option
+        option: Stop
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_strobe_level
+        type: select_option
+        option: Very high level strobe
+      - device_id: b705c017552b399c2b2aa91b7774de6a
+        domain: select
+        entity_id: select.heiman_warningdevice_ef_3_0_default_strobe
+        type: select_option
+        option: Strobe
+      - repeat:
+            sequence:
+              - service: siren.turn_on
+                data: {}
+                target:
+                  entity_id: siren.heiman_warningdevice_ef_3_0_siren
+              - delay:
+                  hours: 0
+                  minutes: 0
+                  seconds: 5
+                  milliseconds: 0                  
+            while:
+              - condition: state
+                entity_id: timer.timer_security_delay_mf_front_wing_activation
+                state: active  
+        enabled: true                      
+###################################################################################
+  - alias: Security-Siren main floor-Alarm activate status
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - input_select.front_wing_siren01_status
+        to: "ring"
+    condition: []
+    action:
+      - type: squawk
+        domain: zha
+        device_id: b705c017552b399c2b2aa91b7774de6a
+        enabled: true         
+      - repeat:
+            sequence:
+              - service: siren.turn_on
+                data: {}
+                target:
+                  entity_id: siren.heiman_warningdevice_ef_3_0_siren
+              - delay:
+                  hours: 0
+                  minutes: 0
+                  seconds: 5
+                  milliseconds: 0                  
+            while:
+              - condition: state
+                entity_id: timer.timer_security_delay_mf_front_wing_activation
+                state: active  
+        enabled: false                      
+###################################################################################

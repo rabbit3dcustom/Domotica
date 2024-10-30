@@ -1,0 +1,183 @@
+###################################################################################
+###################################################################################
+timer:
+###################################################################################
+  timer_shutdown_3dprinter_asun:
+    name: Timer Shutdown 3DPrinter Asun
+    icon: mdi:camera-timer
+    duration: "00:10:00"
+    restore: true
+
+###################################################################################
+###################################################################################
+
+input_boolean:
+  input_bolean_tgle_asun3pro_service:
+    name: input_bolean-tgle-Asun3Pro-service
+    icon: mdi:room-service
+    #initial: "off"
+
+###################################################################################
+###################################################################################
+
+counter:
+  counter_asun3pro_numberofservices:
+    name: Counter-Asun3Pro-NumberOfServices
+    icon: mdi:wrench-outline
+    #initial: 0
+    step: 1
+    minimum: 0
+
+###################################################################################
+###################################################################################
+# To check the utility meters, go to Settings/Devices&Services/Entities.  In the tab Helpers this will not appear.
+utility_meter:
+###################################################################################
+  utility_meter_asun3pro_daily:
+    name: UtilityMeter-Asun3Pro-Daily
+    # icon: mdi:calendar-today
+    source: sensor.hist_stats_asun3pro_total_printing_time_today
+    cycle: daily
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utility_meter_asun3pro_weekly:
+    name: UtilityMeter-Asun3Pro-Weekly
+    # icon: mdi:calendar-today
+    source: sensor.hist_stats_asun3pro_total_printing_time_today
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utility_meter_asun3pro_monthly:
+    name: UtilityMeter-Asun3Pro-Monthly
+    # icon: mdi:calendar-today
+    source: sensor.hist_stats_asun3pro_total_printing_time_today
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utility_meter_asun3pro_yearly:
+    name: UtilityMeter-Asun3Pro-Yearly
+    # icon: mdi:calendar-today
+    source: sensor.hist_stats_asun3pro_total_printing_time_today
+    cycle: yearly
+    offset: 0
+    tariffs: []    
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true    
+
+  utility_meter_asun3pro_servicehours:
+    name: UtilityMeter-Asun3Pro-ServiceHours
+    # icon: mdi:calendar-today
+    source: sensor.hist_stats_asun3pro_total_printing_time_today
+    # cycle: none
+    delta_values: false
+    net_consumption: false
+    tariffs: []
+    periodically_resetting: true     
+
+####################################################################################
+####################################################################################
+automation:
+####################################################################################
+  - alias: Octoprint-Asun3Pro Start timer to switch off
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.asun3pro_octoprint_printing
+        from: "on"
+        to: "off"
+    action:
+      - service: timer.start
+        data: {}            
+        target:
+          entity_id: timer.timer_shutdown_3dprinter_asun
+    mode: single
+
+####################################################################################
+
+  - alias: Octoprint-Asun3Pro SwitchOff sonOff
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - timer.timer_shutdown_3dprinter_asun
+        to: idle
+    condition:
+      - condition: and
+        conditions:
+          - condition: device
+            type: is_on
+            device_id: 6714c63c6f4b3325080adda975dbea0a
+            entity_id: switch.06_basicr2_asun3pro
+            domain: switch
+          - condition: state
+            entity_id: binary_sensor.asun3pro_octoprint_printing
+            state: "off"
+    action:
+    - type: turn_off
+      device_id: 6714c63c6f4b3325080adda975dbea0a
+      entity_id: switch.06_basicr2_asun3pro
+      domain: switch
+    - service: notify.ha_rabbitbot
+      data:
+        message: Asun3Pro-Octoprint SwitchOff sonOff
+        title: End up printing and 10min delay
+    mode: single     
+
+####################################################################################
+  
+  - alias: Octoprint-Asun3Pro-ServiceNeed-Activate
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.utility_meter_asun3pro_servicehours
+      above: input_number.number_3dprinters_maxservicehours
+    condition: []
+    action:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id:
+        - input_boolean.input_bolean_tgle_asun3pro_service
+    - service: telegram_bot.send_message
+      data:
+        message: Asun3Pro need a maintenance!!!!
+        title: Asun3Pro need a maintenance!!!!
+    mode: single
+####################################################################################
+
+  - alias: Octoprint-Asun3Pro-Reset-ServicesHours
+    description: ''
+    trigger:
+    - platform: state
+      entity_id:
+      - input_boolean.input_bolean_tgle_asun3pro_service
+      from: 'on'
+      to: 'off'
+    condition: []
+    action:
+    - service: utility_meter.calibrate
+      data:
+        value: '0'
+      target:
+        entity_id: sensor.utility_meter_asun3pro_servicehours
+    - service: counter.increment
+      data: {}
+      target:
+        entity_id:
+        - counter.counter_asun3pro_numberofservices
+    mode: single
+    

@@ -1,0 +1,94 @@
+esphome:
+  name: "01-bluetooth-xiaomi-scale-esp32"
+  friendly_name: 01-bluetooth-xiaomi-scale-ESP32
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "TmxqQvOA6L3qj5kXCnZDTuxoxiGC+gV5U7X+iJlMn60="
+
+web_server:
+  port: 80
+
+ota:
+
+# Multiple networks with DHCP
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid
+    password: !secret wifi_password
+  - ssid: RoLu_dhcp_EXT
+    password: !secret dhcp_ext
+  - ssid: RoLu_dhcp
+    password: !secret rolu_dhcp
+
+  # Optional manual IP
+  manual_ip:
+    static_ip: 192.168.1.240
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0    
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "01-bluetooth-esp-9dc068_ap"
+    password: "xuljTHiiEAu5"
+
+captive_portal:
+
+################################
+# Example configuration entry
+# switch:
+#   - platform: gpio
+#     pin: 22
+#     name: "Rele test"
+
+################################
+# Xiaomi body scale 2
+esp32_ble_tracker:
+
+################################
+################################
+sensor:
+  - platform: xiaomi_miscale
+    mac_address: 'EC:DF:ED:DF:B7:E3'
+    weight:
+      name: "Xiaomi Mi Scale 2 Weight"
+    impedance:
+      name: "Xiaomi Mi Scale 2 Impedance"    
+################################
+  # - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+  #   name: "WiFi Signal dB"
+  #   id: wifi_signal_db
+  #   update_interval: 60s
+  #   entity_category: "diagnostic"
+################################
+  # - platform: copy # Reports the WiFi signal strength in %
+  #   source_id: wifi_signal_db
+  #   name: "WiFi Signal Percent"
+  #   filters:
+  #     - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+  #   unit_of_measurement: "Signal %"
+  #   entity_category: "diagnostic"    
+
+################################
+################################
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: ESP IP Address
+    ssid:
+      name: ESP Connected SSID
+    bssid:
+      name: ESP Connected BSSID
+    mac_address:
+      name: ESP Mac Wifi Address
+    scan_results:
+      name: ESP Latest Scan Results

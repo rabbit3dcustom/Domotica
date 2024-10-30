@@ -1,0 +1,124 @@
+###################################################################################
+###################################################################################
+input_boolean:
+  tgl_security_basement_activate: #This switch will activate or not the alarms at the basement.
+    name: tgl_security_basement_activate
+    icon: mdi:security
+    initial: "on"
+
+  tgl_security_basement_perimeter_activate: #This switch will activate only the perimeter sensors and not the inside sensors.
+    name: tgl_security_basement_perimeter_activate
+    icon: mdi:security
+    initial: "on"
+
+  tgl_security_forced_basement_activate: #This switch will force the activation of the alarm in the basement despite the state of the sensors.
+    name: tgl_security_forced_basement_activate
+    icon: mdi:security 
+    # initial: "off"
+
+###################################################################################
+###################################################################################
+input_select:
+  basement_alarm_status:
+    name: Basement Alarm Status
+    options:
+    - "off"
+    - "armed"
+    - "activate"
+    # initial: "off"
+    icon: mdi:alarm-bell 
+
+###################################################################################
+###################################################################################
+timer:
+  timer_security_delay_basement_activation:
+    name: Timer Security Delay basement activation
+    icon: mdi:camera-timer
+    duration: "00:01:00"
+    restore: true           
+
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  - alias: Security-Basement-Check sensors are close
+    description: ""
+    trigger:
+      - platform: state
+        entity_id:
+          - input_boolean.tgl_security_basement_activate
+        to: "on"
+    condition: []
+    action:
+      - if:
+        - condition: state
+          entity_id: binary_sensor.group_basement
+          state: "on"
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: input_boolean.tgl_security_forced_mf_livingroom_activate
+              state: "off"              
+        then:
+          - service: notify.ha_rabbitbot
+            data:
+              message: >
+                There is open a sensor on MF Living room.
+              title: Cant activate alarm on Living room something is open
+          - service: input_boolean.toggle
+            data: {}
+            target:
+              entity_id: input_boolean.tgl_security_mf_livingroom_activate
+        else:
+          - service: timer.start
+            data: {}
+            target:
+              entity_id: timer.timer_security_delay_livingroom_activation
+          - service: notify.ha_rabbitbot
+            data:
+              title: Living room alarm activating
+              message: Please leave the living room before delay finish.
+    mode: single
+###################################################################################
+  - alias: Security-Send photo 1.148-IPWbCm-BasementRoom motion detection
+    description: ""
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.192_168_1_148_motion_active
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_boolean.tgl_securitybasementactivate
+        state: "on"
+        enabled: true
+    action:
+      - repeat:
+          while:
+            - condition: state
+              entity_id: input_boolean.tgl_securitybasementactivate
+              state: "on"
+          sequence:
+            - delay:
+                hours: 0
+                minutes: 0
+                seconds: 1
+                milliseconds: 0
+              enabled: true
+            - service: telegram_bot.send_photo
+              data:
+                authentication: digest
+                url: http://192.168.1.148:8080/photoaf.jpg
+                caption: 1.148-BasementRoom-MotionAlert
+                message_tag: "#BasementRoom-MotionAlert"
+                password: ToMe4You
+                username: root
+              enabled: true
+        enabled: true
+    mode: single
+
+# http://192.168.1.145:8080/photoaf.jpg
+# http://192.168.1.145:8080/video
+# http://192.168.1.12:6004/?action=stream
+

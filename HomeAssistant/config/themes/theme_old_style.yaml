@@ -1,0 +1,59 @@
+old_style_theme:
+  state-default-color: '#44739E' # Blue-Grey
+  state-alarm_control_panel-armed_away-color: '#4CAF50' # Green
+  state-alarm_control_panel-armed_custom_bypass-color: '#4CAF50' # Green
+  state-alarm_control_panel-armed_home-color: '#4CAF50' # Green
+  state-alarm_control_panel-armed_night-color: '#4CAF50' # Green
+  state-alarm_control_panel-armed_vacation-color: '#4CAF50' # Green
+  state-alarm_control_panel-arming-color: '#FF9800' # Orange
+  state-alarm_control_panel-disarming-color: '#FF9800' # Orange
+  state-alarm_control_panel-pending-color: '#FF9800' # Orange
+  state-alarm_control_panel-triggered-color: '#F44336' # Red
+  state-alert-off-color: '#FF9800' # Orange
+  state-alert-on-color: '#F44336' # Red
+  state-binary_sensor-active-color: '#FFC107' # Amber
+  state-binary_sensor-battery-on-color: '#FFC107' # Amber
+  state-binary_sensor-carbon_monoxide-on-color: '#FFC107' # Amber
+  state-binary_sensor-gas-on-color: '#FFC107' # Amber
+  state-binary_sensor-heat-on-color: '#FFC107' # Amber
+  state-binary_sensor-lock-on-color: '#FFC107' # Amber
+  state-binary_sensor-moisture-on-color: '#FFC107' # Amber
+  state-binary_sensor-problem-on-color: '#FFC107' # Amber
+  state-binary_sensor-safety-on-color: '#FFC107' # Amber
+  state-binary_sensor-smoke-on-color: '#FFC107' # Amber
+  state-binary_sensor-sound-on-color: '#FFC107' # Amber
+  state-binary_sensor-tamper-on-color: '#FFC107' # Amber
+  state-climate-auto-color: '#4CAF50' # Green
+  state-climate-cool-color: '#2196F3' # Blue
+  state-climate-dry-color: '#FF9800' # Orange
+  state-climate-fan_only-color: '#00bcd4' # Cyan
+  state-climate-heat-color: '#FF5722' # Deep Orange
+  state-climate-heat-cool-color: '#FFC107' # Amber
+  state-cover-active-color: '#FFC107' # Amber
+  state-device_tracker-active-color: '#FFC107' # Amber
+  state-device_tracker-home-color: '#4CAF50' # Green
+  state-fan-active-color: '#FFC107' # Amber
+  state-humidifier-active-color: '#FFC107' # Amber
+  state-light-active-color: '#FFC107' # Amber
+  state-lock-jammed-color: '#F44336' # Red
+  state-lock-locked-color: '#44739E' # Blue-Grey
+  state-lock-pending-color: '#FF9800' # Orange
+  state-lock-unlocked-color: '#FFC107' # Amber
+  state-media_player-active-color: '#FFC107' # Amber
+  state-person-active-color: '#FFC107' # Amber
+  state-person-home-color: '#4CAF50' # Green
+  state-plant-active-color: '#FFC107' # Amber
+  state-siren-active-color: '#FFC107' # Amber
+  state-sun-above_horizon-color: '#FFC107' # Amber
+  state-sun-below_horizon-color: '#44739E' # Blue-Grey
+  state-switch-active-color: '#FFC107' # Amber
+  state-update-active-color: '#FF9800' # Orange
+  state-vacuum-active-color: '#FFC107' # Amber
+  state-sensor-battery-high-color: '#4CAF50' # Green
+  state-sensor-battery-low-color: '#F44336' # Red
+  state-sensor-battery-medium-color: '#FF9800' # Orange
+  modes:
+    light:
+      state-default-color: '#44739E' # Blue-Grey
+    dark:
+      state-default-color: '#44739E' # Blue-Grey

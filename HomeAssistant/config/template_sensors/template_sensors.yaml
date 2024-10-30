@@ -1,0 +1,179 @@
+  # - sensor:
+  #     - name: Inclinacion sol
+  #       unit_of_measurement: "°"
+  #       state: "{{ '%+.1f'|format(state_attr('sun.sun', 'elevation')) }}"
+        
+#
+################################################
+######  VOLTAGE SENSORS
+################################################
+######  TECKIN WIFI SOCKET 01
+  - sensor:
+      - name: 01-Printillas Smart Socket-16A-Voltage
+        state: "{{ '%+.1f'|format(state_attr('switch.01printillasnas_smart_socket_16a', 'voltage')) }}"
+        unit_of_measurement: 'V'
+  - sensor:
+      - name: 01-Printillas Smart Socket-16A-Current
+        state: "{{ '%+.1f'|format(state_attr('switch.01printillasnas_smart_socket_16a', 'current')) }}"
+        unit_of_measurement: 'mA'
+  - sensor:
+      - name: 01-Printillas Smart Socket-16A-Current consumption(W)
+        state: "{{ '%+.1f'|format(state_attr('switch.01printillasnas_smart_socket_16a', 'current_consumption')) }}"
+        unit_of_measurement: 'W'
+######  TECKIN WIFI SOCKET 02
+  - sensor:
+      - name: 02-Working Office Smart Socket 16A-Voltage
+        state: "{{ '%+.1f'|format(state_attr('switch.02workingoffice_smart_socket_16a', 'voltage')) }}"
+        unit_of_measurement: 'V'
+  - sensor:
+      - name: 02-Working Office Smart Socket 16A-Current
+        state: "{{ '%+.1f'|format(state_attr('switch.02workingoffice_smart_socket_16a', 'current')) }}"
+        unit_of_measurement: 'mA'
+  - sensor:
+      - name: 02-Working Office Smart Socket 16A-Current consumption(W)
+        state: "{{ '%+.1f'|format(state_attr('switch.02workingoffice_smart_socket_16a', 'current_consumption')) }}"
+        unit_of_measurement: 'W'
+
+
+################################################
+######  Watts SENSORS
+################################################
+
+  # - sensor:
+  #   - unique_id: "total_power_consuming"
+  #     name: total_power_consuming      
+  #     state_class: measurement
+  #     device_class: power
+  #     unit_of_measurement: "W"      
+  #     state: >
+  #       {% set dc_loads = states('sensor.victron_cerbo_dc_loads') | int(0) %}
+  #       {% set ac_loads = states('sensor.victron_cerbo_ac_loads') | int(0) %}
+  #       {{ dc_loads + ac_loads }}
+  #     # device: {
+  #     #   identifiers: [
+  #     #     "Victron Cerbo GX"
+  #     #   ],
+  #     #   manufacturer: "Victron Energy",
+  #     #   model: "Cerbo GX",
+  #     #   name: "Cerbo GX"}  
+
+  # - sensor:
+  #   - name: total_battery_out
+  #     unique_id: "total_battery_out"
+  #     unit_of_measurement: "W"
+  #     state_class: measurement
+  #     device_class: power
+  #     state: > # Only returns a value when load on battery is negative (consuming)
+  #       {% set battery_load = states('sensor.victron_cerbo_battery_load') | int(0) %}
+  #       {% if battery_load < 0 %}
+  #         {{ battery_load | abs }}
+  #       {% else %}
+  #         0
+  #       {% endif %}
+
+  # - sensor:
+  #   - name: total_battery_in
+  #     unique_id: "total_battery_in"
+  #     unit_of_measurement: "W"
+  #     state_class: measurement
+  #     device_class: power
+  #     state: > # Only returns a value when load on battery is positive (charging)
+  #       {% set battery_load = states('sensor.victron_cerbo_battery_load') | int(0) %}
+  #       {% if battery_load >= 0 %}
+  #         {{ battery_load }}
+  #       {% else %}
+  #         0
+  #       {% endif %}
+        
+################################################
+######  TRIGGER SENSORS
+################################################
+  # - trigger:
+  #     platform: state
+  #     entity_id: sensor.06_snzb_04_garageoutdoor_door
+  #     not_to:
+  #         - unavailable
+  #         - Unavailable
+  #         - unknown
+  #         - Unknown
+  #   sensor:
+  #     - name: Trigger Garage Outdoor Door
+  #       state: >
+  #         {% set value = trigger.to_state.state | int(0) %}
+  #         {% if value >= 0 %} {{ value }}
+  #         {% else %} {{ states('sensor.trigger_garage_outdoor_door') }}
+  #         {% endif %}
+  #       unique_id: trigger_garage_outdoor_door
+  #       # unit_of_measurement: "EUR/m³"
+######################################################################################################
+
+  # - trigger:
+  #     platform: state
+  #     entity_id: sensor.01_snzb_04_garageindoor_door
+  #     not_to:
+  #         - unavailable
+  #         - unknown
+  #         - Unknown
+  #   sensor:
+  #     - name: Test Garage Indoor Door
+  #       state: >
+  #         {% set value = trigger.to_state.state | int %}
+  #         {% if value >= 0 %} {{ value }}
+  #         {% else %} {{ states('sensor.test_garage_indoor_door') }}
+  #         {% endif %}
+  #       unique_id: test_garage_indoor_door
+  #       # unit_of_measurement: "EUR/m³"
+######################################################################################################
+
+  # - trigger:
+  #     platform: state
+  #     entity_id: sensor.02_snzb_04_sleepingroom_window
+  #     not_to:
+  #         - unavailable
+  #         - unknown
+  #         - Unknown
+  #   sensor:
+  #     - name: Test Sleepingroom Window
+  #       state: >
+  #         {% set value = trigger.to_state.state | int %}
+  #         {% if value >= 0 %} {{ value }}
+  #         {% else %} {{ states('sensor.test_sleepingroom_window') }}
+  #         {% endif %}
+  #       unique_id: test_sleepingroom_window
+  #       # unit_of_measurement: "EUR/m³"        
+
+######################################################################################################
+  # - trigger:
+  #     platform: state
+  #     entity_id: sensor.03_snzb_04_kitchentoilet_window
+  #     not_to:
+  #         - unavailable
+  #         - unknown
+  #         - Unknown
+  #   sensor:
+  #     - name: Template KitchenToilet Window
+  #       unique_id: template_kitchentoilet_window
+  #       state: >
+  #         {% set value = trigger.to_state.state | int %}
+  #         {% if value >= 0 %} {{ value }}
+  #         {% else %} {{ states('sensor.template_kitchentoilet_window') }}
+  #         {% endif %}
+  #       # unit_of_measurement: "EUR/m³"
+
+  # - trigger:
+  #     platform: state
+  #     entity_id: sensor.03_snzb_04_kitchentoilet_window_battery
+  #     not_to:
+  #         - unavailable
+  #         - unknown
+  #         - Unknown
+  #   sensor:
+  #     - name: Template KitchenToilet Window battery
+  #       unique_id: template_kitchentoilet_window_battery
+  #       state: >
+  #         {% set value = trigger.to_state.state | int %}
+  #         {% if value >= 0 %} {{ value }}
+  #         {% else %} {{ states('sensor.template_kitchentoilet_window_battery') }}
+  #         {% endif %}
+  #       # unit_of_measurement: "EUR/m³"        
+

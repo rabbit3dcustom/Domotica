@@ -1,0 +1,14 @@
+###################################################################################
+###################################################################################
+binary_sensor:
+###################################################################################
+  - platform: group
+    name: "Group MF-Front wing"
+    device_class: opening
+    entities:
+      - binary_sensor.09_snzb_04_maindoor_door_opening
+      - binary_sensor.03_cave_contactsensor
+      - binary_sensor.03_snzb_04_kitchentoilet_window_opening
+      - binary_sensor.07_snzb_04_kitchen_window_opening
+      - binary_sensor.08_snzb_04_kitchenoutdoor_door_opening
+      - binary_sensor.04_snzb_04_laundryroom_window_opening

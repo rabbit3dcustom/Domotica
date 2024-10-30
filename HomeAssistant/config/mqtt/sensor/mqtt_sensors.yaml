@@ -1,0 +1,282 @@
+####################################################################################################################
+############# Door/Window SENSORS
+####################################################################################################################
+
+# - name: 02-SNZB-04-SleepingRoom-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/02-SNZB-04-SleepingRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.02_snzb_04_sleepingroom_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 02-SNZB-04-SleepingRoom-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/02-SNZB-04-SleepingRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.02_snzb_04_sleepingroom_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 03-SNZB-04-KitchenToilet-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/03-SNZB-04-KitchenToilet-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.03_snzb_04_kitchentoilet_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 03-SNZB-04-KitchenToilet-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/03-SNZB-04-KitchenToilet-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.03_snzb_04_kitchentoilet_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 04-SNZB-04-LaundryRoom-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/04-SNZB-04-LaundryRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.04_snzb_04_laundryroom_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 04-SNZB-04-LaundryRoom-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/04-SNZB-04-LaundryRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.04_snzb_04_laundryroom_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 05-SNZB-04-MainBathroom-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/05-SNZB-04-MainBathroom-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.05_snzb_04_mainbathroom_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 05-SNZB-04-MainBathroom-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/05-SNZB-04-MainBathroom-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.05_snzb_04_mainbathroom_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+#WARN: This sensor seems to be an old version, so it hasn't baterry level and the status is 'ZoneStatusChange'
+# - name: 07-SNZB-04-Kitchen-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/07-SNZB-04-Kitchen-Window/SENSOR"
+#   value_template: >
+#     {% if 'ZoneStatusChange' in value_json %} {{ value_json.ZoneStatusChange }}
+#     {% else %} {{ states('sensor.07_snzb_04_kitchen_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 07-SNZB-04-Kitchen-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/07-SNZB-04-Kitchen-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.07_snzb_04_kitchen_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 08-SNZB-04-KitchenOutdoor-Door
+#   icon: mdi:door-open
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/08-SNZB-04-KitchenOutdoor-Door/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.08_snzb_04_kitchenoutdoor_door') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 08-SNZB-04-KitchenOutdoor-Door-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/08-SNZB-04-KitchenOutdoor-Door-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.08_snzb_04_kitchenoutdoor_door_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 09-SNZB-04-Maindoor-Door
+#   icon: mdi:door-open
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/09-SNZB-04-Maindoor-Door/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.09_snzb_04_maindoor_door') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 09-SNZB-04-Maindoor-Door-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/09-SNZB-04-Maindoor-Door/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.09_snzb_04_maindoor_door_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 10-SNZB-04-MainRoom-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/10-SNZB-04-MainRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.10_snzb_04_mainroom_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 10-SNZB-04-MainRoom-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/10-SNZB-04-MainRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.10_snzb_04_mainroom_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+  
+####################################################################################################################
+
+# - name: 11-SNZB-04-DressingRoom-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/11-SNZB-04-DressingRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.11_snzb_04_dressingroom_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 11-SNZB-04-DressingRoom-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/11-SNZB-04-DressingRoom-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.11_snzb_04_dressingroom_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+
+# - name: 21-SNZB-04-Washer-Door
+#   icon: mdi:door-open
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/21-SNZB-04-Washer-Door/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.21_snzb_04_washer_door') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 21-SNZB-04-Washer-Door-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/21-SNZB-04-Washer-Door/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.21_snzb_04_washer_door_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+############# ENERGY CONSUMPTION SENSORS
+####################################################################################################################
+
+# - name: sensor_testing_mqtt_filter
+#   # icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_639CA8/RESULT"
+#   value_template: >
+#     {% if 'SerialReceived' in value_json %}
+#       {{  value_json | regex_findall_index("r50=([^:]+):R51") }}
+#     {% endif %}
+#   # availability_topic: "tele/tasmota_03-ESP32-Shunt-PowerBank/LWT"
+#   # payload_available: "Online"
+#   # payload_not_available: "Offline"
+#   # qos: 0
+
+#   # value | regex_findall_index("r50=([^:]+):R51")
+

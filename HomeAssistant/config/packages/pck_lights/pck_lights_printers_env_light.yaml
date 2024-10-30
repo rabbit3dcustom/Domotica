@@ -1,0 +1,39 @@
+###################################################################################
+###################################################################################
+# automation:
+###################################################################################
+  # - alias: Lights - Turn on - Printing Lights # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - binary_sensor.printers_are_printing
+  #       from: "off"
+  #       to: "on"
+  #   condition: []
+  #   action:
+  #     - type: turn_on
+  #       domain: switch      
+  #       device_id: 9394afd28c90b894af40a46433814013
+  #       entity_id: switch.09_basicr2_printersledlights
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Lights - Turn off - Printing Lights # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - binary_sensor.printers_are_printing
+  #       from: "on"
+  #       to: "off"
+  #   condition: []
+  #   action:
+  #     - type: turn_off
+  #       domain: switch      
+  #       device_id: 9394afd28c90b894af40a46433814013
+  #       entity_id: switch.09_basicr2_printersledlights
+  #   mode: single
+    
+###################################################################################

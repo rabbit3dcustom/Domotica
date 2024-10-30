@@ -1,0 +1,160 @@
+URL: https://thehelpfulidiot.com/how-to-use-zigbee2tasmota-with-home-assistant
+
+By default, every Zigbee device is communicated over MQTT using the same topic, tele/%topic%/SENSOR.
+
+By setting SetOption89 to 1, each device is given their own topic, tele/%topic%/<device>/SENSOR. I found this much easier to keep the devices separated.
+
+Each device is given a unique identifier when it joins the network, and that is used to initially populate the MQTT topic if you decided to make the change I suggested above, but there is fortunately a way to give friendly names to each device.
+
+ZBName <device>,<new_friendly_name>
+Once you do that, the device friendly name will display on the Tasmota home screen, and you can set SetOption112 to 1 so that the friendly name will be used in the MQTT topic instead of the unique identifier.
+
+Ok, so now that we’ve done that, our Zigbee coordinator should be good to go. We have it connected to our MQTT broker and have tweaked the settings enough to hopefully add some devices.
+
+-------------------------------------------------
+To change the name of the door/window sensor:
+zbname 0x55D2,01-SNZB-04-GarageIndoor-Door
+
+To change the motion sensor name:
+zbname 0x58C8,01-SNZB-03-BasementHall-Motion
+
+
+Summary:
+
+SetOption89 1
+
+BRIDGE Pro
+
+01-SonoffZigbeePro
+02-SonoffZigbeeBridgePro-garage
+
+
+-----------------------------------------------
+DOOR AND WINDOW:
+zbname 0x3689,01-SNZB-04-GarageIndoor-Door
+zbname 0x4CA5,02-SNZB-04-SleepingRoom-Window
+zbname 0x17F9,03-SNZB-04-KitchenToilet-Window
+zbname 0x3E42,04-SNZB-04-LaundryRoom-Window
+zbname 0xDA2B,05-SNZB-04-MainBathroom-Window
+zbname 0xA0D0,06-SNZB-04-GarageOutdoor-Door
+zbname 0x5924,07-SNZB-04-Kitchen-Window
+zbname 0xC1C8,08-SNZB-04-KitchenOutdoor-Door
+zbname 0xF90D,09-SNZB-04-Maindoor-Door
+zbname 0x72B8,10-SNZB-04-MainRoom-Window
+zbname 0xFE15,11-SNZB-04-DressingRoom-Window
+zbname 0xD3E5,12-SNZB-04-LvngAirCon-Window - Ventana de debajo del aire acondicionado
+zbname 0x38B2,13-SNZB-04-LvngRghtFrplc-Window - Ventana a la derecha de la chimenea de leña
+zbname 0x0E33,14-SNZB-04-LvngLftFrplc-Window - Ventana a la izquierda de la chimenea de leña
+zbname 0x7697,15-SNZB-04-LvngPineTrees-Window - Ventana de doble hoja que da a los pinos del vecino de enfrente
+zbname 0x136D,16-SNZB-04-LvngStorRight-Window - Ventana que da a los stores, de la derecha
+zbname 0xAF22,17-SNZB-04-LvngStorLeft-Window - Ventana que da a los stores, de la izquierda
+zbname 0xFF81,18-SNZB-04-LvngMiddle-Window - Ventana central de doble hoja que da al frente
+zbname 0x7A72,19-SNZB-04-LvngSitting-Window - Ventana pequeña donde me siento
+zbname 0xC7C2,20-SNZB-04-LvngMainDoor-Window - Ventana pegada a la puerta de entrada
+zbname 0xB4D7,21-SNZB-04-Washer-Door - Lavadora
+zbname       ,22-SNZB-04-BsmntGym-Window - Ventana de la habitación del sotano que es el GYM
+zbname       ,23-SNZB-04-BsmntBathroom-Window - Ventana del baño que está en el GYM
+zbname       ,24-SNZB-04-BsmntKitchen-Window - Ventana de la cocina del sotano
+zbname       ,25-SNZB-04-BsmntStrgroom-Window - Cuarto trastero del sotano
+zbname       ,26-SNZB-04-GarageMaindoor-Door - Puerta de persiana del garaje.
+
+-----------------------------------------------
+MOTION SENSORS:
+zbname 0x9837,01-SNZB-03-BasementHall-Motion
+-----------------------------------------------
+SWITCH:
+zbname 0x646C,01-ZBMINI-StairsBasement-Switch
+-----------------------------------------------
+SWITCH:
+zbname 0x90B4,01-ZBMINIL2-BasementHall-Switch
+zbname 0x90B4,02-ZBMINIL2-PorcheLights-Switch
+zbname  ,03-ZBMINIL2-ChristmasPlug
+-----------------------------------------------
+BUTTON:
+zbname 0xEC29,01-SNZB-01-MagicLights-Button
+zbname 0xEC29,02-SNZB-01-PorcheLights-Button
+zbname       ,03-SNZB-01-GarageLights-Button
+-----------------------------------------------
+SIREN:
+zbname ,01-HEIMAN-Siren-MainFloor
+zbname ,02-HEIMAN-Siren-Basement
+-----------------------------------------------
+THERMOMETER:
+zbname ,01-SNZB-02D-Thermomtr-Cave
+zbname ,02-SNZB-02D-Thermomtr-SleepingRoom
+zbname ,03-SNZB-02D-Thermomtr-Office
+zbname ,04-SNZB-02D-Thermomtr-MainRoom
+
+
+SetOption112 1
+SetOption119 1
+
+
+---------------------------------------------
+MQTT commands: https://tasmota.github.io/docs/Commands/#wi-fi
+
+StateRetain	
+    0 = disable use of state MQTT retain flag (default)
+    1 = enable MQTT retain flag on message tele/%topic%/STATE
+
+StateRetain 1
+
+This configuration variable is important in order to restart home assistant without loosing the last state.
+SensorRetain	
+    0 = disable use of sensor MQTT retain flag (default)
+    1 = enable MQTT retain flag on message tele/%topic%/SENSOR
+
+SensorRetain 1
+
+SetOption19	Tasmota discovery protocol used in Home Assistant Tasmota integration
+    0 = enable Tasmota discovery (default)
+    1 = use deprecated MQTT discovery (only with #define USE_HOME_ASSISTANT, does not exist in release binaries)
+
+SetOption19 0
+
+SetOption89:
+    Configure MQTT topic for Zigbee devices (also see SensorRetain)
+    0 = single tele/%topic%/SENSOR topic (default)
+    1 = unique device topic based on Zigbee device ShortAddr
+    Example: tele/Zigbee/5ADF/SENSOR = {"ZbReceived":{"0x5ADF":{"Dimmer":254,"Endpoint":1,"LinkQuality":70}}}
+
+SetOption112
+    ZbNameTopic
+    0 = (default)
+    1 = use friendly name in Zigbee topic (use with ZbDeviceTopic)
+    Example: tele/Zigbee/01-SNZB-03-BasementHall-Motion/SENSOR = {"ZbReceived":{"0x5ADF":{"Dimmer":254,"Endpoint":1,"LinkQuality":70}}}
+
+SetOption100
+    ZbNoPrefix
+    Remove Zigbee ZbReceived value from {"ZbReceived":{xxx:yyy}} JSON message
+    0 = disable (default)
+    1 = enable
+
+SetOption119
+    ZbOmitDevice
+    Remove device addr from JSON payload
+    0 = disable (default)
+    1 = enable
+    
+
+
+
+
+InfoRetain	Show current MQTT info retain state.
+0 / off = disable MQTT info retain (default)
+1 / on = enable MQTT info retain
+PowerRetain	Show current MQTT power retain state.
+0 / off = disable MQTT power retain on status update (default)
+1 / on = enable MQTT power retain on status update
+SensorRetain	Show current MQTT sensor retain state.
+0 / off = disable MQTT sensor retain on sensor update (default)
+1 / on = enable MQTT sensor retain on sensor update
+StateRetain	Show current MQTT state retain state.
+0 / off = disable MQTT state retain (default)
+1 / on = enable MQTT state retain
+StatusRetain	Show current MQTT status retain state.
+0 / off = disable MQTT status retain (default)
+1 / on = enable MQTT status retain
+SwitchRetain	Show current MQTT switch retain state.
+0 / off = disable MQTT switch retain on switch update (default)
+1 / on = enable MQTT switch retain on switch update

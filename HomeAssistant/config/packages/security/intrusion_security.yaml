@@ -1,0 +1,240 @@
+###################################################################################
+###################################################################################
+input_boolean:
+  tgl_securitybackwindows:
+    name: tgl-SecurityBackWindows  
+    icon: mdi:security
+    initial: "on"
+  tgl_03cavewindowclose:
+    name: tgl_03CaveWindowClose
+    icon: mdi:security
+    #initial: "on"
+  tgl_02bathwindowclose:
+    name: tgl_02BatchroomWindowClose
+    icon: mdi:security
+    #initial: "on"
+  tgl_01officewindowclose:
+    name: tgl_01OfficeWindowClose
+    icon: mdi:security
+    #initial: "on"
+  tgl_security_global: #This switch will activate or not the alarms at home, ALL OF THEM.
+    name: tgl_security_global
+    icon: mdi:home-lock
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  - alias: WindowSensors-01-Office-ContactSensor open then change tgl variable=01OfficeWindowClose to "off"
+    description: ''
+    trigger:
+      - type: opened
+        platform: device
+        device_id: 2bd596800612c191886d32792ae703ce
+        entity_id: binary_sensor.01_office_contactsensor
+        domain: binary_sensor
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0    
+    action:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.tgl_01officewindowclose
+
+###################################################################################
+
+  - alias: WindowSensors-01-Office-ContactSensor close then change tgl variable=01OfficeWindowClose to "on"
+    description: ''
+    trigger:
+      - type: not_opened
+        platform: device
+        device_id: 2bd596800612c191886d32792ae703ce
+        entity_id: binary_sensor.01_office_contactsensor
+        domain: binary_sensor
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0    
+    action:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.tgl_01officewindowclose          
+
+###################################################################################
+
+  - alias: WindowSensors-01-Office-ContactSensor when open repeat until close
+    description: ''
+    trigger:
+      - platform: time_pattern
+        minutes: /5
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: input_boolean.tgl_01officewindowclose
+            state: "off"
+            for:
+              hours: 0
+              minutes: 10
+              seconds: 0
+          - condition: state
+            entity_id: input_boolean.tgl_securitybackwindows
+            state: "on"
+    action:
+      - service: telegram_bot.send_message
+        data:
+          title: Security
+          message: >-
+            OPEN-WindowSensors-01-Office-ContactSensor is open for more than 10 min.
+            tglsecuritybackwindows "{{
+            states('input_boolean.tgl_securitybackwindows')     }}" is on and
+            02BathroomContactSensor="{{ states('binary_sensor.01_office_contactsensor')
+            }}" is open
+    mode: single
+
+###################################################################################
+###################################################################################    
+  - alias: WindowSensors-02-Bathroom-ContactSensor open then change tgl variable=02BathWindowClose to "off"
+    description: ''
+    trigger:
+      - type: opened
+        platform: device
+        device_id: 5c69f605a3417430001bfa3618669885
+        entity_id: binary_sensor.02_bathroom_contactsensor
+        domain: binary_sensor
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0    
+    action:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.tgl_02bathwindowclose
+
+###################################################################################
+
+  - alias: WindowSensors-02-Bathroom-ContactSensor close then change tgl variable=02BathWindowClose to "on"
+    description: ''
+    trigger:
+      - type: not_opened
+        platform: device
+        device_id: 5c69f605a3417430001bfa3618669885
+        entity_id: binary_sensor.02_bathroom_contactsensor
+        domain: binary_sensor
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0    
+    action:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.tgl_02bathwindowclose          
+
+###################################################################################
+
+  - alias: WindowSensors-02-Bathroom-ContactSensor when open repeat until close
+    description: ''
+    trigger:
+      - platform: time_pattern
+        minutes: /5
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: input_boolean.tgl_02bathwindowclose
+            state: "off"
+            for:
+              hours: 0
+              minutes: 10
+              seconds: 0
+          - condition: state
+            entity_id: input_boolean.tgl_securitybackwindows
+            state: "on"
+    action:
+      - service: telegram_bot.send_message
+        data:
+          title: Security
+          message: >-
+            OPEN-WindowSensors-02-Bathroom-ContactSensor is open for more than 10 min.
+            tglsecuritybackwindows "{{
+            states('input_boolean.tgl_securitybackwindows')     }}" is on and
+            02BathroomContactSensor="{{ states('binary_sensor.02_bathroom_contactsensor')
+            }}" is open
+    mode: single
+
+###################################################################################
+################################################################################### 
+  - alias: WindowSensors-03-Cave-ContactSensor open then change tgl variable=03CaveWindowClose to "off"
+    description: ''
+    trigger:
+      - type: opened
+        platform: device
+        device_id: a4fccfec4e81f04df0b0462b7bf421f7
+        entity_id: binary_sensor.03_cave_contactsensor
+        domain: binary_sensor
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0    
+    action:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.tgl_03cavewindowclose
+
+###################################################################################
+
+  - alias: WindowSensors-03-Cave-ContactSensor close then change tgl variable=03CaveWindowClose to "on"
+    description: ''
+    trigger:
+      - type: not_opened
+        platform: device
+        device_id: a4fccfec4e81f04df0b0462b7bf421f7
+        entity_id: binary_sensor.03_cave_contactsensor
+        domain: binary_sensor
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0    
+    action:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.tgl_03cavewindowclose          
+
+###################################################################################
+  - alias: WindowSensors-03-Cave-ContactSensor when open repeat until close
+    description: ''
+    trigger:
+      - platform: time_pattern
+        minutes: /5
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: input_boolean.tgl_03cavewindowclose
+            state: "off"
+            for:
+              hours: 0
+              minutes: 10
+              seconds: 0
+          - condition: state
+            entity_id: input_boolean.tgl_securitybackwindows
+            state: "on"
+    action:
+      - service: telegram_bot.send_message
+        data:
+          title: Security
+          message: >-
+            OPEN-WindowSensors-03-Cave-ContactSensor is open for more than 10 min.
+            tglsecuritybackwindows "{{
+            states('input_boolean.tgl_securitybackwindows')     }}" is on and
+            03CaveContactsensor="{{ states('binary_sensor.03_cave_contactsensor')
+            }}" is open
+    mode: single            
+###################################################################################a

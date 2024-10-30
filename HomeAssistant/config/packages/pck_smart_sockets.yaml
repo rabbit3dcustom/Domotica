@@ -1,0 +1,176 @@
+
+
+###################################################################################
+  # Example configuration.yaml entry
+# input_datetime:
+#   both_date_and_time:
+#     name: Input with both date and time
+#     has_date: true
+#     has_time: true
+#   only_date:
+#     name: Input with only date
+#     has_date: true
+#     has_time: false
+#   only_time:
+#     name: Input with only time
+#     has_date: false
+#     has_time: true
+###################################################################################
+input_datetime:
+  date_smartsocket_shutdown_time:
+    name: Date-SmartSocket-ShutdownTime  
+    icon: mdi:clock-time-eleven
+    has_time: true
+    #initial: "23:00:00"
+  date_smartsocket_restart_time:
+    name: Date-SmartSocket-RestartTime  
+    icon: mdi:clock-time-eleven
+    has_time: true
+    #initial: "08:00:00"
+
+###################################################################################
+###################################################################################
+# The integration sensor can't be placed in a package. Move it to the "sensor.yaml"->Moved to HomeAssistant\config\sensors\sensors_smart_sockets_shelly.yaml
+# integration:
+#   riemann_01_shelly_plug_s_washer_totalconsumption:
+#     name: Riemann-01-Shelly-plug-s-Washer-TotalConsumption
+#     source: sensor.01_shelly_plug_s_washer_power
+#     icon: mdi:chart-histogram
+#     # unit_prefix: k
+#     # round: 2  
+
+###################################################################################
+###################################################################################
+# To check the utility meters, go to Settings/Devices&Services/Entities.  In the tab Helpers this will not appear. ->Moved to HomeAssistant\config\utility_meters\util_meters_smart_sockets_shelly.yaml
+# utility_meter:
+###################################################################################
+  # utilitymeter_01_shelly_plug_s_washer_dailyconsumption:
+  #   name: UtilityMeter-01-Shelly-plug-s-Washer-DailyConsumption
+  #   # icon: mdi:calendar-today
+  #   source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+  #   cycle: daily
+  #   offset: 0
+  #   tariffs: []
+  #   # unit_of_measurement: "kWh"
+  #   delta_values: false
+  #   net_consumption: false
+  #   periodically_resetting: true
+
+  # utilitymeter_01_shelly_plug_s_washer_weeklyconsumption:
+  #   name: UtilityMeter-01-Shelly-plug-s-Washer-WeeklyConsumption
+  #   # icon: mdi:calendar-today
+  #   source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+  #   cycle: weekly
+  #   offset: 0
+  #   tariffs: []      
+  #   delta_values: false
+  #   net_consumption: false
+  #   periodically_resetting: true
+
+  # utilitymeter_01_shelly_plug_s_washer_monthlyconsumption:
+  #   name: UtilityMeter-01-Shelly-plug-s-Washer-MonthlyConsumption
+  #   # icon: mdi:calendar-today
+  #   source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+  #   cycle: monthly
+  #   offset: 0
+  #   tariffs: []      
+  #   delta_values: false
+  #   net_consumption: false
+  #   periodically_resetting: true
+
+  # utilitymeter_01_shelly_plug_s_washer_yearlyconsumption:
+  #   name: UtilityMeter-01-Shelly-plug-s-Washer-YearlyConsumption
+  #   # icon: mdi:calendar-today
+  #   source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+  #   cycle: yearly
+  #   offset: 0
+  #   tariffs: []    
+  #   delta_values: false
+  #   net_consumption: false
+  #   periodically_resetting: true    
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  - alias: Smart Socket - Turn off - 01-shelly-plug-s-Washer at input_datetime.date_smartsocket_shutdown_time # MIGRATE INSIDE HOME ASSITANT
+    description: ""
+    mode: single
+    trigger:
+      - platform: time_pattern
+        minutes: /6    
+    condition:
+      - type: is_power
+        condition: device
+        device_id: 4fd85999eeca4f06fadc20d26e4440b8
+        entity_id: 3c9e23c7e77ca9b7da1b7b0fc6c0d372 #switch.01_shelly_plug_s_washer
+        domain: sensor
+        below: 5
+        enabled: true
+      - condition: device
+        type: is_on
+        device_id: 4fd85999eeca4f06fadc20d26e4440b8
+        entity_id: 65fe225af511fcc8ecf09e6c944da55b
+        domain: switch         
+        enabled: true          
+      - condition: time
+        after: input_datetime.date_smartsocket_shutdown_time
+        before: input_datetime.date_smartsocket_restart_time   
+        enabled: true         
+    action:
+      - type: turn_off
+        device_id: 4fd85999eeca4f06fadc20d26e4440b8
+        entity_id: switch.01_shelly_plug_s_washer
+        domain: switch
+      - service: telegram_bot.send_message
+        data:
+          message: 01-shelly-plug-s-Washer is down now
+          title: 01-shelly-plug-s-Washer        
+###################################################################################
+  - alias: Smart Socket - Turn on - 01-shelly-plug-s-Washer at input_datetime.date_smartsocket_restart_time # MIGRATE INSIDE HOME ASSITANT
+    description: ""
+    mode: single
+    trigger:
+      - platform: time_pattern
+        minutes: /6
+    condition:
+      - condition: and
+        conditions:     
+          - condition: device
+            type: is_off
+            device_id: 4fd85999eeca4f06fadc20d26e4440b8
+            entity_id: switch.01_shelly_plug_s_washer
+            domain: switch
+            enabled: true
+          - condition: time
+            after: input_datetime.date_smartsocket_restart_time
+            before: input_datetime.date_smartsocket_shutdown_time          
+            enabled: true 
+    action:
+      - type: turn_on
+        device_id: 4fd85999eeca4f06fadc20d26e4440b8
+        entity_id: switch.01_shelly_plug_s_washer
+        domain: switch
+      - service: telegram_bot.send_message
+        data:
+          message: 01-shelly-plug-s-Washer is operative now
+          title: 01-shelly-plug-s-Washer       
+###################################################################################
+  # The smart socket cant be restart, because when it is off, the socket is completly off.
+  # - alias: Smart Socket-02WorkingOffice-Switch on at Date SocketRestartTime
+  #   description: ''
+  #   trigger:
+  #     - platform: time
+  #       at: input_datetime.date_smartsocket_restart_time
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 9dbc8be4169e4b429610bca6cfdc8abe
+  #       entity_id: switch.02workingoffice_smart_socket_16a
+  #       domain: switch
+  #   action:
+  #     - type: turn_on
+  #       device_id: 9dbc8be4169e4b429610bca6cfdc8abe
+  #       entity_id: switch.02workingoffice_smart_socket_16a
+  #       domain: switch
+  #   mode: single

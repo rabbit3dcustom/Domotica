@@ -1,0 +1,18 @@
+Cuando se instala el firmware de Sonoff-Zigbee Bridge Pro, se debe hacer lo siguiente.
+
+
+1.Ir a consolas
+2.Ir a Berry Scripting console y poner:
+
+import sonoff_zb_pro_flasher as cc
+cc.load("SonoffZBPro_coord_20220219.hex")
+cc.check()
+
+Esperar....
+
+
+
+3.Escribir lo siguiente y esperar más de 10min, suele tardar entre 5min y 8min. No tocar nada mientras hace el flasheo
+cc.flash()
+
+Esperar.... de 5min a 8min... 

@@ -1,0 +1,88 @@
+####################################################################################################################
+############# MPPT - MQTT SWITCHES
+####################################################################################################################
+
+###################################################################################
+###################################################################################
+# MPPT GarageNorth 150-70
+###################################################################################
+
+  - unique_id: victron_solar_charger_garage_north_dc_load
+    name: DC load
+    command_topic: "victron_env/W/c0619ab3baad/solarcharger/290/Mode"
+    payload_on: '{"value": 1}' # Victron uses the 1 to start the mppt to charge the batteries.
+    payload_off: '{"value": 4}' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    state_topic: "victron_env/N/c0619ab3baad/solarcharger/290/Mode"
+    value_template: "{{ value_json.value | int }}"
+    state_on: '1' # Victron uses the 1 to start the mppt to charge the batteries.
+    state_off: '4' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    device: {
+      identifiers: [
+        "Victron MPPT 150/70tr"
+      ],
+      manufacturer: "Victron Energy",
+      model: "MPPT 150/70tr",
+      name: "MPPT 150/70tr - GarageNorth"}        
+
+###################################################################################
+
+  - unique_id: victron_solar_charger_garage_north_relay
+    name: Relay
+    command_topic: "victron_env/W/c0619ab3baad/solarcharger/290/Relay/0/State"
+    payload_on: '{"value": 1}' # Victron uses the 1 to start the mppt to charge the batteries.
+    payload_off: '{"value": 4}' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    state_topic: "victron_env/N/c0619ab3baad/solarcharger/290/Relay/0/State"
+    value_template: "{{ value_json.value | int }}"
+    state_on: '1' # Victron uses the 1 to start the mppt to charge the batteries.
+    state_off: '4' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    device: {
+      identifiers: [
+        "Victron MPPT 150/70tr"
+      ],
+      manufacturer: "Victron Energy",
+      model: "MPPT 150/70tr",
+      name: "MPPT 150/70tr - GarageNorth"}         
+
+
+###################################################################################
+###################################################################################
+# MPPT GarageSouth 150-70
+###################################################################################
+
+  - unique_id: victron_solar_charger_garage_south_dc_load
+    name: DC load
+    command_topic: "victron_env/W/c0619ab3baad/solarcharger/289/Mode"
+    payload_on: '{"value": 1}' # Victron uses the 1 to start the mppt to charge the batteries.
+    payload_off: '{"value": 4}' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    state_topic: "victron_env/N/c0619ab3baad/solarcharger/289/Mode"
+    value_template: "{{ value_json.value | int }}"
+    state_on: '1' # Victron uses the 1 to start the mppt to charge the batteries.
+    state_off: '4' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    device: {
+      identifiers: [
+        "Victron MPPT 150/70"
+      ],
+      manufacturer: "Victron Energy",
+      model: "MPPT 150/70",
+      name: "MPPT 150/70 - GarageSouth"}  
+
+###################################################################################
+
+  - unique_id: victron_solar_charger_garage_south_relay
+    name: Relay
+    command_topic: "victron_env/W/c0619ab3baad/solarcharger/289/Relay/0/State"
+    payload_on: '{"value": 1}' # Victron uses the 1 to start the mppt to charge the batteries.
+    payload_off: '{"value": 4}' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    state_topic: "victron_env/N/c0619ab3baad/solarcharger/289/Relay/0/State"
+    value_template: "{{ value_json.value | int }}"
+    state_on: '1' # Victron uses the 1 to start the mppt to charge the batteries.
+    state_off: '4' # Victron uses the 4 to stop the mppt to not charge the batteries.
+    device: {
+      identifiers: [
+        "Victron MPPT 150/70"
+      ],
+      manufacturer: "Victron Energy",
+      model: "MPPT 150/70",
+      name: "MPPT 150/70 - GarageSouth"}  
+
+      

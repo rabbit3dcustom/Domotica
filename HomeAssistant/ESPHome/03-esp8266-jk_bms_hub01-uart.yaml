@@ -1,0 +1,429 @@
+substitutions:
+  esp_name: 03-esp82-jk-bms-hub-01
+  name_jk: "jkbms"
+  friendly_name: 03-esp82-jk-bms-hub-01
+  device_description: "Monitor and control a JK-BMS via UART"
+  external_components_source: github://syssi/esphome-jk-bms@main
+  esp_ip: 192.168.1.245
+  tx_pin: GPIO1
+  rx_pin: GPIO3  
+  
+esphome:
+  name: ${esp_name}
+  friendly_name: ${friendly_name}
+  comment: ${device_description}
+  project:
+    name: "syssi.esphome-jk-bms"
+    version: 2.0.0
+    # version: 1.5.0
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+# logger:    
+
+api:
+  encryption:
+    key: "Cb2Cur2psutG2xSQ6CH4DzUzNO2qfYraZ5/ujUMZCrs="    
+
+web_server:
+  port: 80
+
+ota:  
+
+# Multiple networks with DHCP
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid
+    password: !secret wifi_password
+  - ssid: RoLu_dhcp_EXT
+    password: !secret dhcp_ext
+  - ssid: RoLu_dhcp
+    password: !secret rolu_dhcp
+
+  # Optional manual IP
+  manual_ip:
+    static_ip: ${esp_ip}
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0  
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "03-esp82-jk-bms-hub-01"
+    password: "03-esp82-jk-bms-hub-01"
+
+captive_portal:
+
+# Enable logging
+logger:
+  baud_rate: 0
+  level: DEBUG
+  logs:
+    esp32_ble_tracker: INFO
+    jk_bms_ble: INFO
+    scheduler: DEBUG
+    component: DEBUG
+    sensor: INFO
+    api.service: INFO
+    api: INFO
+    number: INFO
+
+debug:
+  update_interval: 10s 
+
+# If you use Home Assistant please remove this `mqtt` section and uncomment the `api` component!
+# The native API has many advantages over MQTT: https://esphome.io/components/api.html#advantages-over-mqtt
+# mqtt:
+#   broker: !secret mqtt_host
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
+#   id: mqtt_client
+
+external_components:
+  - source: ${external_components_source}
+    refresh: 0s  
+
+uart:
+  - id: uart_0
+    baud_rate: 115200
+    rx_buffer_size: 384
+    tx_pin: ${tx_pin}
+    rx_pin: ${rx_pin}
+
+jk_modbus:
+  - id: modbus0
+    uart_id: uart_0
+    rx_timeout: 50ms
+
+jk_bms:
+  - id: bms0
+    jk_modbus_id: modbus0
+    update_interval: 5s
+
+############### BINARY_SENSOR  ###########################
+
+binary_sensor:
+  - platform: jk_bms
+    balancing:
+      name: "${name_jk} balancing"
+    balancing_switch:
+      name: "${name_jk} balancing switch"
+    charging:
+      name: "${name_jk} charging"
+    discharging:
+      name: "${name_jk} discharging"
+    dedicated_charger_switch:
+      name: "${name_jk} dedicated charger switch"
+    online_status:
+      name: "${name_jk} online status"
+
+################ BUTTONS ###############################
+# button:
+#   - platform: jk_bms
+#     retrieve_settings:
+#       name: "${name_jk} retrieve settings"
+#     retrieve_device_info:
+#       name: "${name_jk} retrieve device info"    
+
+################ NUMBER ###############################
+# number:
+#   - platform: jk_bms
+#     balance_trigger_voltage:
+#       name: "${name_jk} balance trigger voltage"
+#     cell_count:
+#       name: "${name_jk} cell count"
+#     total_battery_capacity:
+#       name: "${name_jk} total battery capacity"
+#     cell_voltage_overvoltage_protection:
+#       name: "${name_jk} cell voltage overvoltage protection"
+#     cell_voltage_overvoltage_recovery:
+#       name: "${name_jk} cell voltage overvoltage recovery"
+#     cell_voltage_undervoltage_protection:
+#       name: "${name_jk} cell voltage undervoltage protection"
+#     cell_voltage_undervoltage_recovery:
+#       name: "${name_jk} cell voltage undervoltage recovery"
+#     balance_starting_voltage:
+#       name: "${name_jk} balance starting voltage"
+#     voltage_calibration:
+#       name: "${name_jk} voltage calibration"
+#     current_calibration:
+#       name: "${name_jk} current calibration"
+#     power_off_voltage:
+#       name: "${name_jk} power off voltage"
+#     max_balance_current:
+#       name: "${name_jk} max balance current"
+#     max_charge_current:
+#       name: "${name_jk} max charge current"
+#     max_discharge_current:
+#       name: "${name_jk} max discharge current"              
+
+############### SENSOR  ###########################
+sensor:
+  - platform: wifi_signal
+    name: "${name_jk} WiFi Signal"
+    update_interval: 60s
+  - platform: uptime
+    name: "${name_jk} uptime"
+    update_interval: 1s
+  - platform: debug
+    free:
+      name: "Heap Free"
+############## JK BMS SENSORS ######################
+  - platform: jk_bms
+    min_cell_voltage:
+      name: "${name_jk} min cell voltage"
+    max_cell_voltage:
+      name: "${name_jk} max cell voltage"
+    min_voltage_cell:
+      name: "${name_jk} min voltage cell"
+    max_voltage_cell:
+      name: "${name_jk} max voltage cell"
+    delta_cell_voltage:
+      name: "${name_jk} delta cell voltage"
+    average_cell_voltage:
+      name: "${name_jk} average cell voltage"
+    cell_voltage_1:
+      name: "${name_jk} cell voltage 1"
+    cell_voltage_2:
+      name: "${name_jk} cell voltage 2"
+    cell_voltage_3:
+      name: "${name_jk} cell voltage 3"
+    cell_voltage_4:
+      name: "${name_jk} cell voltage 4"
+    # cell_voltage_5:
+    #   name: "${name_jk} cell voltage 5"
+    # cell_voltage_6:
+    #   name: "${name_jk} cell voltage 6"
+    # cell_voltage_7:
+    #   name: "${name_jk} cell voltage 7"
+    # cell_voltage_8:
+    #   name: "${name_jk} cell voltage 8"
+    # cell_voltage_9:
+    #   name: "${name_jk} cell voltage 9"
+    # cell_voltage_10:
+    #   name: "${name_jk} cell voltage 10"
+    # cell_voltage_11:
+    #   name: "${name_jk} cell voltage 11"
+    # cell_voltage_12:
+    #   name: "${name_jk} cell voltage 12"
+    # cell_voltage_13:
+    #   name: "${name_jk} cell voltage 13"
+    # cell_voltage_14:
+    #   name: "${name_jk} cell voltage 14"
+    # cell_voltage_15:
+    #   name: "${name_jk} cell voltage 15"
+    # cell_voltage_16:
+    #   name: "${name_jk} cell voltage 16"
+    # cell_voltage_17:
+    #   name: "${name_jk} cell voltage 17"
+    # cell_voltage_18:
+    #   name: "${name_jk} cell voltage 18"
+    # cell_voltage_19:
+    #   name: "${name_jk} cell voltage 19"
+    # cell_voltage_20:
+    #   name: "${name_jk} cell voltage 20"
+    # cell_voltage_21:
+    #   name: "${name_jk} cell voltage 21"
+    # cell_voltage_22:
+    #   name: "${name_jk} cell voltage 22"
+    # cell_voltage_23:
+    #   name: "${name_jk} cell voltage 23"
+    # cell_voltage_24:
+    #   name: "${name_jk} cell voltage 24"
+    # cell_resistance_1:
+    #   name: "${name_jk} cell resistance 1"
+    # cell_resistance_2:
+    #   name: "${name_jk} cell resistance 2"
+    # cell_resistance_3:
+    #   name: "${name_jk} cell resistance 3"
+    # cell_resistance_4:
+    #   name: "${name_jk} cell resistance 4"    
+    # cell_resistance_5:
+    #   name: "${name_jk} cell resistance 5"
+    # cell_resistance_6:
+    #   name: "${name_jk} cell resistance 6"
+    # cell_resistance_7:
+    #   name: "${name_jk} cell resistance 7"
+    # cell_resistance_8:
+    #   name: "${name_jk} cell resistance 8"
+    # cell_resistance_9:
+    #   name: "${name_jk} cell resistance 9"
+    # cell_resistance_10:
+    #   name: "${name_jk} cell resistance 10"
+    # cell_resistance_11:
+    #   name: "${name_jk} cell resistance 11"
+    # cell_resistance_12:
+    #   name: "${name_jk} cell resistance 12"
+    # cell_resistance_13:
+    #   name: "${name_jk} cell resistance 13"
+    # cell_resistance_14:
+    #   name: "${name_jk} cell resistance 14"
+    # cell_resistance_15:
+    #   name: "${name_jk} cell resistance 15"
+    # cell_resistance_16:
+    #   name: "${name_jk} cell resistance 16"      
+    # power_tube_temperature:
+    #   name: "${name_jk} power tube temperature"
+    total_voltage:
+      name: "${name_jk} total voltage"
+    current:
+      name: "${name_jk} current"
+    # heating_current:
+    #   name: "${name_jk} heating current"      
+    power:
+      name: "${name_jk} power"
+    capacity_remaining:
+      name: "${name_jk} capacity remaining"
+    total_battery_capacity_setting:
+      name: "${name_jk} total battery capacity setting"      
+    capacity_remaining_derived:
+      name: "${name_jk} capacity remaining derived"      
+    charging_power:
+      name: "${name_jk} charging power"
+    discharging_power:
+      name: "${name_jk} discharging power"
+    temperature_sensors:
+      name: "${name_jk} temperature sensors"      
+    temperature_sensor_1:
+      name: "${name_jk} temperature sensor 1"
+    temperature_sensor_2:
+      name: "${name_jk} temperature sensor 2"
+    power_tube_temperature:
+      name: "${name_jk} power tube temperature"    
+    # state_of_charge:
+    #   name: "${name_jk} state of charge"              
+    charging_cycles:
+      name: "${name_jk} charging cycles"
+    total_charging_cycle_capacity:
+      name: "${name_jk} total charging cycle capacity"
+    total_runtime:
+      name: "${name_jk} total runtime"      
+    battery_strings:
+      name: "${name_jk} battery strings"
+    errors_bitmask:
+      name: "${name_jk} errors bitmask"
+    operation_mode_bitmask:
+      name: "${name_jk} operation mode bitmask"
+    total_voltage_overvoltage_protection:
+      name: "${name_jk} total voltage overvoltage protection"
+    total_voltage_undervoltage_protection:
+      name: "${name_jk} total voltage undervoltage protection"
+    cell_voltage_overvoltage_protection:
+      name: "${name_jk} cell voltage overvoltage protection"
+    cell_voltage_overvoltage_recovery:
+      name: "${name_jk} cell voltage overvoltage recovery"
+    cell_voltage_overvoltage_delay:
+      name: "${name_jk} cell voltage overvoltage delay"
+    cell_voltage_undervoltage_protection:
+      name: "${name_jk} cell voltage undervoltage protection"
+    cell_voltage_undervoltage_recovery:
+      name: "${name_jk} cell voltage undervoltage recovery"
+    cell_voltage_undervoltage_delay:
+      name: "${name_jk} cell voltage undervoltage delay"
+    cell_pressure_difference_protection:
+      name: "${name_jk} cell pressure difference protection"
+    discharging_overcurrent_protection:
+      name: "${name_jk} discharging overcurrent protection"
+    discharging_overcurrent_delay:
+      name: "${name_jk} discharging overcurrent delay"
+    charging_overcurrent_protection:
+      name: "${name_jk} charging overcurrent protection"
+    charging_overcurrent_delay:
+      name: "${name_jk} charging overcurrent delay"
+    balance_starting_voltage:
+      name: "${name_jk} balance starting voltage"
+    balance_opening_pressure_difference:
+      name: "${name_jk} balance opening pressure difference"
+    power_tube_temperature_protection:
+      name: "${name_jk} power tube temperature protection"
+    power_tube_temperature_recovery:
+      name: "${name_jk} power tube temperature recovery"
+    temperature_sensor_temperature_protection:
+      name: "${name_jk} temperature sensor temperature protection"
+    temperature_sensor_temperature_recovery:
+      name: "${name_jk} temperature sensor temperature recovery"
+    temperature_sensor_temperature_difference_protection:
+      name: "${name_jk} temperature sensor temperature difference protection"
+    charging_high_temperature_protection:
+      name: "${name_jk} charging high temperature protection"
+    discharging_high_temperature_protection:
+      name: "${name_jk} discharging high temperature protection"
+    charging_low_temperature_protection:
+      name: "${name_jk} charging low temperature protection"
+    charging_low_temperature_recovery:
+      name: "${name_jk} charging low temperature recovery"
+    discharging_low_temperature_protection:
+      name: "${name_jk} discharging low temperature protection"
+    discharging_low_temperature_recovery:
+      name: "${name_jk} discharging low temperature recovery"
+    # total_battery_capacity_setting:
+    #   name: "${name_jk} total battery capacity setting"
+    current_calibration:
+      name: "${name_jk} current calibration"
+    device_address:
+      name: "${name_jk} device address"
+    sleep_wait_time:
+      name: "${name_jk} sleep wait time"
+    alarm_low_volume:
+      name: "${name_jk} alarm low volume"
+    manufacturing_date:
+      name: "${name_jk} manufacturing date"
+#    start_current_calibration:
+#      name: "${name_jk} start current calibration"
+    actual_battery_capacity:
+      name: "${name_jk} actual battery capacity"
+#    protocol_version:
+#      name: "${name_jk} protocol version"
+
+
+############### SWITCH  ###########################
+
+switch:
+  - platform: jk_bms
+    charging:
+      name: "${name_jk} charging"
+    discharging:
+      name: "${name_jk} discharging"
+    # balancing:
+    #   name: "${name_jk} balancing"     
+
+############### TEXT  ###########################
+
+text_sensor:
+  - platform: debug
+    device:
+      name: "Device Info"
+    reset_reason:
+      name: "Reset Reason"
+  - platform: wifi_info
+    ip_address:
+      name: ESP IP Address
+    ssid:
+      name: ESP Connected SSID
+    bssid:
+      name: ESP Connected BSSID
+    mac_address:
+      name: ESP Mac Wifi Address
+    scan_results:
+      name: ESP Latest Scan Results
+    dns_address:
+      name: ESP DNS Address   
+####################################################
+  - platform: jk_bms
+    errors:
+      name: "${name_jk} errors"
+    operation_mode:
+      name: "${name_jk} operation mode"
+    battery_type:
+      name: "${name_jk} battery type"
+    password:
+      name: "${name_jk} password"
+    device_type:
+      name: "${name_jk} device type"
+    software_version:
+      name: "${name_jk} software version"
+    manufacturer:
+      name: "${name_jk} manufacturer"
+    total_runtime_formatted:
+      name: "${name_jk} total runtime formatted"

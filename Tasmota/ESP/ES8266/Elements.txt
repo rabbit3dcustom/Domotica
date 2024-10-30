@@ -1,0 +1,8 @@
+----------------------------------------------
+SHUNTS:
+zbname , D1-Mini-01-ESP8266-Shunt-PowerBank     #tasmota_%06X -> tasmota_D1-Mini-01-ESP8266-Shunt-PowerBank
+
+Setoption19 0
+Baudrate 115200
+SerialSend 0
+

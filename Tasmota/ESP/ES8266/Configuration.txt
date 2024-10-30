@@ -1,0 +1,27 @@
+Entiendo que deseas conectar dos dispositivos para comunicación serie en tu Wemos D1 Mini ESP8266, cada uno con sus pines de TX y RX separados. Si los pines TX y RX ya están ocupados, 
+puedes usar otros pines GPIO disponibles para conectar los dispositivos.
+
+Para encontrar los pines GPIO disponibles en tu Wemos D1 Mini ESP8266, puedes buscar el pinout de la placa. Aquí hay un enlace que proporciona información sobre el pinout de la placa.
+
+Una vez que hayas encontrado los pines GPIO disponibles, deberás configurar Tasmota para que use los pines que has elegido como pines de comunicación serie. Para hacer esto, sigue los siguientes pasos:
+
+Abre la página de configuración de Tasmota en tu navegador web.
+
+Selecciona la opción “Configure Module”. -> Configure Template
+
+Selecciona “Module Type” y elige “18 Generic”.
+
+# Haz clic en “Save”.
+# Selecciona “Serial Configuration”.
+# Configura los siguientes parámetros:
+# Serial Baudrate: 9600
+# Serial Device: 1
+# Serial Config: 8N1
+
+Serial Tx Pin: El pin GPIO que has elegido como pin de comunicación TX para el primer dispositivo.
+Serial Rx Pin: El pin GPIO que has elegido como pin de comunicación RX para el primer dispositivo.
+
+# Serial Enable: Enabled
+Haz clic en “Save”.
+
+Repite los pasos 5 a 7 para el segundo dispositivo, pero usando los pines GPIO que has elegido para el segundo dispositivo.

@@ -1,0 +1,269 @@
+title: Home
+views:
+  - path: default_view
+    title: Home
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 100%
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: input_boolean.tgl_security_global
+              - entity: input_boolean.tgl_securitymainflooractivate
+              - entity: input_boolean.tgl_security_mf_livingroom_activate
+              - entity: input_boolean.tgl_security_basement_activate              
+            title: Security main
+          - type: entities
+            entities:            
+              - entity: input_boolean.tgl_securitybackwindows
+              - entity: input_boolean.tgl_01officewindowclose
+              - entity: input_boolean.tgl_02bathwindowclose
+              - entity: input_boolean.tgl_03cavewindowclose
+            title: Aqara activation
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.group_mf_right_wing
+              - entity: binary_sensor.group_living_room_windows
+              - entity: binary_sensor.group_mf_front_wing
+              - entity: binary_sensor.group_basement
+              - entity: binary_sensor.group_garage
+            title: Groups
+            show_header_toggle: true
+          - type: entities
+            entities:
+              - entity: timer.timer_security_delay_mf_right_wing_activation            
+              - entity: timer.timer_security_delay_livingroom_activation
+              - entity: timer.timer_security_delay_mf_front_wing_activation
+              - entity: timer.timer_security_delay_basement_activation
+              - entity: timer.timer_security_delay_garage_activation
+            title: timers
+          - type: entities
+            entities:
+              - entity: input_select.right_wing_alarm_status            
+              - entity: input_select.living_room_alarm_status
+              - entity: input_select.front_wing_alarm_status              
+              - entity: input_select.basement_alarm_status
+              - entity: input_select.garage_alarm_status
+            title: Sector status                        
+        columns: 2
+  - title: Cameras
+    path: cameras
+    type: custom:grid-layout
+    badges: []
+    cards:
+      - square: true
+        type: grid
+        cards:
+          - type: picture-entity
+            show_state: true
+            show_name: true
+            camera_view: auto
+            entity: camera.192_168_1_145
+          - type: picture-entity
+            show_state: true
+            show_name: true
+            camera_view: auto
+            entity: camera.192_168_1_146
+          - type: picture-entity
+            show_state: true
+            show_name: true
+            camera_view: auto
+            entity: camera.192_168_1_147
+          - type: picture-entity
+            show_state: true
+            show_name: true
+            camera_view: auto
+            entity: camera.192_168_1_148
+        columns: 3
+      - type: entities
+        entities:
+          - entity: switch.192_168_1_145_night_vision
+          - entity: sensor.home_assistant_operating_system_newest_version
+          - entity: sensor.inclinacion_sol
+  - title: Aqara
+    path: aqara
+    icon: mdi:zodiac-aquarius
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 100%
+    badges: []
+    cards:
+      - type: alarm-panel
+        entity: alarm_control_panel.aqara_hub_m2_ad62_security_system
+        states:
+          - arm_away
+          - arm_home
+          - arm_night
+          - arm_vacation
+          - arm_custom_bypass
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                entities:
+                  - binary_sensor.securitygroup
+                title: Binary sensor
+              - type: entities
+                entities:
+                  - entity: button.aqara_hub_m2_ad62_identify
+                    name: Identify
+                title: Aqara-Hub-M2-AD62
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                entities:
+                  - binary_sensor.01_office_contactsensor
+                  - sensor.01_office_contactsensor_battery_sensor
+                title: 01-Office-ContactSensor
+              - type: entities
+                entities:
+                  - binary_sensor.02_bathroom_contactsensor
+                  - sensor.02_bathroom_contactsensor_battery_sensor
+                title: 02-Bathroom-ContactSensor
+              - type: entities
+                entities:
+                  - entity: binary_sensor.03_cave_contactsensor
+                  - entity: sensor.03_cave_contactsensor_battery_sensor
+                title: 03-Cave-ContactSensor
+  - title: MF-Right wing
+    path: right-wing
+    icon: mdi:bed
+    type: custom:grid-layout
+    badges: []
+    cards:
+      - square: true
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.group_mf_right_wing
+              - entity: binary_sensor.10_snzb_04_mainroom_window_opening
+              - entity: binary_sensor.11_snzb_04_dressingroom_window_opening
+              - entity: binary_sensor.05_snzb_04_mainbathroom_window_opening
+              - entity: binary_sensor.01_office_contactsensor
+              - entity: binary_sensor.02_snzb_04_sleepingroom_window_opening
+              - entity: binary_sensor.02_bathroom_contactsensor
+            title: Sensor
+          - type: entities
+            entities:
+              - entity: sensor.10_snzb_04_mainroom_window_battery
+              - entity: sensor.11_snzb_04_dressingroom_window_battery
+              - entity: sensor.05_snzb_04_mainbathroom_window_battery
+              - entity: sensor.01_office_contactsensor_battery_sensor
+              - entity: sensor.02_snzb_04_sleepingroom_window_battery
+              - entity: sensor.02_bathroom_contactsensor_battery_sensor
+            title: Battery
+        columns: 2
+  - title: MF-Living room
+    path: mf-living-room
+    icon: mdi:sofa
+    type: custom:grid-layout
+    badges: []
+    cards:
+      - square: true
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: input_select.living_room_alarm_status
+              - entity: timer.timer_security_delay_livingroom_activation
+              - entity: binary_sensor.group_living_room_windows
+              - entity: binary_sensor.12_snzb_04_lvngaircon_window_opening
+              - entity: binary_sensor.13_snzb_04_lvngrghtfrplc_window_opening
+              - entity: binary_sensor.14_snzb_04_lvnglftfrplc_window_opening
+              - entity: binary_sensor.15_snzb_04_lvngpinetrees_window_opening
+              - entity: binary_sensor.16_snzb_04_lvngstorright_window_opening
+              - entity: binary_sensor.17_snzb_04_lvngstorleft_window_opening
+              - entity: binary_sensor.18_snzb_04_lvngmiddle_window_opening
+              - entity: binary_sensor.19_snzb_04_lvngsitting_window_opening
+              - entity: binary_sensor.20_snzb_04_lvngmaindoor_window_opening
+          - type: entities
+            entities:
+              - entity: sensor.12_snzb_04_lvngaircon_window_battery
+              - entity: sensor.13_snzb_04_lvngrghtfrplc_window_battery
+              - entity: sensor.14_snzb_04_lvnglftfrplc_window_battery
+              - entity: sensor.15_snzb_04_lvngpinetrees_window_battery
+              - entity: sensor.16_snzb_04_lvngstorright_window_battery
+              - entity: sensor.17_snzb_04_lvngstorleft_window_battery
+              - entity: sensor.18_snzb_04_lvngmiddle_window_battery
+              - entity: sensor.19_snzb_04_lvngsitting_window_battery
+              - entity: sensor.20_snzb_04_lvngmaindoor_window_battery
+        columns: 2
+  - icon: mdi:fridge
+    title: MF-Front wing
+    path: front-wing
+    type: custom:grid-layout
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.group_mf_front_wing
+              - entity: binary_sensor.09_snzb_04_maindoor_door_opening
+              - entity: binary_sensor.03_cave_contactsensor
+              - entity: binary_sensor.03_snzb_04_kitchentoilet_window_opening
+              - entity: binary_sensor.07_snzb_04_kitchen_window_opening
+              - entity: binary_sensor.08_snzb_04_kitchenoutdoor_door_opening
+              - entity: binary_sensor.04_snzb_04_laundryroom_window_opening
+          - type: entities
+            entities:
+              - entity: sensor.09_snzb_04_maindoor_door_battery
+              - entity: sensor.03_cave_contactsensor_battery_sensor
+              - entity: sensor.03_snzb_04_kitchentoilet_window_battery
+              - entity: sensor.07_snzb_04_kitchen_window_battery
+              - entity: sensor.08_snzb_04_kitchenoutdoor_door_battery
+              - entity: sensor.04_snzb_04_laundryroom_window_battery
+        columns: 2
+  - title: Basement
+    path: basement
+    icon: mdi:home-floor-b
+    type: custom:grid-layout
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.group_basement
+              - entity: binary_sensor.22_snzb_04_bsmntgym_window_opening
+              - entity: binary_sensor.23_snzb_04_bsmntbathroom_window_opening
+              - entity: binary_sensor.01_snzb_04_garageindoor_door_opening
+              - entity: binary_sensor.24_snzb_04_bsmntkitchen_window_opening
+              - entity: binary_sensor.25_snzb_04_bsmntstrgroom_window_opening
+          - type: entities
+            entities:
+              - entity: sensor.22_snzb_04_bsmntgym_window_battery
+              - entity: sensor.23_snzb_04_bsmntbathroom_window_battery
+              - entity: sensor.01_snzb_04_garageindoor_door_battery
+              - entity: sensor.24_snzb_04_bsmntkitchen_window_battery
+              - entity: sensor.25_snzb_04_bsmntstrgroom_window_battery
+        columns: 2    
+  - title: Garage
+    path: garage
+    icon: mdi:garage-variant
+    type: custom:grid-layout    
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.group_garage
+              - entity: binary_sensor.06_snzb_04_garageoutdoor_door_opening
+          - type: entities
+            entities:
+              - entity: sensor.06_snzb_04_garageoutdoor_door_battery
+        columns: 2
+

@@ -1,0 +1,28 @@
+# ####################################################################################################################
+# ############# Door/Window SENSORS
+# ####################################################################################################################
+# - name: 06-SNZB-04-GarageOutdoor-Door
+#   icon: mdi:door-open
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/06-SNZB-04-GarageOutdoor-Door/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.06_snzb_04_garageoutdoor_door') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 06-SNZB-04-GarageOutdoor-Door-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/06-SNZB-04-GarageOutdoor-Door/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.06_snzb_04_garageoutdoor_door_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# ####################################################################################################################

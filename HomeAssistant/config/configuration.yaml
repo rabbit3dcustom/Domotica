@@ -1,0 +1,132 @@
+homeassistant:
+  packages: !include_dir_named packages/
+  
+logger:
+  default: warning
+  logs:
+    homeassistant.components.mqtt: info
+    homeassistant.components.shell_command: info
+    homeassistant.components.recorder.migration: info
+  
+# Loads default set of integrations. Do not remove.
+default_config:
+
+mobile_app:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Allow home assistant to record history
+# 2024-09-10-uncommented again. 
+# 2024-09-10-commented again. 
+# 2024-09-10-uncommented again. 
+history:
+
+# automation: !include automations.yaml
+# automation: !include_dir_list automations
+# automation: !include_dir_merge_list automations
+# My own handmade automations
+automation manual: !include_dir_merge_list automations/
+# Automations I create in the UI
+automation ui: !include automations.yaml
+
+binary_sensor: !include binary_sensor.yaml
+device_tracker: !include device_tracker.yaml
+# 2024-09-10-Commented the history.yaml
+# history: !include history.yaml
+# input_boolean: !include_dir_merge_list input_booleans/
+group: !include groups.yaml
+recorder: !include recorder.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+# sensor: !include sensor.yaml
+# sensor: !include_dir_list sensor/
+# sensor: !include_dir_named sensor/
+sensor: !include_dir_merge_list sensor/
+# sensor: !include_dir_merge_named sensors/
+switch: !include switch.yaml
+# template: !include template_sensors.yaml
+template: !include_dir_merge_list template_sensors/
+# utility_meter: !include_dir_merge_list utility_meters/
+utility_meter: !include_dir_merge_named utility_meters/
+# influxdb: !include_dir_merge_list influxdb/
+# influxdb: !include_dir_merge_named influxdb/
+
+mqtt: 
+  #certficate: auto
+  # Create first the folders if not exists
+  sensor: !include_dir_merge_list mqtt/sensor/
+  binary_sensor: !include_dir_merge_list mqtt/binary_sensor/
+  switch: !include_dir_merge_list mqtt/switch/
+  number:  !include_dir_merge_list mqtt/numbers/  
+
+###################################################################################
+###################################################################################
+# INFLUXDB SECTION
+###################################################################################
+
+# LOCAL INFLUXDB - HOME ASSISTANT INTERNAL.
+###################################################################################
+# influxdb:
+#   host: a0d7b954-influxdb
+#   port: 8086
+#   database: !secret influx_database
+#   username: !secret influx_username
+#   password: !secret influx_password
+#   max_retries: 3
+#   default_measurement: state
+###################################################################################
+
+# REMOTE INFLUXDB - SYNOLGY DOCKER CONTAINER.
+###################################################################################  
+influxdb:
+  api_version: 2
+  ssl: false
+  host: !secret remote_syno_influx_database_ip
+  port: !secret remote_syno_influx_database_port
+  token: !secret remote_syno_influx_homeassistant_token
+  organization: !secret remote_syno_influx_organization
+  bucket: !secret remote_syno_influx_database
+  max_retries: 3  
+  default_measurement: state
+###################################################################################
+
+
+
+# Example configuration.yaml entry for the Telegram Bot
+telegram_bot:
+  - platform: polling
+    # api_key: 6189580638:AAF6MFHcOpKOzPHm5MDr7RrAwhckGGK_IIA
+    api_key: !secret telegram_bot_api_key    
+    allowed_chat_ids:
+      # - 1034127067 # example: 123456789 for the chat_id of a user
+      - !secret telegram_bot_chat_id # example: 123456789 for the chat_id of a user
+      #- CHAT_ID_2 # example: -987654321 for the chat_id of a group
+      #- CHAT_ID_3
+
+# Example configuration.yaml entry for the notifier
+notify:
+  - platform: telegram
+    # name: HA_RabbitBot
+    name: !secret telegram_bot_name
+    # chat_id: 1034127067
+    chat_id: !secret telegram_bot_chat_id
+
+  # It is possible to add multiple notifiers by using another chat_id
+  # the example belows shows an additional notifier which sends messages to the bot which is added to a group
+  #- platform: telegram
+  #name: NOTIFIER_NAME_OF_GROUP
+  #chat_id: CHAT_ID_2
+#binary_sensor:
+#  - platform: workday
+#    country: ES
+
+#service: hassio.addon_stdin
+#data:
+#  addon: 719b45ef_dropback#
+#  input: sync

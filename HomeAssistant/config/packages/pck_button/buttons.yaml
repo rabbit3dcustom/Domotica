@@ -1,0 +1,121 @@
+###################################################################################
+###################################################################################
+# template:
+###################################################################################
+  # - trigger:
+  #     platform: state
+  #     entity_id: sensor.01_snzb_01_magiclights_button
+  #     not_to:
+  #         - unavailable
+  #         - Unavailable
+  #         - unknown
+  #         - Unknown
+  #   sensor:
+  #     - name: Trigger Magic lights button
+  #       state: >
+  #         {% set value = trigger.to_state.state | int(0) %}
+  #         {% if value >= -1 %} {{ value }}
+  #         {% else %} {{ states('sensor.trigger_magic_lights_button') }}
+  #         {% endif %}
+  #       unique_id: trigger_magic_lights_button
+
+  # - trigger:
+  #     platform: state
+  #     entity_id: sensor.01_snzb_01_magiclights_button_battery
+  #     not_to:
+  #         - unavailable
+  #         - Unavailable
+  #         - unknown
+  #         - Unknown
+  #   sensor:
+  #     - name: Trigger Magic lights button_battery
+  #       state: >
+  #         {% set value = trigger.to_state.state | int(0) %}
+  #         {% if value >= 0 %} {{ value }}
+  #         {% else %} {{ states('sensor.trigger_magic_lights_button_battery') }}
+  #         {% endif %}
+  #       unique_id: trigger_magic_lights_button_battery
+
+###################################################################################
+
+
+###################################################################################
+###################################################################################
+# sensor:
+###################################################################################
+  # - platform: template
+  #   sensors:
+  #     btn_magic_lights_button_battery:
+  #       friendly_name: "BTN Magic lights button_battery"
+  #       unit_of_measurement: "%"
+  #       device_class: battery
+  #       value_template: "{{ states('sensor.trigger_magic_lights_button_battery') }}"
+
+      # btn_magic_lights_button:
+      #   friendly_name: "BTN Magic lights button"      
+      #   device_class: enum
+      #   # unit_of_measurement: "State"
+      #   value_template: >-
+      #     {% set mapper =  {
+      #         '0' : 'Hold',
+      #         '1' : 'Double',
+      #         '2' : 'Single',
+      #         '3' : 'Reset'} %}
+      #     {% set state =  states('sensor.trigger_magic_lights_button') %}
+      #     {{ mapper[state] if state in mapper else 'Unknown' }}
+
+# ###################################################################################
+# ###################################################################################
+# input_select:
+# ###################################################################################
+#   dropdwn_magic_lights_button_status:
+#     name: DropDown Magic lights button Status
+#     options:
+#     - "Hold"
+#     - "Double"
+#     - "Single"
+#     - "Reset"
+#     initial: "Reset"
+#     icon: mdi:dip-switch
+
+# ###################################################################################
+# ###################################################################################
+# automation:
+# ###################################################################################    
+#   - alias: 01-SNZB-01-Single click
+#     trigger:
+#     - platform: state
+#       entity_id:
+#         - sensor.trigger_magic_lights_button
+#       to: "2"
+#     action:
+#       - service: input_select.select_option
+#         data:
+#           entity_id: input_select.dropdwn_magic_lights_button_status
+#           option: "Single"
+
+# ###################################################################################    
+#   - alias: 01-SNZB-01-Duble click
+#     trigger:
+#     - platform: state
+#       entity_id: 
+#         - sensor.trigger_magic_lights_button
+#       to: "1"
+#     action:
+#       - service: input_select.select_option
+#         data:
+#           entity_id: input_select.dropdwn_magic_lights_button_status
+#           option: "Double"                     
+
+# ###################################################################################    
+#   - alias: 01-SNZB-01-Hold click
+#     trigger:
+#     - platform: state
+#       entity_id: 
+#         - sensor.trigger_magic_lights_button
+#       to: "0"
+#     action:
+#       - service: input_select.select_option
+#         data:
+#           entity_id: input_select.dropdwn_magic_lights_button_status
+#           option: "Hold"    

@@ -1,0 +1,865 @@
+###################################################################################
+###################################################################################
+timer:
+###################################################################################
+  timer_shutdown_3dprinter_emilia:
+    name: Timer Shutdown 3DPrinter Emilia
+    icon: mdi:camera-timer
+    duration: "00:10:00"
+    restore: true
+
+  timer_shutdown_3dprinter_chispi:
+    name: Timer Shutdown 3DPrinter Chispi
+    icon: mdi:camera-timer
+    duration: "00:10:00"
+    restore: true
+
+  timer_shutdown_3dprinter_asun:
+    name: Timer Shutdown 3DPrinter Asun
+    icon: mdi:camera-timer
+    duration: "00:10:00"
+    restore: true
+    
+  timer_shutdown_3dprinter_ita:
+    name: Timer Shutdown 3DPrinter Ita
+    icon: mdi:camera-timer
+    duration: "00:10:00"
+    restore: true
+
+  timer_shutdown_3dprinter_rhinobox:
+    name: Timer Shutdown 3DPrinter RhinoBox
+    icon: mdi:camera-timer
+    duration: "00:10:00"
+    restore: true    
+###################################################################################
+###################################################################################
+input_number:
+  number_3dprinters_maxservicehours:
+    name: Number-3dPrinters-MaxServiceHours
+    icon: mdi:wrench-clock
+    min: 0
+    max: 1000
+    initial: 500
+    step: 1
+    mode: box
+    unit_of_measurement: h
+  
+  number_3dprinters_delay_shutdown:  
+    name: Number-3dPrinters-Delay-Shutdown
+    icon: mdi:wrench-clock
+    min: 0
+    max: 60
+    initial: 20
+    step: 1
+    mode: box
+    unit_of_measurement: min
+
+###################################################################################
+###################################################################################
+
+input_boolean:
+  input_bolean_tgle_asun3pro_service:
+    name: input_bolean-tgle-Asun3Pro-service
+    icon: mdi:room-service
+    #initial: "off"
+  input_bolean_tgle_emiliaa10m_service:
+    name: input_bolean-tgle-EmiliaA10M-service
+    icon: mdi:room-service
+    #initial: "off"
+  input_bolean_tgle_chispia10m_service:
+    name: input_bolean-tgle-ChispiA10M-service
+    icon: mdi:room-service
+    #initial: "off"    
+  input_bolean_tgle_itaender3_service:
+    name: input_bolean-tgle-ItaEnder3-service
+    icon: mdi:room-service
+    #initial: "off"
+  input_boolean_tgle_rhinobox_service:
+    name: input_bolean-tgle-Rhinobox-service
+    icon: mdi:room-service
+    #initial: "off"    
+
+###################################################################################
+###################################################################################
+
+counter:
+  counter_asun3pro_numberofservices:
+    name: Counter-Asun3Pro-NumberOfServices
+    icon: mdi:wrench-outline
+    #initial: 0
+    step: 1
+    minimum: 0
+  counter_emiliaa10m_numberofservices:
+    name: Counter-EmiliaA10M-NumberOfServices
+    icon: mdi:wrench-outline
+    #initial: 1
+    step: 1
+    minimum: 0
+  counter_chispia10m_numberofservices:
+    name: Counter-ChispiA10M-NumberOfServices
+    icon: mdi:wrench-outline
+    #initial: 0
+    step: 1
+    minimum: 0    
+  counter_itaender3_numberofservices:
+    name: Counter-ItaEnder3-NumberOfServices
+    icon: mdi:wrench-outline
+    #initial: 0
+    step: 1
+    minimum: 0         
+  counter_rhinobox_numberofservices:
+    name: Counter-Rhinobox-NumberOfServices
+    icon: mdi:wrench-outline
+    #initial: 0
+    step: 1
+    minimum: 0
+
+###################################################################################
+###################################################################################
+# To check the utility meters, go to Settings/Devices&Services/Entities.  In the tab Helpers this will not appear.
+utility_meter:
+###################################################################################
+  utility_meter_asun3pro_daily:
+    name: UtilityMeter-Asun3Pro-Daily
+    # icon: mdi:calendar-today
+    source: sensor.histstat_asun3pro_total_printing_time
+    cycle: daily
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utility_meter_asun3pro_weekly:
+    name: UtilityMeter-Asun3Pro-Weekly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_asun3pro_total_printing_time
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utility_meter_asun3pro_monthly:
+    name: UtilityMeter-Asun3Pro-Monthly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_asun3pro_total_printing_time
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utility_meter_asun3pro_yearly:
+    name: UtilityMeter-Asun3Pro-Yearly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_asun3pro_total_printing_time
+    cycle: yearly
+    offset: 0
+    tariffs: []    
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true    
+
+  utility_meter_asun3pro_servicehours:
+    name: UtilityMeter-Asun3Pro-ServiceHours
+    # icon: mdi:calendar-today
+    source: sensor.histstat_asun3pro_total_printing_time
+    # cycle: none
+    delta_values: false
+    net_consumption: false
+    tariffs: []
+    periodically_resetting: true     
+
+###################################################################################    
+
+  utility_meter_itaender3_daily:
+    name: UtilityMeter-ItaEnder3-Daily
+    # icon: mdi:calendar-today
+    source: sensor.histstat_itaender3_total_printing_time
+    cycle: daily
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   
+
+  utility_meter_itaender3_weekly:
+    name: UtilityMeter-ItaEnder3-Weekly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_itaender3_total_printing_time
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_itaender3_monthly:
+    name: UtilityMeter-ItaEnder3-Monthly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_itaender3_total_printing_time
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true 
+
+  utility_meter_itaender3_yearly:
+    name: UtilityMeter-ItaEnder3-Yearly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_itaender3_total_printing_time
+    cycle: yearly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_itaender3_servicehours:
+    name: UtilityMeter-ItaEnder3-ServiceHours
+    # icon: mdi:calendar-today
+    source: sensor.histstat_itaender3_total_printing_time
+    # cycle: none
+    delta_values: false
+    net_consumption: false
+    tariffs: []
+    periodically_resetting: true 
+
+###################################################################################    
+
+  utility_meter_emiliaa10m_daily:
+    name: UtilityMeter-EmiliaA10M-Daily
+    # icon: mdi:calendar-today
+    source: sensor.histstat_emiliaa10m_total_printing_time
+    cycle: daily
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   
+
+  utility_meter_emiliaa10m_weekly:
+    name: UtilityMeter-EmiliaA10M-Weekly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_emiliaa10m_total_printing_time
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_emiliaa10m_monthly:
+    name: UtilityMeter-EmiliaA10M-Monthly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_emiliaa10m_total_printing_time
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true 
+
+  utility_meter_emiliaa10m_yearly:
+    name: UtilityMeter-EmiliaA10M-Yearly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_emiliaa10m_total_printing_time
+    cycle: yearly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_emiliaa10m_servicehours:
+    name: UtilityMeter-EmiliaA10M-ServiceHours
+    # icon: mdi:calendar-today
+    source: sensor.histstat_emiliaa10m_total_printing_time
+    # cycle: none
+    delta_values: false
+    net_consumption: false
+    tariffs: []
+    periodically_resetting: true 
+
+###################################################################################    
+
+  utility_meter_chispia10m_daily:
+    name: UtilityMeter-ChispiA10M-Daily
+    # icon: mdi:calendar-today
+    source: sensor.histstat_chispia10m_total_printing_time
+    cycle: daily
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   
+
+  utility_meter_chispia10m_weekly:
+    name: UtilityMeter-ChispiA10M-Weekly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_chispia10m_total_printing_time
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_chispia10m_monthly:
+    name: UtilityMeter-ChispiA10M-Monthly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_chispia10m_total_printing_time
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true 
+
+  utility_meter_chispia10m_yearly:
+    name: UtilityMeter-ChispiA10M-Yearly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_chispia10m_total_printing_time
+    cycle: yearly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_chispia10m_servicehours:
+    name: UtilityMeter-ChispiA10M-ServiceHours
+    # icon: mdi:calendar-today
+    source: sensor.histstat_chispia10m_total_printing_time
+    # cycle: none
+    delta_values: false
+    net_consumption: false
+    tariffs: []
+    periodically_resetting: true 
+
+###################################################################################    
+
+  utility_meter_rhinobox_daily:
+    name: UtilityMeter-RhinoBox-Daily
+    # icon: mdi:calendar-today
+    source: sensor.histstat_rhinobox_total_printing_time
+    cycle: daily
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   
+
+  utility_meter_rhinobox_weekly:
+    name: UtilityMeter-RhinoBox-Weekly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_rhinobox_total_printing_time
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_rhinobox_monthly:
+    name: UtilityMeter-RhinoBox-Monthly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_rhinobox_total_printing_time
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true 
+
+  utility_meter_rhinobox_yearly:
+    name: UtilityMeter-RhinoBox-Yearly
+    # icon: mdi:calendar-today
+    source: sensor.histstat_rhinobox_total_printing_time
+    cycle: yearly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true     
+
+  utility_meter_rhinobox_servicehours:
+    name: UtilityMeter-RhinoBox-ServiceHours
+    # icon: mdi:calendar-today
+    source: sensor.histstat_rhinobox_total_printing_time
+    # cycle: none
+    delta_values: false
+    net_consumption: false
+    tariffs: []
+    periodically_resetting: true 
+
+####################################################################################
+####################################################################################
+automation:
+####################################################################################
+
+  - alias: Octoprint-Asun3Pro Start timer to switch off
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.asun3pro_octoprint_printing
+        from: "on"
+        to: "off"
+    action:
+      - service: timer.start
+        data: {}            
+        target:
+          entity_id: timer.timer_shutdown_3dprinter_asun
+    mode: single
+
+####################################################################################
+
+  - alias: Octoprint-Asun3Pro SwitchOff sonOff
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - timer.timer_shutdown_3dprinter_asun
+        to: idle
+    condition:
+      - condition: and
+        conditions:
+          - condition: device
+            type: is_on
+            device_id: 6714c63c6f4b3325080adda975dbea0a
+            entity_id: switch.06_basicr2_asun3pro
+            domain: switch
+          - condition: state
+            entity_id: binary_sensor.asun3pro_octoprint_printing
+            state: "off"
+    action:
+    - type: turn_off
+      device_id: 6714c63c6f4b3325080adda975dbea0a
+      entity_id: switch.06_basicr2_asun3pro
+      domain: switch
+    - service: notify.ha_rabbitbot
+      data:
+        message: Asun3Pro-Octoprint SwitchOff sonOff
+        title: End up printing and 10min delay
+    mode: single        
+
+####################################################################################
+
+  - alias: Octoprint-Asun3Pro-Reset-ServicesHours
+    description: ''
+    trigger:
+    - platform: state
+      entity_id:
+      - input_boolean.input_bolean_tgle_asun3pro_service
+      from: 'on'
+      to: 'off'
+    condition: []
+    action:
+    - service: utility_meter.calibrate
+      data:
+        value: '0'
+      target:
+        entity_id: sensor.utility_meter_asun3pro_servicehours
+    - service: counter.increment
+      data: {}
+      target:
+        entity_id:
+        - counter.counter_asun3pro_numberofservices
+    mode: single
+####################################################################################
+
+  - alias: Octoprint-Asun3Pro-ServiceNeed-Activate
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.utility_meter_asun3pro_servicehours
+      above: input_number.number_3dprinters_maxservicehours
+    condition: []
+    action:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id:
+        - input_boolean.input_bolean_tgle_asun3pro_service
+    - service: telegram_bot.send_message
+      data:
+        message: Asun3Pro need a maintenance!!!!
+        title: Asun3Pro need a maintenance!!!!
+    mode: single
+
+####################################################################################
+####################################################################################
+
+  - alias: Octoprint-EmiliaA10M Start timer to switch off
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.emiliaa10m_octoprint_printing
+        from: "on"
+        to: "off"
+    action:
+      - service: timer.start
+        data: {}            
+        target:
+          entity_id: timer.timer_shutdown_3dprinter_emilia 
+    mode: single
+
+####################################################################################
+
+  - alias: Octoprint-EmiliaA10M SwitchOff sonOff
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - timer.timer_shutdown_3dprinter_emilia
+        to: idle
+    condition:
+      - condition: and
+        conditions:
+          - condition: device
+            type: is_on
+            device_id: babf65b1f30930203e06002f957b9304
+            entity_id: switch.05_basicr2_emiliaa10m
+            domain: switch
+          - condition: state
+            entity_id: binary_sensor.emiliaa10m_octoprint_printing
+            state: "off"
+    action:
+    - type: turn_off
+      device_id: babf65b1f30930203e06002f957b9304
+      entity_id: switch.05_basicr2_emiliaa10m
+      domain: switch
+    - service: notify.ha_rabbitbot
+      data:
+        message: EmiliaA10M-Octoprint SwitchOff sonOff
+        title: End up printing and 10min delay
+    mode: single    
+
+####################################################################################
+
+  - alias: Octoprint-EmiliaA10M ServiceNeed Activate
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.utility_meter_emiliaa10m_servicehours
+      above: input_number.number_3dprinters_maxservicehours
+    condition: []
+    action:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.input_bolean_tgle_emiliaa10m_service
+    - service: telegram_bot.send_message
+      data:
+        message: EmiliaA10M need a maintenance!!!!
+        title: EmiliaA10M need a maintenance!!!!
+    mode: single
+####################################################################################
+
+  - alias: Octoprint-EmiliaA10M Reset ServicesHoursTest
+    description: ""
+    trigger:
+      - platform: state
+        entity_id:
+          - input_boolean.input_bolean_tgle_emiliaa10m_service
+        from: "on"
+        to: "off"
+    condition: []
+    action:
+      - service: utility_meter.calibrate
+        data:
+          value: "0"
+        target:
+          entity_id:
+            - sensor.utilitymeter_emiliaa10m_servicehours
+      - service: counter.increment
+        data: {}
+        target:
+          entity_id: counter.counter_emiliaa10m_numberofservices
+    mode: single
+
+
+####################################################################################
+####################################################################################
+
+  - alias: Octoprint-ChispiA10M Start timer to switch off
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.chispia10m_octoprint_printing
+        from: "on"
+        to: "off"
+    action:
+      - service: timer.start
+        data: {}            
+        target:
+          entity_id: timer.timer_shutdown_3dprinter_chispi
+    mode: single
+
+####################################################################################
+
+  - alias: Octoprint-ChispiA10M SwitchOff sonOff
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - timer.timer_shutdown_3dprinter_chispi
+        to: idle
+    condition:
+      - condition: and
+        conditions:
+          - condition: device
+            type: is_on
+            device_id: 5caef4be13eba001bf7a2758086fa139
+            entity_id: switch.07_basicr2_chispia10m
+            domain: switch
+          - condition: state
+            entity_id: binary_sensor.chispia10m_octoprint_printing
+            state: "off"
+    action:
+    - type: turn_off
+      device_id: 5caef4be13eba001bf7a2758086fa139
+      entity_id: switch.07_basicr2_chispia10m
+      domain: switch
+    - service: notify.ha_rabbitbot
+      data:
+        message: ChispiA10M-Octoprint SwitchOff sonOff
+        title: End up printing and 10min delay
+    mode: single    
+
+####################################################################################
+
+  - alias: Octoprint-ChispiA10M ServiceNeed Activate
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.utility_meter_chispia10m_servicehours
+      above: input_number.number_3dprinters_maxservicehours
+    condition: []
+    action:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.input_bolean_tgle_chispia10m_service
+    - service: telegram_bot.send_message
+      data:
+        message: ChispiA10M need a maintenance!!!!
+        title: ChispiA10M need a maintenance!!!!
+    mode: single
+####################################################################################
+
+  - alias: Octoprint-ChispiA10M Reset ServicesHours
+    description: ''
+    trigger:
+    - platform: state
+      entity_id:
+      - input_boolean.input_bolean_tgle_chispia10m_service
+      from: 'on'
+      to: 'off'
+    condition: []
+    action:
+    - service: utility_meter.calibrate
+      data:
+        value: '0'
+      target:
+        entity_id: sensor.utility_meter_chispia10m_servicehours
+    - service: counter.increment
+      data: {}
+      target:
+        entity_id:
+        - counter.counter_chispia10m_numberofservices
+    mode: single         
+
+####################################################################################
+####################################################################################
+
+  - alias: Octoprint-ItaEnder3 Start timer to switch off
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.itaender3_octoprint_printing
+        from: "on"
+        to: "off"
+    action:
+      - service: timer.start
+        data: {}            
+        target:
+          entity_id: timer.timer_shutdown_3dprinter_ita
+    mode: single
+
+####################################################################################
+
+  - alias: Octoprint-ItaEnder3 SwitchOff sonOff
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - timer.timer_shutdown_3dprinter_ita
+        to: idle
+    condition:
+      - condition: and
+        conditions:
+          - condition: device
+            type: is_on
+            device_id: a799c084b21a0568a8a43c9452102c80
+            entity_id: switch.01_basicr2_itaender3
+            domain: switch
+          - condition: state
+            entity_id: binary_sensor.itaender3_octoprint_printing
+            state: "off"
+    action:
+    - type: turn_off
+      device_id: a799c084b21a0568a8a43c9452102c80
+      entity_id: switch.01_basicr2_itaender3
+      domain: switch
+    - service: notify.ha_rabbitbot
+      data:
+        message: ItaEnder3-Octoprint SwitchOff sonOff
+        title: End up printing and 10min delay
+    mode: single 
+
+####################################################################################
+
+  - alias: Octoprint-ItaEnder3-ServiceNeed-Activate
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.utility_meter_chispia10m_servicehours
+      above: input_number.number_3dprinters_maxservicehours
+    condition: []
+    action:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.input_bolean_tgle_chispia10m_service
+    - service: telegram_bot.send_message
+      data:
+        message: ChispiA10M need a maintenance!!!!
+        title: ChispiA10M need a maintenance!!!!
+    mode: single
+####################################################################################
+
+  - alias: Octoprint-ItaEnder3-Reset-ServicesHours
+    description: ''
+    trigger:
+    - platform: state
+      entity_id:
+      - input_boolean.input_bolean_tgle_chispia10m_service
+      from: 'on'
+      to: 'off'
+    condition: []
+    action:
+    - service: utility_meter.calibrate
+      data:
+        value: '0'
+      target:
+        entity_id: sensor.utility_meter_chispia10m_servicehours
+    - service: counter.increment
+      data: {}
+      target:
+        entity_id:
+        - counter.counter_chispia10m_numberofservices
+    mode: single             
+
+####################################################################################
+####################################################################################
+
+  - alias: Octoprint-RhinoBox Start timer to switch off
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.rhinobox_octoprint_printing
+        from: "on"
+        to: "off"
+    action:
+      - service: timer.start
+        data: {}            
+        target:
+          entity_id: timer.timer_shutdown_3dprinter_rhinobox
+    mode: single
+
+####################################################################################
+
+  - alias: Octoprint-RhinoBox SwitchOff sonOff
+    description: ''
+    trigger:
+      - platform: state
+        entity_id:
+          - timer.timer_shutdown_3dprinter_rhinobox
+        to: idle
+    condition:
+      - condition: and
+        conditions:
+          - condition: device
+            type: is_on
+            device_id: 03d28742dcd5da5601c91b6558391a4a
+            entity_id: switch.04_basicr2_witbox
+            domain: switch
+          - condition: state
+            entity_id: binary_sensor.rhinobox_octoprint_printing
+            state: "off"
+    action:
+    - type: turn_off
+      device_id: 03d28742dcd5da5601c91b6558391a4a
+      entity_id: switch.04_basicr2_witbox
+      domain: switch
+    - service: notify.ha_rabbitbot
+      data:
+        message: RhinoBox-Octoprint SwitchOff sonOff
+        title: End up printing and 10min delay
+    mode: single 
+
+####################################################################################
+
+  - alias: Octoprint-RhinoBox-ServiceNeed-Activate
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.utility_meter_rhinobox_servicehours
+      above: input_number.number_3dprinters_maxservicehours
+    condition: []
+    action:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.input_boolean_tgle_rhinobox_service
+    - service: telegram_bot.send_message
+      data:
+        message: RhinoBox need a maintenance!!!!
+        title: RhinoBox need a maintenance!!!!
+    mode: single
+####################################################################################
+
+  - alias: Octoprint-RhinoBox-Reset-ServicesHours
+    description: ''
+    trigger:
+    - platform: state
+      entity_id:
+      - input_boolean.input_boolean_tgle_rhinobox_service
+      from: 'on'
+      to: 'off'
+    condition: []
+    action:
+    - service: utility_meter.calibrate
+      data:
+        value: '0'
+      target:
+        entity_id: sensor.utility_meter_rhinobox_servicehours
+    - service: counter.increment
+      data: {}
+      target:
+        entity_id:
+        - counter.counter_rhinobox_numberofservices
+    mode: single             
+
+####################################################################################
+####################################################################################

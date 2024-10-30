@@ -1,0 +1,260 @@
+# ###################################################################################
+# ######  UTITILY METERS - SMART SOCKET SHELLY
+# ###################################################################################  
+# ######  UTITILY METERS - SMART SOCKET SHELLY 01 - WASHER  
+  utilitymeter_01_shelly_plug_s_washer_dailyconsumption:
+    name: UtilityMeter-01-Shelly-plug-s-Washer-DailyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+    # source: sensor.01_shelly_plug_s_washer_energy
+    cycle: daily
+    offset: 0
+    tariffs: []
+    # unit_of_measurement: "kWh"
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_01_shelly_plug_s_washer_weeklyconsumption:
+    name: UtilityMeter-01-Shelly-plug-s-Washer-WeeklyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+    # source: sensor.01_shelly_plug_s_washer_energy
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_01_shelly_plug_s_washer_monthlyconsumption:
+    name: UtilityMeter-01-Shelly-plug-s-Washer-MonthlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+    # source: sensor.01_shelly_plug_s_washer_energy
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_01_shelly_plug_s_washer_yearlyconsumption:
+    name: UtilityMeter-01-Shelly-plug-s-Washer-YearlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+    # source: sensor.01_shelly_plug_s_washer_energy
+    cycle: yearly
+    offset: 0
+    tariffs: []    
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true 
+
+
+# ###################################################################################      
+# ######  UTITILY METERS - SMART SOCKET SHELLY 02 - DISHWASHER
+
+  utilitymeter_02_shelly_plug_s_dishwasher_dailyconsumption:
+    name: UtilityMeter-02-Shelly-plug-s-DishWasher-DailyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_02_shelly_plug_s_dishwasher_totalconsumption
+    # source: sensor.02_shelly_plug_s_dishwasher_energy
+    cycle: daily
+    offset: 0
+    tariffs: []
+    # unit_of_measurement: "kWh"
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_02_shelly_plug_s_dishwasher_weeklyconsumption:
+    name: UtilityMeter-02-Shelly-plug-s-DishWasher-WeeklyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_02_shelly_plug_s_dishwasher_totalconsumption
+    # source: sensor.02_shelly_plug_s_dishwasher_energy
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_02_shelly_plug_s_dishwasher_monthlyconsumption:
+    name: UtilityMeter-02-Shelly-plug-s-DishWasher-MonthlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_02_shelly_plug_s_dishwasher_totalconsumption
+    # source: sensor.02_shelly_plug_s_dishwasher_energy
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_02_shelly_plug_s_dishwasher_yearlyconsumption:
+    name: UtilityMeter-02-Shelly-plug-s-DishWasher-YearlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_02_shelly_plug_s_dishwasher_totalconsumption
+    # source: sensor.02_shelly_plug_s_dishwasher_energy
+    cycle: yearly
+    offset: 0
+    tariffs: []    
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   
+
+# ###################################################################################      
+# ######  UTITILY METERS - SMART SOCKET SHELLY 03 - FRIDGE
+
+  utilitymeter_03_shelly_plug_s_fridge_dailyconsumption:
+    name: UtilityMeter-03-Shelly-plug-s-Fridge-DailyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_03_shelly_plug_s_fridge_totalconsumption
+    # source: sensor.03_shelly_plug_s_fridge_energy
+    cycle: daily
+    offset: 0
+    tariffs: []
+    # unit_of_measurement: "kWh"
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_03_shelly_plug_s_fridge_weeklyconsumption:
+    name: UtilityMeter-03-Shelly-plug-s-Fridge-WeeklyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_03_shelly_plug_s_fridge_totalconsumption
+    # source: sensor.03_shelly_plug_s_fridge_energy
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_03_shelly_plug_s_fridge_monthlyconsumption:
+    name: UtilityMeter-03-Shelly-plug-s-Fridge-MonthlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_03_shelly_plug_s_fridge_totalconsumption
+    # source: sensor.03_shelly_plug_s_fridge_energy
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_03_shelly_plug_s_fridge_yearlyconsumption:
+    name: UtilityMeter-03-Shelly-plug-s-Fridge-YearlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_03_shelly_plug_s_fridge_totalconsumption
+    # source: sensor.03_shelly_plug_s_fridge_energy
+    cycle: yearly
+    offset: 0
+    tariffs: []    
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   
+
+# ###################################################################################
+# ######  UTITILY METERS - SMART SOCKET SHELLY 04 - Office non mandatory
+  utilitymeter_04_shellyplug_s_nonmandat_dailyconsumption:
+    name: UtilityMeter-04-ShellyPlug-S-NonMandat-DailyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_04_shellyplug_s_nonmandat_totalconsumption
+    # source: sensor.04_shellyplug_s_nonmandat_energy
+    cycle: daily
+    offset: 0
+    tariffs: []
+    # unit_of_measurement: "kWh"
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_04_shellyplug_s_nonmandat_weeklyconsumption:
+    name: UtilityMeter-04-ShellyPlug-S-NonMandat-WeeklyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_04_shellyplug_s_nonmandat_totalconsumption
+    # source: sensor.04_shellyplug_s_nonmandat_energy
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_04_shellyplug_s_nonmandat_monthlyconsumption:
+    name: UtilityMeter-04-ShellyPlug-S-NonMandat-MonthlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_04_shellyplug_s_nonmandat_totalconsumption
+    # source: sensor.04_shellyplug_s_nonmandat_energy
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_04_shellyplug_s_nonmandat_yearlyconsumption:
+    name: UtilityMeter-04-ShellyPlug-S-NonMandat-YearlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_04_shellyplug_s_nonmandat_totalconsumption
+    # source: sensor.04_shellyplug_s_nonmandat_energy
+    cycle: yearly
+    offset: 0
+    tariffs: []    
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   
+
+
+# ###################################################################################
+# ######  UTITILY METERS - SMART SOCKET SHELLY 05 - Swimming pool 
+  utilitymeter_05_shellyplug_s_swimmingpool_dailyconsumption:
+    name: UtilityMeter-05-ShellyPlug-S-SwimmingPool-DailyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_05_shellyplug_s_swimmingpool_totalconsumption
+    # source: sensor.05_shellyplug_s_swimmingpool_energy
+    cycle: daily
+    offset: 0
+    tariffs: []
+    # unit_of_measurement: "kWh"
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_05_shellyplug_s_swimmingpool_weeklyconsumption:
+    name: UtilityMeter-05-ShellyPlug-S-SwimmingPool-WeeklyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_05_shellyplug_s_swimmingpool_totalconsumption
+    # source: sensor.05_shellyplug_s_swimmingpool_energy
+    cycle: weekly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_05_shellyplug_s_swimmingpool_monthlyconsumption:
+    name: UtilityMeter-05-ShellyPlug-S-SwimmingPool-MonthlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_05_shellyplug_s_swimmingpool_totalconsumption
+    # source: sensor.05_shellyplug_s_swimmingpool_energy
+    cycle: monthly
+    offset: 0
+    tariffs: []      
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_05_shellyplug_s_swimmingpool_yearlyconsumption:
+    name: UtilityMeter-05-ShellyPlug-S-SwimmingPool-YearlyConsumption
+    # icon: mdi:calendar-today
+    source: sensor.riemann_05_shellyplug_s_swimmingpool_totalconsumption
+    # source: sensor.05_shellyplug_s_swimmingpool_energy
+    cycle: yearly
+    offset: 0
+    tariffs: []    
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true   

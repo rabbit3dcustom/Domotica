@@ -1,0 +1,80 @@
+################################################
+######  AGGREGATE SENSORS
+################################################
+
+# MPPT Total live Photo Voltaic Power
+###################################################################################
+- sensor:
+  - name: Victron MPPT total live PV Power
+    unique_id: victron_mppt_total_live_pv_power
+    state_class: measurement
+    device_class: power
+    unit_of_measurement: "W"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% if states('sensor.mppt_150_70_garagesouth_pv_power') | is_number  and  states('sensor.mppt_150_70tr_garagenorth_pv_power') | is_number %}     
+        {% set garage_south = states('sensor.mppt_150_70_garagesouth_pv_power') | round(2) %}
+        {% set garage_north = states('sensor.mppt_150_70tr_garagenorth_pv_power') | round(2) %}
+        {% set total = garage_south + garage_north %}       
+        {{ total | round(0) }}     
+      {% else %}
+        {{ 0 }} 
+      {% endif %} 
+
+# MPPT Total live Photo Voltaic Amperes
+###################################################################################
+- sensor:
+  - name: Victron MPPT total live PV Amps
+    unique_id: victron_mppt_total_live_pv_amps
+    state_class: measurement
+    device_class: current
+    unit_of_measurement: "A"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% if states('sensor.mppt_garagesouth_150_70_pv_current') | is_number  and  states('sensor.mppt_garagenorth_150_70tr_pv_current') | is_number %}     
+        {% set garage_south = states('sensor.mppt_garagesouth_150_70_pv_current') | round(2) %}
+        {% set garage_north = states('sensor.mppt_garagenorth_150_70tr_pv_current') | round(2) %}
+        {% set total = garage_south + garage_north %}       
+        {{total | round(0) }}      
+      {% else %}
+        {{ 0 }} 
+      {% endif %} 
+
+
+# MPPT Total live DC Power
+###################################################################################
+- sensor:
+  - name: Victron MPPT total live DC Power
+    unique_id: victron_mppt_total_live_dc_power
+    state_class: measurement
+    device_class: power
+    unit_of_measurement: "W"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% if states('sensor.mppt_garagesouth_150_70_dc_power') | is_number  and  states('sensor.mppt_garagenorth_150_70_dc_power') | is_number %}     
+        {% set garage_south = states('sensor.mppt_garagesouth_150_70_dc_power') | round(2) %}
+        {% set garage_north = states('sensor.mppt_garagenorth_150_70_dc_power') | round(2) %}
+        {% set total = garage_south + garage_north %}       
+        {{total | round(0) }}
+      {% else %}
+        {{ 0 }} 
+      {% endif %}       
+
+# MPPT Total live DC Amperes
+###################################################################################
+- sensor:
+  - name: Victron MPPT total live DC Amps
+    unique_id: victron_mppt_total_live_dc_amps
+    state_class: measurement
+    device_class: current
+    unit_of_measurement: "A"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% if states('sensor.mppt_150_70_garagesouth_dc_current') | is_number  and  states('sensor.mppt_150_70tr_garagenorth_dc_current') | is_number %}     
+        {% set garage_south = states('sensor.mppt_150_70_garagesouth_dc_current') | round(2) %}
+        {% set garage_north = states('sensor.mppt_150_70tr_garagenorth_dc_current') | round(2) %}
+        {% set total = garage_south + garage_north %}       
+        {{total | round(0) }}  
+      {% else %}
+        {{ 0 }} 
+      {% endif %}           

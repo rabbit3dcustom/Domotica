@@ -1,0 +1,142 @@
+####################################################################################################################
+############# CERBO
+####################################################################################################################
+
+#Cerbo battery percentage
+- unique_id: victron_cerbo_battery_percentage
+  name: Battery Percentage #cerbo_gx_battery_percentage
+  state_class: measurement
+  device_class: battery
+  unit_of_measurement: "%"  
+  state_topic: "victron_env/N/c0619ab3baad/system/0/Dc/Battery/Soc"
+  value_template: "{{ value_json.value | round(0) }}"
+  icon: mdi:car-battery  
+  device: {
+    identifiers: [
+      "Victron Cerbo GX"
+    ],
+    manufacturer: "Victron Energy",
+    model: "Cerbo GX",
+    name: "Cerbo GX"}
+
+#Cerbo battery voltage
+- unique_id: victron_cerbo_battery_voltage
+  name: Battery Voltage #cerbo_gx_battery_voltage
+  state_class: measurement
+  device_class: voltage
+  unit_of_measurement: V 
+  state_topic: "victron_env/N/c0619ab3baad/system/0/Dc/Battery/Voltage"
+  value_template: "{{ value_json.value | round(1) }}"
+  icon: mdi:lightning-bolt-circle
+  device: {
+    identifiers: [
+      "Victron Cerbo GX"
+    ],
+    manufacturer: "Victron Energy",
+    model: "Cerbo GX",
+    name: "Cerbo GX"}
+
+# AC Loads
+- unique_id: victron_cerbo_ac_loads
+  name: AC Loads #cerbo_gx_ac_loads
+  state_class: measurement
+  device_class: power
+  unit_of_measurement: W
+  state_topic: "victron_env/N/c0619ab3baad/system/0/Ac/Consumption/L1/Power"  
+  value_template: '{{ value_json.value }}'  
+  icon: mdi:power-socket-uk
+  device: {
+    identifiers: [
+      "Victron Cerbo GX"
+    ],
+    manufacturer: "Victron Energy",
+    model: "Cerbo GX",
+    name: "Cerbo GX"}  
+
+# DC Loads
+- unique_id: victron_cerbo_dc_loads
+  name: DC Loads #cerbo_gx_dc_loads
+  state_class: measurement    
+  device_class: power    
+  unit_of_measurement: W
+  state_topic: "victron_env/N/c0619ab3baad/system/0/Dc/System/Power"
+  value_template: '{{ value_json.value|float(0)|round(0) }}'
+  icon: mdi:skull
+  device: {
+    identifiers: [
+      "Victron Cerbo GX"
+    ],
+    manufacturer: "Victron Energy",
+    model: "Cerbo GX",
+    name: "Cerbo GX"} 
+
+# Net Solar Production
+- unique_id: victron_cerbo_live_solar_production
+  name: Live Solar Production #sensor.cerbo_gx_live_solar_production
+  state_class: measurement    
+  device_class: power
+  unit_of_measurement: W
+  state_topic: "victron_env/N/c0619ab3baad/system/0/Dc/Pv/Power"
+  value_template: '{{ value_json.value|float(0)|round(0) }}'
+  icon: mdi:solar-power
+  device: {
+    identifiers: [
+      "Victron Cerbo GX"
+    ],
+    manufacturer: "Victron Energy",
+    model: "Cerbo GX",
+    name: "Cerbo GX"} 
+
+# Net load going in/out of your battery
+- unique_id: victron_cerbo_battery_load
+  name: Battery Load  #cerbo_gx_battery_load
+  state_class: measurement    
+  device_class: power
+  unit_of_measurement: W
+  state_topic: "victron_env/N/c0619ab3baad/system/0/Batteries" # Extracted from an array that is sent to the cerbo.
+  value_template: '{{ value_json.value[0].power|float(0)|round(0) }}' # Extracted from an array that is sent to the cerbo.
+  device: {
+    identifiers: [
+      "Victron Cerbo GX"
+    ],
+    manufacturer: "Victron Energy",
+    model: "Cerbo GX",
+    name: "Cerbo GX"}    
+
+# Current State of your Inverter
+- unique_id: victron_cerbo_inverter_state
+  name: Inverter State #sensor.cerbo_gx_inverter_state
+  state_topic: "victron_env/N/c0619ab3baad/system/0/SystemState/State"
+  value_template: >
+    {% if value_json.value == 0 %}
+      Off
+    {% elif value_json.value == 2 %}
+      VE.Bus Fault condition
+    {% elif value_json.value == 3 %}
+      Bulk
+    {% elif value_json.value == 4 %}
+      Absorption
+    {% elif value_json.value == 5 %}
+      Float
+    {% elif value_json.value == 6 %}
+      Storage
+    {% elif value_json.value == 7 %}
+      Equalize
+    {% elif value_json.value == 9 %}
+      Inverting
+    {% elif value_json.value == 10 %}
+      Assisting
+    {% elif value_json.value == 256 %}
+      Discharging
+    {% elif value_json.value == 257 %}
+      Sustain
+    {% else %}
+      Error - No Data
+    {% endif %}
+  device: {
+    identifiers: [
+      "Victron Cerbo GX"
+    ],
+    manufacturer: "Victron Energy",
+    model: "Cerbo GX",
+    name: "Cerbo GX"}        

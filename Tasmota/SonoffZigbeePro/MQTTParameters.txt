@@ -1,0 +1,20 @@
+Original:
+
+Topic = tasmota_%06X
+Full Topic = %prefix%/%topic%/
+
+Custom:
+Topic = tasmota_01-SonoffZigbeePro
+
+
+
+----------------------------------------------------
+DVES_C24B8C
+DVES_USER
+
+
+
+ZbSend { "device":"01-ZBMINI-BasementAisle-Switch", "send":{"Power":"On"} }
+ZbSend { "device":"01-ZBMINI-BasementAisle-Switch", "send":{"Power":1} }
+ZbSend { "device":"01-ZBMINI-BasementAisle-Switch", "send":{"Power":false} }
+ZbSend { "device":"01-ZBMINI-BasementAisle-Switch", "send":{"Power":"Toggle"} }

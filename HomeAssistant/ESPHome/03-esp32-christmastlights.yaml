@@ -1,0 +1,72 @@
+esphome:
+  name: "03-esp32-christmastlights"
+  friendly_name: 03-ESP32-ChristmastLights
+  comment: ${device_description}  
+  project:
+    name: "syssi.esphome-jk-bms"
+    version: 2.0.0  
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+# logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "NdyCvB4Kz1UL/+u3r6DM+ue0oGNCaui3jwuHav4vLQY="
+
+web_server:
+  port: 80
+
+
+ota:
+
+# Multiple networks with DHCP
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid
+    password: !secret wifi_password
+  - ssid: RoLu_dhcp_EXT
+    password: !secret dhcp_ext
+  - ssid: RoLu_dhcp
+    password: !secret rolu_dhcp
+
+  # Optional manual IP
+  manual_ip:
+    static_ip: 192.168.1.242
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0  
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "03-christmastlights-esp32_ap"
+    password: "lnMkGXMk0deD"
+
+captive_portal:
+
+################################
+# Example configuration entry
+switch:
+  - platform: gpio
+    pin: 22
+    name: "Rele test"
+
+################################
+################################
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: ESP IP Address
+    ssid:
+      name: ESP Connected SSID
+    bssid:
+      name: ESP Connected BSSID
+    mac_address:
+      name: ESP Mac Wifi Address
+    scan_results:
+      name: ESP Latest Scan Results
+    

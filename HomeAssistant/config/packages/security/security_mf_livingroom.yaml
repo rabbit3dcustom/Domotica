@@ -1,0 +1,185 @@
+###################################################################################
+###################################################################################
+input_boolean:
+  tgl_security_mf_livingroom_activate: #This switch will activate or not the alarms at the main floor living room
+    name: tgl_security_mf_livingroom_activate
+    icon: mdi:security 
+    initial: "on"
+
+  tgl_security_mf_livingroom_perimeter_activate: #This switch will activate only the perimeter sensors and not the inside sensors like motion sensors.
+    name: tgl_security_mf_livingroom_perimeter_activate
+    icon: mdi:security
+    initial: "on"    
+
+  tgl_security_forced_mf_livingroom_activate: #This switch will force the activation of the alarm in the living room despite the state of the sensors.
+    name: tgl_security_forced_mf_livingroom_activate
+    icon: mdi:security 
+    # initial: "off"
+
+###################################################################################
+###################################################################################
+input_select:
+  living_room_alarm_status:
+    name: Living room alarm status
+    options:
+    - "off"
+    - "armed"
+    - "activate"
+    # initial: "off"
+    icon: mdi:alarm-bell    
+
+###################################################################################
+###################################################################################
+timer:
+  timer_security_delay_livingroom_activation:
+    name: Timer Security Delay living room activation
+    icon: mdi:camera-timer
+    duration: "00:01:00"
+    restore: true     
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  - alias: Security-MF_Living room-Check sensors are close
+    description: ""
+    trigger:
+      - platform: state
+        entity_id:
+          - input_boolean.tgl_security_mf_livingroom_activate
+        to: "on"
+    condition: []
+    action:
+      - if:
+        - condition: state
+          entity_id: binary_sensor.group_living_room_windows
+          state: "on"
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: input_boolean.tgl_security_forced_mf_livingroom_activate
+              state: "off"              
+        then:
+          - service: notify.ha_rabbitbot
+            data:
+              message: >
+                There is open a sensor on MF Living room.
+              title: Cant activate alarm on Living room something is open
+          - service: input_boolean.toggle
+            data: {}
+            target:
+              entity_id: input_boolean.tgl_security_mf_livingroom_activate
+        else:
+          - service: timer.start
+            data: {}
+            target:
+              entity_id: timer.timer_security_delay_livingroom_activation
+          - service: notify.ha_rabbitbot
+            data:
+              title: Living room alarm activating
+              message: Please leave the living room before delay finish.
+          - service: input_select.select_option
+            target:
+              entity_id: input_select.front_wing_siren01_status      
+            data:
+              option: "notification"               
+    mode: single
+
+  - alias: Security-MF_Living room-Alarm arm
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - timer.timer_security_delay_livingroom_activation
+        from: active
+        to: idle
+    condition: []
+    action:
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.living_room_alarm_status      
+        data:
+          option: "armed"
+      - service: notify.ha_rabbitbot
+        data:
+          title: Living room alarm armed
+          message: Living room alarm in armed mode.
+
+  - alias: Security-MF_Living room-Alarm disarm
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - input_boolean.tgl_security_mf_livingroom_activate
+        to: "off"
+    condition:
+      - condition: state
+        entity_id: input_select.living_room_alarm_status
+        state: armed
+    action:
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.living_room_alarm_status      
+        data:
+          option: "off"
+      - service: notify.ha_rabbitbot
+        data:
+          title: Living room alarm disarm     
+          message: Living room alarm disarm correctly
+
+  - alias: Security-MF_Living room-Alarm is activated
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.group_living_room_windows
+        to: "on"
+        from: "off"
+    condition:
+      - condition: and
+        conditions:           
+          - condition: state
+            entity_id: input_boolean.tgl_security_mf_livingroom_activate
+            state: "on"
+          - condition: state
+            entity_id: input_select.living_room_alarm_status
+            state: "armed"   
+    action:
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.living_room_alarm_status
+        data:
+          option: activate
+      - service: notify.ha_rabbitbot
+        data:
+          title: Living room alarm active     
+          message: Living room alarm has been activate!
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.front_wing_siren01_status      
+        data:
+          option: "ring"          
+
+  - alias: Security-MF_Living room-Alarm activated warning continously
+    mode: single
+    trigger:
+      - platform: time_pattern
+        minutes: /1
+    condition:
+      - condition: state
+        entity_id: input_select.living_room_alarm_status
+        state: "activate"
+    action:
+      - service: notify.ha_rabbitbot
+        data:
+          title: Living room alarm active        
+          message: Call the police!!! someone is robbing you!
+
+
+# service: telegram_bot.send_photo
+# data:
+#   url: http://192.168.1.151:8080/photoaf.jpg
+#   caption: My image
+#   message_tag: msg_to_edit
+#   username: !secret android_ip_webcam_user
+#   password: !secret android_ip_webcam_pass
+
+

@@ -1,0 +1,238 @@
+####################################################################################################################
+############# Door/Window SENSORS
+####################################################################################################################
+
+#  - name: 12-SNZB-04-LvngAirCon-Window	
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/12-SNZB-04-LvngAirCon-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.12_snzb_04_lvngaircon_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 12-SNZB-04-LvngAirCon-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/12-SNZB-04-LvngAirCon-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.12_snzb_04_lvngaircon_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 13-SNZB-04-LvngRghtFrplc-Window	
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/13-SNZB-04-LvngRghtFrplc-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.13_snzb_04_lvngrghtfrplc_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 13-SNZB-04-LvngRghtFrplc-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/13-SNZB-04-LvngRghtFrplc-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.13_snzb_04_lvngrghtfrplc_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 14-SNZB-04-LvngLftFrplc-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/14-SNZB-04-LvngLftFrplc-Window/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.14_snzb_04_lvnglftfrplc_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 14-SNZB-04-LvngLftFrplc-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/14-SNZB-04-LvngLftFrplc-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.14_snzb_04_lvnglftfrplc_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 15-SNZB-04-LvngPineTrees-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/15-SNZB-04-LvngPineTrees-Window/SENSOR"
+#   value_template: >
+#     {% if 'ZoneStatusChange' in value_json %} {{ value_json.ZoneStatusChange }}
+#     {% else %} {{ states('sensor.15_snzb_04_lvngpinetrees_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 15-SNZB-04-LvngPineTrees-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/15-SNZB-04-LvngPineTrees-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.15_snzb_04_lvngpinetrees_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name: 16-SNZB-04-LvngStorRight-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/16-SNZB-04-LvngStorRight-Window/SENSOR"
+#   value_template: >
+#     {% if 'ZoneStatusChange' in value_json %} {{ value_json.ZoneStatusChange }}
+#     {% else %} {{ states('sensor.16_snzb_04_lvngstorright_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 16-SNZB-04-LvngStorRight-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/16-SNZB-04-LvngStorRight-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.16_snzb_04_lvngstorright_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name:  17-SNZB-04-LvngStorLeft-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/17-SNZB-04-LvngStorLeft-Window/SENSOR"
+#   value_template: >
+#     {% if 'ZoneStatusChange' in value_json %} {{ value_json.ZoneStatusChange }}
+#     {% else %} {{ states('sensor.17_snzb_04_lvngstorleft_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name:  17-SNZB-04-LvngStorLeft-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/17-SNZB-04-LvngStorLeft-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.17_snzb_04_lvngstorleft_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+####################################################################################################################
+
+# - name:  18-SNZB-04-LvngMiddle-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/18-SNZB-04-LvngMiddle-Window/SENSOR"
+#   value_template: >
+#     {% if 'ZoneStatusChange' in value_json %} {{ value_json.ZoneStatusChange }}
+#     {% else %} {{ states('sensor.18_snzb_04_lvngmiddle_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name:  18-SNZB-04-LvngMiddle-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/18-SNZB-04-LvngMiddle-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.18_snzb_04_lvngmiddle_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+  ####################################################################################################################
+
+# - name:  19-SNZB-04-LvngSitting-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/19-SNZB-04-LvngSitting-Window/SENSOR"
+#   value_template: >
+#     {% if 'ZoneStatusChange' in value_json %} {{ value_json.ZoneStatusChange }}
+#     {% else %} {{ states('sensor.19_snzb_04_lvngsitting_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name:  19-SNZB-04-LvngSitting-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/19-SNZB-04-LvngSitting-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.19_snzb_04_lvngsitting_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+  ####################################################################################################################
+
+# - name:  20-SNZB-04-LvngMainDoor-Window
+#   icon: mdi:window-open-variant
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/20-SNZB-04-LvngMainDoor-Window/SENSOR"
+#   value_template: >
+#     {% if 'ZoneStatusChange' in value_json %} {{ value_json.ZoneStatusChange }}
+#     {% else %} {{ states('sensor.20_snzb_04_lvngmaindoor_window') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name:  20-SNZB-04-LvngMainDoor-Window-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/20-SNZB-04-LvngMainDoor-Window/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.20_snzb_04_lvngmaindoor_window_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+####################################################################################################################
+############# Motion SENSORS
+####################################################################################################################

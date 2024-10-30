@@ -1,0 +1,41 @@
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  - alias: 01ShellyEM-Main main power above 2500W # MIGRATE INSIDE HOME ASSITANT
+    description: ""
+    trigger:
+  - type: power
+    platform: device
+    device_id: 42f13264a30cfba90e814b4c04bdb67a
+    entity_id: sensor.01shellyem_01_main_power
+    domain: sensor
+    above: 2500
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+    condition: []
+    action:
+      - repeat:
+          until:
+            - type: is_power
+              condition: device
+              device_id: 42f13264a30cfba90e814b4c04bdb67a
+              entity_id: sensor.01shellyem_01_main_power
+              domain: sensor
+              below: 600
+          sequence:
+            - service: telegram_bot.send_message
+              data:
+                title: EnergyConsumption
+                message: >-
+                  01ShellyEM-Main main power above 2500W >> "{{
+                  states('sensor.01shellyem_01_main_power') }}"
+            - delay:
+                hours: 0
+                minutes: 10
+                seconds: 0
+                milliseconds: 0
+    mode: single

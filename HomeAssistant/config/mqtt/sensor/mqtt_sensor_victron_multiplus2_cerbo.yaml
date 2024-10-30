@@ -1,0 +1,122 @@
+####################################################################################################################
+############# MULTIPLUS II 5000W
+####################################################################################################################
+
+# DC INFORMATION
+####################################################################################################################
+
+- unique_id: victron_cerbo_multiplus_01_dc_power
+  name: DC Power
+  state_class: measurement    
+  device_class: power    
+  unit_of_measurement: W
+  icon: mdi:skull
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Dc/0/Power"
+  value_template: "{{ value_json.value | round(0) }}"  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}
+
+- unique_id: victron_cerbo_multiplus_01_dc_voltage
+  name: DC Voltage
+  state_class: measurement
+  device_class: voltage
+  unit_of_measurement: V 
+  icon: mdi:lightning-bolt-circle
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Dc/0/Voltage"
+  value_template: "{{ value_json.value | round(2) }}"  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}    
+
+- unique_id: victron_cerbo_multiplus_01_dc_max_charge_current
+  name: DC Max Charge Current
+  state_class: measurement
+  device_class: current
+  unit_of_measurement: A
+  icon: mdi:current-dc
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Dc/0/MaxChargeCurrent"
+  value_template: "{{ value_json.value | round(2) }}"  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}     
+
+- unique_id: victron_cerbo_multiplus_01_dc_current
+  name: DC Current
+  state_class: measurement
+  device_class: current
+  unit_of_measurement: A
+  icon: mdi:current-dc
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Dc/0/Current"
+  value_template: "{{ value_json.value | round(2) }}" 
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"} 
+
+
+# AC INFORMATION
+####################################################################################################################
+
+- unique_id: victron_cerbo_multiplus_01_ac_current
+  name: AC Current
+  state_class: measurement    
+  device_class: current
+  unit_of_measurement: A
+  icon: mdi:current-ac
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Ac/Out/L1/I"
+  value_template: "{{ value_json.value | round(2) }}"  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}
+
+- unique_id: victron_cerbo_multiplus_01_ac_voltage
+  name: AC Voltage
+  state_class: measurement    
+  device_class: voltage
+  unit_of_measurement: v
+  icon: mdi:alpha-v-box
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Ac/Out/L1/V"
+  value_template: "{{ value_json.value | round(2) }}"  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}    
+
+- unique_id: victron_cerbo_multiplus_01_ac_power
+  name: AC Power
+  state_class: measurement    
+  device_class: Power
+  unit_of_measurement: W
+  icon: mdi:power-socket-uk
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Ac/Out/L1/P"
+  value_template: "{{ value_json.value | round(2) }}"  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}    

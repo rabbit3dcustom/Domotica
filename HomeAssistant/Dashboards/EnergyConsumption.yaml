@@ -1,0 +1,2109 @@
+title: EnergyConsumption-Home
+views:
+  - path: default_view
+    title: Home
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 100%
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: gauge
+            entity: sensor.pvpc_spain_electricity_hourly_pricing
+            needle: true
+            unit: €
+            min: 0
+            max: 50
+          - type: entity
+            entity: sun.sun
+          - type: entities
+            entities:
+              - entity: input_number.number_basementmaxconsumption
+              - entity: input_number.number_homemaxconsumption
+              - entity: sensor.histstat_chispia10m_total_printing_time
+            title: Configuration
+        columns: 3
+      - square: false
+        type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.01shellyem_01_main_energy
+                  - entity: sensor.01shellyem_01_main_energy_returned
+                  - entity: sensor.01shellyem_01_main_power
+                  - entity: sensor.01shellyem_01_main_power_factor
+                  - entity: sensor.01shellyem_01_main_voltage
+                  - entity: binary_sensor.01shellyem_cloud
+                  - entity: binary_sensor.01shellyem_overpowering
+                  - entity: sensor.01shellyem_rssi
+                  - entity: sensor.01shellyem_uptime
+                title: 01Shelly - Main consumption
+                show_header_toggle: true
+                state_color: true
+              - type: entities
+                entities:
+                  - entity: sensor.01shellyem_02_lights_energy
+                  - entity: sensor.01shellyem_02_lights_energy_returned
+                  - entity: sensor.01shellyem_02_lights_power
+                  - entity: sensor.01shellyem_02_lights_power_factor
+                  - entity: sensor.01shellyem_02_lights_voltage
+                title: 01Shelly - Lights consumption
+                state_color: true
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.02shellyem_grey_plugs_energy
+                  - entity: sensor.02shellyem_grey_plugs_returned
+                  - entity: sensor.02shellyem_grey_plugs_power
+                  - entity: sensor.02shellyem_grey_plugs_power_factor
+                  - entity: sensor.02shellyem_grey_plugs_voltage
+                  - entity: binary_sensor.02shellyem_cloud
+                  - entity: binary_sensor.02shellyem_overpowering
+                  - entity: sensor.02shellyem_rssi
+                  - entity: sensor.02shellyem_uptime
+                title: 02ShellyEM - Grey Plugs
+                state_color: true
+              - type: entities
+                entities:
+                  - entity: sensor.02shellyem_red_plugs_energy
+                  - entity: sensor.02shellyem_red_plugs_energy_returned
+                  - entity: sensor.02shellyem_red_plugs_power
+                  - entity: sensor.02shellyem_red_plugs_power_factor
+                  - entity: sensor.02shellyem_red_plugs_voltage
+                title: 02ShellyEM-Red-Plugs
+                state_color: true
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.03shellyem_basement_main_energy
+                  - entity: sensor.03shellyem_basement_main_energy_returned
+                  - entity: sensor.03shellyem_basement_main_power
+                  - entity: sensor.03shellyem_basement_main_power_factor
+                  - entity: sensor.03shellyem_basement_main_voltage
+                  - entity: binary_sensor.03shellyem_cloud
+                  - entity: binary_sensor.03shellyem_overpowering
+                  - entity: sensor.03shellyem_rssi
+                  - entity: sensor.03shellyem_uptime
+                title: 03ShellyEM-Basement Main
+                state_color: true
+              - type: entities
+                entities:
+                  - entity: sensor.03shellyem_basement_plugs_energy
+                  - entity: sensor.03shellyem_basement_plugs_energy_returned
+                  - entity: sensor.03shellyem_basement_plugs_power
+                  - entity: sensor.03shellyem_basement_plugs_power_factor
+                  - entity: sensor.03shellyem_basement_plugs_voltage
+                title: 03ShellyEM-Basement Plugs
+                state_color: true
+        columns: 3
+      - square: false
+        type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.rieman_01shellyem_01main_total_consumo
+                  - entity: sensor.utimet_01shelly_01main_dailyconsumption
+                  - entity: sensor.utimet_01shelly_01main_weeklyconsumption
+                  - entity: sensor.utimet_01shelly_01main_monthlyconsumption
+                  - entity: sensor.utimet_01shelly_01main_yearlyconsumption
+                title: 01Shelly - Main consumption Stats
+                show_header_toggle: false
+        columns: 3
+      - type: entities
+        entities:
+          - switch.04_basicr2_chargerprinterbattery
+        title: 04-BASICR2-ChargerPrinterBattery
+      - type: entities
+        entities:
+          - entity: switch.04_shellyplug_s_nonmandat_switch_0
+            name: Switch 0
+        title: 04-ShellyPlug-S-NonMandat
+  - title: SmartSockets
+    path: smartsockets
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 100%
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - input_datetime.date_smartsocket_shutdown_time
+              - input_datetime.date_smartsocket_restart_time
+            title: Configuration
+            state_color: true
+          - type: entities
+            entities:
+              - switch.01printillasnas_smart_socket_16a
+              - sensor.01_printillas_smart_socket_16a_current
+              - sensor.01_printillas_smart_socket_16a_current_consumption_w
+              - sensor.01_printillas_smart_socket_16a_voltage
+              - sensor.rieman_01printillassmartsocket_16a_totalconsumption_2
+              - sensor.utimet_01printillassmartsocket_16a_dailyconsumption
+              - sensor.utimet_01printillassmartsocket_16a_weeklyconsumption
+              - sensor.utimet_01printillassmartsocket_16a_monthlyconsumption
+              - sensor.utimet_01printillassmartsocket_16a_yearlyconsumption
+            title: 01PrintillasNAS-Smart Socket-16A
+            state_color: true
+          - type: entities
+            entities:
+              - switch.02workingoffice_smart_socket_16a
+              - sensor.02_working_office_smart_socket_16a_current
+              - sensor.02_working_office_smart_socket_16a_current_consumption_w
+              - sensor.02_working_office_smart_socket_16a_voltage
+              - sensor.rieman_02_workingofficesmartsocket16a_totalconsumption
+              - sensor.utimet_02_workingofficesmartsocket16a_dailyconsumption
+              - sensor.utimet_02_workingofficesmartsocket16a_weeklyconsumption
+              - sensor.utimet_02_workingofficesmartsocket16a_monthlyconsumption
+              - sensor.utimet_02_workingofficesmartsocket16a_yearlyconsumption
+            title: 02WorkingOffice-Smart Socket-16A
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.01_shelly_plug_s_washer
+              - entity: sensor.01_shelly_plug_s_washer_power
+              - entity: sensor.01_shelly_plug_s_washer_energy
+              - entity: sensor.01_shelly_plug_s_washer_device_temperature
+              - entity: binary_sensor.01_shelly_plug_s_washer_cloud
+              - entity: sensor.riemann_01_shelly_plug_s_washer_totalconsumption
+              - entity: sensor.utilitymeter_01_shelly_plug_s_washer_dailyconsumption
+              - entity: sensor.utilitymeter_01_shelly_plug_s_washer_weeklyconsumption
+              - entity: sensor.utilitymeter_01_shelly_plug_s_washer_monthlyconsumption
+              - entity: sensor.utilitymeter_01_shelly_plug_s_washer_yearlyconsumption
+            title: 01-Shelly-plug-s-Washer
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.02_shelly_plug_s_dishwasher_switch_0
+              - entity: sensor.02_shelly_plug_s_dishwasher_switch_0_power
+              - entity: sensor.02_shelly_plug_s_dishwasher_switch_0_energy
+              - entity: sensor.02_shelly_plug_s_dishwasher_switch_0_current
+              - entity: sensor.02_shelly_plug_s_dishwasher_switch_0_voltage
+              - entity: sensor.02_shelly_plug_s_dishwasher_switch_0_device_temperature
+              - entity: sensor.riemann_02_shelly_plug_s_dishwasher_totalconsumption
+              - entity: >-
+                  sensor.utilitymeter_02_shelly_plug_s_dishwasher_dailyconsumption
+              - entity: >-
+                  sensor.utilitymeter_02_shelly_plug_s_dishwasher_weeklyconsumption
+              - entity: >-
+                  sensor.utilitymeter_02_shelly_plug_s_dishwasher_monthlyconsumption
+              - entity: >-
+                  sensor.utilitymeter_02_shelly_plug_s_dishwasher_yearlyconsumption
+            title: 02-shelly-plug-s-DishWasher
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.03_shelly_plug_s_fridge_switch_0
+              - entity: sensor.03_shelly_plug_s_fridge_switch_0_power
+              - entity: sensor.03_shelly_plug_s_fridge_switch_0_energy
+              - entity: sensor.03_shelly_plug_s_fridge_switch_0_current
+              - entity: sensor.03_shelly_plug_s_fridge_switch_0_voltage
+              - entity: sensor.03_shelly_plug_s_fridge_switch_0_device_temperature
+              - entity: sensor.riemann_03_shelly_plug_s_fridge_totalconsumption
+              - entity: sensor.utilitymeter_03_shelly_plug_s_fridge_dailyconsumption
+              - entity: sensor.utilitymeter_03_shelly_plug_s_fridge_weeklyconsumption
+              - entity: sensor.utilitymeter_03_shelly_plug_s_fridge_monthlyconsumption
+              - entity: sensor.utilitymeter_03_shelly_plug_s_fridge_yearlyconsumption
+            title: 03-shelly-plug-s-Fridge
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.04_shellyplug_s_nonmandat_switch_0
+                secondary_info: last-updated
+                name: 04-ShellyPlug-S-NonMandat
+              - entity: sensor.04_shellyplug_s_nonmandat_switch_0_power
+                name: 04-ShellyPlug-S-NonMandat power
+              - entity: sensor.04_shellyplug_s_nonmandat_switch_0_energy
+                name: 04-ShellyPlug-S-NonMandat energy
+              - entity: sensor.04_shellyplug_s_nonmandat_switch_0_current
+                name: 04-ShellyPlug-S-NonMandat current
+              - entity: sensor.04_shellyplug_s_nonmandat_switch_0_voltage
+                name: 04-ShellyPlug-S-NonMandat voltage
+              - entity: sensor.04_shellyplug_s_nonmandat_switch_0_device_temperature
+                name: 04-ShellyPlug-S-NonMandat temperature
+              - entity: sensor.riemann_04_shellyplug_s_nonmandat_totalconsumption
+                name: 04-ShellyPlug-S-NonMandat Total consumption
+              - entity: sensor.utilitymeter_04_shellyplug_s_nonmandat_dailyconsumption
+              - entity: >-
+                  sensor.utilitymeter_04_shellyplug_s_nonmandat_weeklyconsumption
+              - entity: >-
+                  sensor.utilitymeter_04_shellyplug_s_nonmandat_monthlyconsumption
+              - entity: >-
+                  sensor.utilitymeter_04_shellyplug_s_nonmandat_yearlyconsumption
+            title: 04-ShellyPlug-S-NonMandat
+            state_color: true
+          - type: entities
+            entities:
+              - entity: switch.05_shellyplug_s_swimmingpool_switch_0
+                secondary_info: last-updated
+                name: 05-ShellyPlug-S-SwimmingPool
+              - entity: sensor.05_shellyplug_s_swimmingpool_switch_0_power
+                name: 05-ShellyPlug-S-SwimmingPool power
+              - entity: sensor.05_shellyplug_s_swimmingpool_switch_0_energy
+                name: 05-ShellyPlug-S-SwimmingPool energy
+              - entity: sensor.05_shellyplug_s_swimmingpool_switch_0_current
+                name: 05-ShellyPlug-S-SwimmingPool current
+              - entity: sensor.05_shellyplug_s_swimmingpool_switch_0_voltage
+                name: 05-ShellyPlug-S-SwimmingPool voltage
+              - entity: >-
+                  sensor.05_shellyplug_s_swimmingpool_switch_0_device_temperature
+                name: 05-ShellyPlug-S-SwimmingPool temperature
+              - entity: sensor.riemann_05_shellyplug_s_swimmingpool_totalconsumption
+                name: 05-ShellyPlug-S-SwimmingPool Total consumption
+              - entity: >-
+                  sensor.utilitymeter_05_shellyplug_s_swimmingpool_dailyconsumption
+              - entity: >-
+                  sensor.utilitymeter_05_shellyplug_s_swimmingpool_weeklyconsumption
+              - entity: >-
+                  sensor.utilitymeter_05_shellyplug_s_swimmingpool_monthlyconsumption
+              - entity: >-
+                  sensor.utilitymeter_05_shellyplug_s_swimmingpool_yearlyconsumption
+            title: 05-ShellyPlug-S-SwimmingPool
+            state_color: true
+            show_header_toggle: true
+        columns: 3
+  - title: Solar
+    path: solar
+    type: custom:grid-layout
+    badges: []
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: switch.04_basicr2_chargerprinterbattery
+              - entity: sensor.04_basicr2_chargerprinterbattery_last_restart_time
+          - type: entities
+            entities:
+              - entity: input_number.number_degrees_above
+              - entity: input_number.number_degrees_below
+            title: Grid on/off
+        columns: 2
+      - square: false
+        type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: sun.sun
+              - entity: sensor.sun_next_dawn
+              - entity: sensor.sun_next_dusk
+              - entity: sensor.sun_next_rising
+              - entity: sensor.sun_next_setting
+              - entity: sensor.sun_solar_elevation
+            state_color: true
+          - type: weather-forecast
+            entity: weather.forecast_home
+            forecast_type: daily
+          - type: entity
+            entity: weather.forecast_home
+        columns: 2
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.power_production_now
+                name: Est.pwr.prod-now
+              - entity: sensor.energy_current_hour
+                name: Est.nrgy.prod-this hour
+              - entity: sensor.energy_next_hour
+                name: Est.nrgy.prod-next hour
+              - entity: sensor.power_production_next_hour
+                name: Est.pwr.prod-next hour
+              - entity: sensor.energy_production_today_remaining
+                name: Est.nrgy.prod-remaining today
+              - entity: sensor.energy_production_today
+                name: Est.nrgy.prod-today
+              - entity: sensor.energy_production_tomorrow
+                name: Est.nrgy.prod-tomorrow
+              - entity: sensor.power_production_next_12hours
+                name: Est.pwr.prod-next 12 hours
+              - entity: sensor.power_production_next_24hours
+                name: Est.pwr.prod-next 24 hours
+              - entity: sensor.power_highest_peak_time_today
+                name: Highest power peak time - today
+              - entity: sensor.power_highest_peak_time_tomorrow
+                name: Highest power peak time - tomorrow
+            title: GarageNorth
+          - type: entities
+            entities:
+              - entity: sensor.power_production_now_2
+                name: Est.pwr.prod-now
+              - entity: sensor.energy_current_hour_2
+                name: Est.nrgy.prod-this hour
+              - entity: sensor.energy_next_hour_2
+                name: Est.nrgy.prod-next hour
+              - entity: sensor.power_production_next_hour_2
+                name: Est.pwr.prod-next hour
+              - entity: sensor.energy_production_today_remaining_2
+                name: Est.nrgy.prod-remaining today
+              - entity: sensor.energy_production_today_2
+                name: Est.nrgy.prod-today
+              - entity: sensor.energy_production_tomorrow_2
+                name: Est.nrgy.prod-tomorrow
+              - entity: sensor.power_production_next_12hours_2
+                name: Est.pwr.prod-next 12 hours
+              - entity: sensor.power_production_next_24hours_2
+                name: Est.pwr.prod-next 24 hours
+              - entity: sensor.power_highest_peak_time_today_2
+                name: Highest power peak time - today
+              - entity: sensor.power_highest_peak_time_tomorrow_2
+                name: Highest power peak time - tomorrow
+            title: GarageSouth
+      - square: false
+        type: grid
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.cerbo_gx_battery_percentage
+                  - entity: sensor.cerbo_gx_battery_voltage
+                  - entity: sensor.cerbo_gx_ac_loads
+                  - entity: sensor.cerbo_gx_dc_loads
+                  - entity: sensor.cerbo_gx_live_solar_production
+                  - entity: sensor.cerbo_gx_battery_load
+                  - entity: sensor.cerbo_gx_inverter_state
+                title: mqtt_sensor_victron_cerbo
+              - type: entities
+                entities:
+                  - entity: binary_sensor.cerbo_gx_cerbo_system_status
+                  - entity: binary_sensor.cerbo_gx_cerbo_allow_to_charge
+                  - entity: binary_sensor.cerbo_gx_cerbo_allow_to_discharge
+                title: mqtt_binary_sensor_cerbo
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.total_power_consuming
+                  - entity: sensor.live_battery_in
+                  - entity: sensor.live_battery_out
+                title: template_sensors-solar-production
+              - type: entities
+                entities:
+                  - entity: sensor.riemann_total_solar_kwh
+                  - entity: sensor.util_meter_daily_total_power_consuming
+                  - entity: sensor.riemann_total_power_consumed
+                  - entity: sensor.riemann_total_battery_in_kwh
+                  - entity: sensor.riemann_total_battery_out_kwh
+                  - entity: sensor.util_meter_daily_total_battery_out
+                title: sensors-solar-production
+        columns: 1
+  - title: Battery
+    path: battery
+    icon: mdi:power-plug-battery
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 100%
+      max_cols: 2
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: vertical-stack
+            title: JK-BMS PowerWall
+            cards:
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: horizontal-stack
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: gauge
+                        entity: >-
+                          sensor.03_esp32_jk_bms_hub_01_jkbms_powa_capacity_remaining
+                        name: JK-BMS PowerWall battery
+                        needle: true
+                        severity:
+                          green: 85
+                          yellow: 50
+                          red: 0
+                      - type: markdown
+                        content: >-
+                          <center>Time:&nbsp;<b><font color=#3090C7>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_total_runtime_formatted')
+                          | upper }}</font></center></br>Error:&nbsp;<b><font
+                          color=#3090C7>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_errors')
+                          | upper }}</font></b>
+              - type: horizontal-stack
+                square: false
+                columns: 3
+                cards:
+                  - type: markdown
+                    content: >-
+                      <center>Charge:&nbsp;<b>{% if
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_powa_charging')
+                      == 'on' %} <font color=#41CD52>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_powa_charging')
+                      | upper }}</font> {% else %} <font color=red>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_powa_charging')
+                      | upper }}</font> {% endif %} 
+                  - type: markdown
+                    content: >-
+                      <center>Discharge:&nbsp;<b> {% if
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_powa_discharging')
+                      == 'on' %} <font color=#41CD52>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_powa_discharging')
+                      | upper }}</font> {% else %} <font color=red>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_powa_discharging')
+                      | upper }}</font> {% endif %} 
+                  - type: markdown
+                    content: >-
+                      <center>Balance:&nbsp;<b> {% if
+                      states('binary_sensor.03_esp32_jk_bms_hub_01_jkbms_powa_balancing')
+                      == 'on' %} <font color=#41CD52>{{
+                      states('binary_sensor.03_esp32_jk_bms_hub_01_jkbms_powa_balancing')
+                      | upper }}</font> {% else %} <font color=red>{{
+                      states('binary_sensor.03_esp32_jk_bms_hub_01_jkbms_powa_balancing')
+                      | upper }}</font> {% endif %}
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: grid
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: markdown
+                        content: >-
+                          <center><b><font color=#41CD52 size=6>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_total_voltage')
+                          }} V</font></b> <br>Battery Power:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_power')
+                          }} W</font> <br> Battery Capacity:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_actual_battery_capacity')
+                          }} Ah</font> <br> Remain Capacity:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_capacity_remaining_derived')
+                          }} Ah</font> <br> Remain Battery:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_capacity_remaining')
+                          }}
+                          %</font>                                            
+                          <br> Cycle Count:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_charging_cycles')
+                          }}</font> <br> Cycle Capacity:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_total_charging_cycle_capacity')
+                          }} Ah</font> <br> Time Emerg.:&nbsp;&nbsp;<font
+                          color=#41CD52> Pending </font>                      
+                      - type: markdown
+                        content: >-
+                          <center><!--<b> <font color=#41CD52 size=6>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_current')
+                          }} A</font></b>--> <b>{% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_current')
+                          | float >= 0 |float %} <font color=#41CD52 
+                          size=6>{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_current')
+                          | upper }}
+                           A </font> {% else %} <font color=red 
+                          size=6>{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_current')
+                          | upper }}
+                           A </font> {% endif %} </b> <br>Ave. Cell Vol.:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_average_cell_voltage')
+                          }} V</font>                       <br> Cell Volt
+                          Diff.:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_delta_cell_voltage')
+                          }} V</font>                       <br> Balance
+                          Cur.:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_balancing_current')
+                          }} A</font>                       <br> MOS
+                          Temp.:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_power_tube_temperature')
+                          }} °C</font> <br> Battery T1:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_temperature_sensor_1')
+                          }} °C</font>                       <br> Battery
+                          T2:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_temperature_sensor_2')
+                          }} °C</font>
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: grid
+                    square: false
+                    columns: 1
+                    cards:
+                      - type: markdown
+                        content: >-
+                          <center><br>Cells/Series:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_battery_strings')
+                          }}</font>
+                  - type: grid
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: markdown
+                        content: >-
+                          <center> 01.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '1' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_1')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '1' %}  <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_1')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_1')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_1')
+                          }} Ω <br>
+
+                          02.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '2' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_2')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '2' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_2')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_2')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_2')
+                          }} Ω <br>
+
+                          03.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '3' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_3')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '3' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_3')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_3')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_3')
+                          }} Ω <br>
+
+                          04.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '4' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_4')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '4' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_4')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_4')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_4')
+                          }} Ω <br> <!-- 05.&nbsp;&nbsp;&nbsp;  {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '5' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_5')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '5' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_5')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_5')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_5')
+                          }} Ω <br>
+
+                          06.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '6' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_6')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '6' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_6')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_6')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_6')
+                          }} Ω <br>
+
+                          07.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '7' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_7')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '7' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_7')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_7')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_7')
+                          }} Ω <br>
+
+                          08.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '8' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_8')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '8' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_8')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_8')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_8')
+                          }} Ω -->           <br></center>
+                      - type: markdown
+                        content: >-
+                          <center><!-- 09.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '9' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_9')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '9' %}  <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_9')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_9')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_9')
+                          }} Ω <br> 10.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '10' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_10')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '10' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_10')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_10')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_10')
+                          }} Ω <br> 11.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '11' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_11')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '11' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_11')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_11')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_11')
+                          }} Ω <br> 12.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '12' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_12')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '12' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_12')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_12')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_12')
+                          }} Ω <br> 13.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '13' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_13')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '13' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_13')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_13')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_13')
+                          }} Ω <br> 14.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '14' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_14')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '14' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_14')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_14')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_14')
+                          }} Ω <br> 15.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '15' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_15')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '15' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_15')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_15')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_15')
+                          }} Ω <br> 16.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_max_voltage_cell')
+                          == '16' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_16')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_min_voltage_cell')
+                          == '16' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_16')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_16')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_resistance_16')
+                          }} Ω --> <br></center>
+              - type: horizontal-stack
+                cards:
+                  - type: entities
+                    entities:
+                      - entity: switch.03_esp32_jk_bms_hub_01_jkbms_powa_charging
+                        name: JK-BMS Charging
+                  - type: entities
+                    entities:
+                      - entity: switch.03_esp32_jk_bms_hub_01_jkbms_powa_discharging
+                        name: JK-BMS Discharging
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: grid
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: markdown
+                        content: >-
+                          Balance starting voltage: <font
+                          color="blue">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_balance_starting_voltage')}}V</font><br>
+                          OverVoltageProtection: <font
+                          color="red">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_overvoltage_protection')}}V</font><br>
+                          OVPRecovery: <font
+                          color="green">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_overvoltage_recovery')}}V</font><br> 
+                      - type: markdown
+                        content: >-
+                          Balance starting Diff voltage: <font
+                          color="blue">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_balance_opening_pressure_difference')}}V</font><br>
+                          UVPRecovery: <font
+                          color="green">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_undervoltage_recovery')}}V</font><br>
+                          UnderVoltageProtection: <font
+                          color="red">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_powa_cell_voltage_undervoltage_protection')}}V</font><br>    
+                      - type: entities
+                        entities:
+                          - entity: input_number.number_powa_soc_100_volt
+              - type: horizontal-stack
+                cards:
+                  - type: vertical-stack
+                    cards:
+                      - type: entities
+                        entities:
+                          - entity: >-
+                              sensor.03_esp32_jk_bms_hub_01_jkbms_powa_total_voltage
+                            name: Voltage
+                          - entity: sensor.03_esp32_jk_bms_hub_01_jkbms_powa_power
+                            name: Battery Power
+                          - entity: >-
+                              sensor.03_esp32_jk_bms_hub_01_jkbms_powa_actual_battery_capacity
+                            name: 'Battery Capacity:'
+                  - type: vertical-stack
+                    cards: []
+          - type: vertical-stack
+            title: JK-BMS 3D SAI
+            cards:
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: horizontal-stack
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: gauge
+                        entity: >-
+                          sensor.03_esp32_jk_bms_hub_01_jkbms_3d_capacity_remaining
+                        name: JK-BMS Printers battery
+                        needle: true
+                        severity:
+                          green: 85
+                          yellow: 50
+                          red: 0
+                      - type: markdown
+                        content: >-
+                          <center>Time:&nbsp;<b><font color=#3090C7>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_total_runtime_formatted')
+                          | upper }}</font></center></br>Error:&nbsp;<b><font
+                          color=#3090C7>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_errors')
+                          | upper }}</font></b>
+              - type: horizontal-stack
+                square: false
+                columns: 3
+                cards:
+                  - type: markdown
+                    content: >-
+                      <center>Charge:&nbsp;<b>{% if
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_3d_charging')
+                      == 'on' %} <font color=#41CD52>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_3d_charging')
+                      | upper }}</font> {% else %} <font color=red>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_3d_charging')
+                      | upper }}</font> {% endif %} 
+                  - type: markdown
+                    content: >-
+                      <center>Discharge:&nbsp;<b> {% if
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_3d_discharging')
+                      == 'on' %} <font color=#41CD52>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_3d_discharging')
+                      | upper }}</font> {% else %} <font color=red>{{
+                      states('switch.03_esp32_jk_bms_hub_01_jkbms_3d_discharging')
+                      | upper }}</font> {% endif %} 
+                  - type: markdown
+                    content: >-
+                      <center>Balance:&nbsp;<b> {% if
+                      states('binary_sensor.03_esp32_jk_bms_hub_01_jkbms_3d_balancing')
+                      == 'on' %} <font color=#41CD52>{{
+                      states('binary_sensor.03_esp32_jk_bms_hub_01_jkbms_3d_balancing')
+                      | upper }}</font> {% else %} <font color=red>{{
+                      states('binary_sensor.03_esp32_jk_bms_hub_01_jkbms_3d_balancing')
+                      | upper }}</font> {% endif %}
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: grid
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: markdown
+                        content: >-
+                          <center><b><font color=#41CD52 size=6>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_total_voltage')
+                          }} V</font></b> <br>Battery Power:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_power')
+                          }} W</font> <br> Battery Capacity:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_actual_battery_capacity')
+                          }} Ah</font> <br> Remain Capacity:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_capacity_remaining_derived')
+                          }} Ah</font> <br> Remain Battery:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_capacity_remaining')
+                          }} %</font><br> Cycle Count:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_charging_cycles')
+                          }}</font> <br> Cycle Capacity:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_total_charging_cycle_capacity')
+                          }} Ah</font> <br> Time Emerg.:&nbsp;&nbsp;<font
+                          color=#41CD52> Pending </font>                      
+                      - type: markdown
+                        content: >-
+                          <center><!--<b> <font color=#41CD52 size=6>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_current')
+                          }} A</font></b>--> <b>{% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_current')
+                          | float >= 0 |float %} <font color=#41CD52 
+                          size=6>{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_current')
+                          | upper }}
+                           A </font> {% else %} <font color=red 
+                          size=6>{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_current')
+                          | upper }}
+                           A </font> {% endif %} </b> <br>Ave. Cell Vol.:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_average_cell_voltage')
+                          }} V</font>                       <br> Cell Volt
+                          Diff.:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_delta_cell_voltage')
+                          }} V</font>                       <br> Balance
+                          Cur.:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_balancing_current')
+                          }} A</font>                       <br> MOS
+                          Temp.:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_power_tube_temperature')
+                          }} °C</font> <br> Battery T1:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_temperature_sensor_1')
+                          }} °C</font>                       <br> Battery
+                          T2:&nbsp;&nbsp;<font color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_temperature_sensor_2')
+                          }} °C</font>
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: grid
+                    square: false
+                    columns: 1
+                    cards:
+                      - type: markdown
+                        content: >-
+                          <center><br>Cells/Series:&nbsp;&nbsp;<font
+                          color=#41CD52>{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_battery_strings')
+                          }}</font>
+                  - type: grid
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: markdown
+                        content: >-
+                          <center> 01.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '1' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_1')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '1' %}  <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_1')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_1')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_1')
+                          }} Ω <br>
+
+                          02.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '2' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_2')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '2' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_2')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_2')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_2')
+                          }} Ω <br>
+
+                          03.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '3' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_3')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '3' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_3')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_3')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_3')
+                          }} Ω <br>
+
+                          04.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '4' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_4')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '4' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_4')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_4')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_4')
+                          }} Ω <br> <!-- 05.&nbsp;&nbsp;&nbsp;  {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '5' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_5')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '5' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_5')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_5')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_5')
+                          }} Ω <br>
+
+                          06.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '6' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_6')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '6' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_6')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_6')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_6')
+                          }} Ω <br>
+
+                          07.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '7' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_7')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '7' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_7')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_7')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_7')
+                          }} Ω <br>
+
+                          08.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '8' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_8')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '8' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_8')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_8')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_8')
+                          }} Ω -->           <br></center>
+                      - type: markdown
+                        content: >-
+                          <center><!-- 09.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '9' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_9')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '9' %}  <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_9')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_9')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_9')
+                          }} Ω <br> 10.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '10' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_10')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '10' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_10')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_10')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_10')
+                          }} Ω <br> 11.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '11' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_11')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '11' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_11')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_11')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_11')
+                          }} Ω <br> 12.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '12' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_12')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '12' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_12')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_12')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_12')
+                          }} Ω <br> 13.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '13' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_13')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '13' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_13')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_13')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_13')
+                          }} Ω <br> 14.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '14' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_14')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '14' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_14')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_14')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_14')
+                          }} Ω <br> 15.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '15' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_15')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '15' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_15')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_15')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_15')
+                          }} Ω <br> 16.&nbsp;&nbsp;&nbsp; {% if
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_max_voltage_cell')
+                          == '16' %}  <font color="#3090C7">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_16')
+                          }} V</font> {% elif
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_min_voltage_cell')
+                          == '16' %} <font color="red">{{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_16')
+                          }} V</font> {% else %} {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_16')
+                          }} V {% endif %} &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+                          {{
+                          states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_resistance_16')
+                          }} Ω --> <br></center>
+              - type: horizontal-stack
+                cards:
+                  - type: entities
+                    entities:
+                      - entity: switch.03_esp32_jk_bms_hub_01_jkbms_3d_charging
+                        name: JK-BMS Charging
+                  - type: entities
+                    entities:
+                      - entity: switch.03_esp32_jk_bms_hub_01_jkbms_3d_discharging
+                        name: JK-BMS Discharging
+              - type: custom:stack-in-card
+                keep:
+                  margin: false
+                  box_shadow: false
+                  background: false
+                cards:
+                  - type: grid
+                    square: false
+                    columns: 2
+                    cards:
+                      - type: markdown
+                        content: >-
+                          Balance starting voltage: <font
+                          color="blue">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_balance_starting_voltage')}}V</font><br>
+                          OverVoltageProtection: <font
+                          color="red">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_overvoltage_protection')}}V</font><br>
+                          OVPRecovery: <font
+                          color="green">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_overvoltage_recovery')}}V</font><br> 
+                      - type: markdown
+                        content: >-
+                          Balance starting Diff voltage: <font
+                          color="blue">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_balance_opening_pressure_difference')}}V</font><br>
+                          UVPRecovery: <font
+                          color="green">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_undervoltage_recovery')}}V</font><br>
+                          UnderVoltageProtection: <font
+                          color="red">{{states('sensor.03_esp32_jk_bms_hub_01_jkbms_3d_cell_voltage_undervoltage_protection')}}V</font><br>                         
+                      - type: entities
+                        entities:
+                          - entity: input_number.number_print_soc_100_volt
+              - type: entity
+                entity: switch.04_basicr2_chargerprinterbattery
+                state_color: true
+        columns: 2
+  - title: Solar system
+    path: ss-main
+    type: custom:grid-layout
+    cards:
+      - type: custom:text-divider-row
+        text: Solar dashboard
+      - square: false
+        type: grid
+        cards:
+          - type: custom:button-card
+            name: MPPTs
+            label: MPPTs detail
+            styles:
+              card:
+                - height: 100px
+                - width: 100px
+              name:
+                - font-size: 11px
+            tap_action:
+              action: navigate
+              navigation_path: ss-mppt
+          - type: custom:button-card
+            name: Battery from shunt
+            label: Battery from shunt
+            tap_action:
+              action: navigate
+              navigation_path: ss-battery-from-shunt
+            styles:
+              card:
+                - height: 100px
+                - width: 100px
+              name:
+                - font-size: 11px
+          - type: custom:button-card
+            name: Cerbo live info
+            label: Cerbo live info
+            tap_action:
+              action: navigate
+              navigation_path: ss-battery-from-shunt
+            styles:
+              card:
+                - height: 100px
+                - width: 100px
+              name:
+                - font-size: 11px
+          - type: custom:button-card
+            name: Battery shelf
+            label: Battery shelf
+            styles:
+              card:
+                - height: 100px
+                - width: 100px
+              name:
+                - font-size: 11px
+            tap_action:
+              action: navigate
+              navigation_path: ss-battery-shelf
+          - type: custom:button-card
+            name: Inverter
+            label: Inverter live info
+            tap_action:
+              action: navigate
+              navigation_path: ss-inverter
+            styles:
+              card:
+                - height: 100px
+                - width: 100px
+              name:
+                - font-size: 11px
+        columns: 5
+      - square: false
+        type: grid
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:text-divider-row
+                text: MPPT
+                align: center
+              - type: custom:text-divider-row
+                text: Battery
+                text-divider-font-size: 1px
+                align: center
+              - type: custom:text-divider-row
+                text: Inverter
+                align: center
+              - type: custom:text-divider-row
+                text: CERBO
+                align: center
+          - type: horizontal-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: gauge
+                    entity: sensor.victron_mppt_total_live_pv_power
+                    name: Live PV Power
+                    unit: W
+                    min: 0
+                    max: 3500
+                    needle: true
+                    severity:
+                      green: 1000
+                      yellow: 500
+                      red: 0
+                  - type: gauge
+                    entity: sensor.victron_mppt_total_live_dc_power
+                    name: Live DC Power
+                    unit: W
+                    min: 0
+                    max: 3500
+                    needle: true
+                    severity:
+                      green: 1000
+                      yellow: 500
+                      red: 0
+                  - type: horizontal-stack
+                    cards:
+                      - type: entities
+                        entities:
+                          - entity: sensor.victron_mppt_total_live_pv_amps
+                            name: PV
+                          - entity: sensor.victron_mppt_total_live_dc_amps
+                            name: DC
+              - type: vertical-stack
+                cards:
+                  - type: gauge
+                    entity: sensor.smartshunt500a_battery_soc
+                    unit: '%'
+                    min: 0
+                    max: 100
+                    needle: true
+                    severity:
+                      green: 50
+                      yellow: 30
+                      red: 0
+                    name: SOC
+                  - type: gauge
+                    entity: sensor.smartshunt500a_battery_power
+                    name: Power
+                    unit: W
+                    min: -5000
+                    max: 5000
+                    needle: true
+                    segments:
+                      - from: -5000
+                        color: '#FF0000'
+                      - from: -3500
+                        color: '#FA8072'
+                      - from: 0
+                        color: '#43a047'
+                  - type: entity
+                    entity: sensor.smartshunt500a_battery_remaining_time_readable
+                    state_color: true
+                    name: Remaining
+                  - type: entity
+                    entity: sensor.smartshunt500a_battery_current
+                    state_color: false
+              - type: vertical-stack
+                cards:
+                  - type: gauge
+                    entity: sensor.multiplus_ii_01_dc_power
+                    name: Live DC Power
+                    unit: W
+                    min: -5000
+                    max: 5000
+                    needle: true
+                    segments:
+                      - from: -5000
+                        color: '#FF0000'
+                      - from: -3500
+                        color: '#FA8072'
+                      - from: -1500
+                        color: '#43a047'
+                  - type: entities
+                    entities:
+                      - entity: binary_sensor.multiplus_ii_01_led_inverter
+                        name: Inverting
+                        type: custom:multiple-entity-row
+                        secondary_info: false
+                        show_state: false
+                        entities:
+                          - icon: mdi:circle
+                        card_mod:
+                          style:
+                            hui-generic-entity-row $: ''
+                            .: |
+                              div.entity:nth-child(1) state-badge {
+                                color: {% if states('binary_sensor.multiplus_ii_01_led_inverter') == 'off' %} grey {% else %} green {% endif %}
+                              }
+                  - type: entities
+                    entities:
+                      - entity: binary_sensor.multiplus_ii_01_led_float
+                        name: Floating
+                        type: custom:multiple-entity-row
+                        secondary_info: false
+                        show_state: false
+                        entities:
+                          - icon: mdi:circle
+                        card_mod:
+                          style:
+                            hui-generic-entity-row $: ''
+                            .: |
+                              div.entity:nth-child(1) state-badge {
+                                color: {% if states('binary_sensor.multiplus_ii_01_led_float') == 'off' %} grey {% else %} green {% endif %}
+                              }     
+                  - type: entities
+                    entities:
+                      - entity: binary_sensor.multiplus_ii_01_led_bulk
+                        name: Bulking
+                        type: custom:multiple-entity-row
+                        secondary_info: false
+                        show_state: false
+                        entities:
+                          - icon: mdi:circle
+                        card_mod:
+                          style:
+                            hui-generic-entity-row $: ''
+                            .: |
+                              div.entity:nth-child(1) state-badge {
+                                color: {% if states('binary_sensor.multiplus_ii_01_led_bulk') == 'off' %} grey {% else %} green {% endif %}
+                              } 
+                  - type: entities
+                    entities:
+                      - entity: binary_sensor.multiplus_ii_01_led_absorption
+                        name: Absorpting
+                        type: custom:multiple-entity-row
+                        secondary_info: false
+                        show_state: false
+                        entities:
+                          - icon: mdi:circle
+                        card_mod:
+                          style:
+                            hui-generic-entity-row $: ''
+                            .: |
+                              div.entity:nth-child(1) state-badge {
+                                color: {% if states('binary_sensor.multiplus_ii_01_led_absorption') == 'off' %} grey {% else %} green {% endif %}
+                              } 
+                  - type: custom:text-divider-row
+                    text: ALARMS
+                    align: center
+                  - type: horizontal-stack
+                    cards:
+                      - type: entities
+                        entities: []
+                        show_header_toggle: false
+                      - type: custom:text-divider-row
+                        text: LowBat
+                        align: center
+                      - type: custom:text-divider-row
+                        text: Overload
+                        align: center
+                      - type: custom:text-divider-row
+                        text: Temperature
+                        align: center
+                  - type: horizontal-stack
+                    cards:
+                      - type: entities
+                        entities:
+                          - entity: binary_sensor.multiplus_ii_01_led_low_battery
+                            name: Alarm
+                            type: custom:multiple-entity-row
+                            secondary_info: false
+                            show_state: false
+                            entities:
+                              - icon: mdi:circle
+                              - icon: mdi:circle
+                              - icon: mdi:circle
+                            card_mod:
+                              style:
+                                hui-generic-entity-row $: ''
+                                .: |
+                                  div.entity:nth-child(1) state-badge {
+                                    color: {% if states('binary_sensor.multiplus_ii_01_led_low_battery') == 'off' %} grey {% else %} red {% endif %}
+                                  }
+                                  div.entity:nth-child(2) state-badge {
+                                    color: {% if states('binary_sensor.multiplus_ii_01_led_low_battery') == 'off' %} grey {% else %} red {% endif %}
+                                  }
+                                  div.entity:nth-child(3) state-badge {
+                                    color: {% if states('binary_sensor.multiplus_ii_01_led_low_battery') == 'off' %} grey {% else %} red {% endif %}
+                                  }
+              - type: vertical-stack
+                cards:
+                  - type: entities
+                    entities: []
+                    show_header_toggle: false
+        columns: 1
+    layout: {}
+    theme: dracula
+  - title: 'Solar system - MPPTs '
+    path: ss-mppt
+    icon: mdi:solar-power-variant
+    type: custom:grid-layout
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: custom:text-divider-row
+            text: MPPTs Overview
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                entity: sensor.victron_mppt_total_live_pv_power
+                name: Live PV Power
+                unit: W
+                min: 0
+                max: 3500
+                needle: true
+                severity:
+                  green: 1000
+                  yellow: 500
+                  red: 0
+              - type: gauge
+                entity: sensor.victron_mppt_total_live_dc_power
+                name: Live DC Power
+                unit: W
+                min: 0
+                max: 3500
+                needle: true
+                severity:
+                  green: 1000
+                  yellow: 500
+                  red: 0
+              - type: entities
+                entities:
+                  - entity: sensor.victron_mppt_total_live_pv_amps
+                    name: PV Amps
+                  - entity: sensor.victron_mppt_total_live_dc_amps
+                    name: DC Amps
+        columns: 1
+      - square: false
+        type: grid
+        cards:
+          - type: custom:text-divider-row
+            text: GarageSouth 150-70
+          - type: custom:text-divider-row
+            text: GarageNorth 150-70
+        columns: 2
+      - square: false
+        type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: gauge
+                    entity: sensor.mppt_150_70_garagesouth_pv_power
+                    needle: true
+                    name: PV Power
+                    unit: W
+                    min: 0
+                    max: 2000
+                    severity:
+                      green: 500
+                      yellow: 250
+                      red: 0
+              - type: entities
+                entities:
+                  - entity: sensor.mppt_150_70_garagesouth_pv_voltage
+                    name: PV Voltage
+                  - entity: sensor.mppt_garagesouth_150_70_pv_current
+                    name: PV Current
+                  - entity: sensor.mppt_150_70_garagesouth_charger_state
+                    name: State
+                state_color: true
+                show_header_toggle: true
+              - type: gauge
+                entity: sensor.mppt_garagesouth_150_70_dc_power
+                needle: true
+                name: DC Power
+                unit: W
+                min: 0
+                max: 1800
+                severity:
+                  green: 500
+                  yellow: 250
+                  red: 0
+              - type: entities
+                entities:
+                  - entity: sensor.mppt_150_70_garagesouth_dc_voltage
+                    name: DC Voltage
+                    state_color: true
+                  - entity: sensor.mppt_150_70_garagesouth_dc_current
+                    name: DC Current
+                    state_color: true
+              - type: horizontal-stack
+                cards:
+                  - type: custom:button-card
+                    name: DC Charger
+                    label: DC Charger
+                    entity: switch.mppt_150_70_garagesouth_dc_load
+                    lock:
+                      enabled: true
+                      duration: 10
+                      unlock: hold
+                    styles:
+                      card:
+                        - height: 100px
+                        - width: 100px
+                      name:
+                        - font-size: 11px
+                  - type: entities
+                    entities:
+                      - entity: number.mppt_150_70_garagesouth_ampere_output
+                      - entity: input_number.number_garage_south_ampere_output
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: gauge
+                    entity: sensor.mppt_150_70tr_garagenorth_pv_power
+                    name: PV Power
+                    unit: W
+                    min: 0
+                    max: 2500
+                    needle: true
+                    severity:
+                      green: 500
+                      yellow: 250
+                      red: 0
+              - type: entities
+                entities:
+                  - entity: sensor.mppt_150_70tr_garagenorth_pv_voltage
+                    name: PV Voltage
+                  - entity: sensor.mppt_garagenorth_150_70tr_pv_current
+                    name: PV Current
+                  - entity: sensor.mppt_150_70tr_garagenorth_charger_state
+                    name: State
+                state_color: true
+                show_header_toggle: true
+              - type: gauge
+                entity: sensor.mppt_garagenorth_150_70_dc_power
+                needle: true
+                name: DC Power
+                unit: W
+                min: 0
+                max: 2500
+                severity:
+                  green: 500
+                  yellow: 250
+                  red: 0
+              - type: entities
+                entities:
+                  - entity: sensor.mppt_150_70tr_garagenorth_dc_voltage
+                    name: DC Voltage
+                  - entity: sensor.mppt_150_70tr_garagenorth_dc_current
+                    name: DC Current
+              - type: horizontal-stack
+                cards:
+                  - type: custom:button-card
+                    name: DC Charger
+                    label: DC Charger
+                    entity: switch.mppt_150_70tr_garagenorth_dc_load
+                    lock:
+                      enabled: true
+                      duration: 10
+                      unlock: hold
+                    styles:
+                      card:
+                        - height: 100px
+                        - width: 100px
+                      name:
+                        - font-size: 11px
+                  - type: entities
+                    entities:
+                      - entity: number.mppt_150_70tr_garagenorth_ampere_output
+                      - entity: input_number.number_garage_north_ampere_output
+        columns: 2
+    subview: true
+    layout:
+      grid-template-columns: 100%
+    theme: dracula
+  - title: Solar system - Battery from shunt
+    path: ss-battery-from-shunt
+    subview: true
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: gauge
+                    entity: sensor.smartshunt500a_battery_soc
+                    needle: true
+                    severity:
+                      green: 50
+                      yellow: 30
+                      red: 0
+                    card_mod:
+                      style:
+                        .: |
+                          .name {
+                            font-size: 10px !important;
+                            background-color: ;
+                            }
+                        ha-gauge$: |
+                          svg {
+                          transform: scale(0.9) translateY(0px);
+                          overflow: visible;
+                          }
+                          svg text {
+                          transform: scale(0.9) translateY(0px);
+                          }    
+                  - type: entities
+                    entities:
+                      - entity: sensor.smartshunt500a_battery_remaining_time_readable
+                        name: Remaining time
+              - type: custom:text-divider-row
+                text: SOC
+              - chart_type: line
+                period: hour
+                type: statistics-graph
+                entities:
+                  - sensor.smartshunt500a_battery_soc
+                stat_types:
+                  - mean
+                  - min
+                  - max
+                days_to_show: 5
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.smartshunt500a_battery_current
+                    name: Current
+                  - entity: sensor.smartshunt500a_battery_voltage
+                    name: Voltage
+                  - entity: sensor.smartshunt500a_battery_power
+                    name: Power
+              - type: vertical-stack
+                cards:
+                  - type: custom:text-divider-row
+                    text: Power
+                  - chart_type: line
+                    period: hour
+                    type: statistics-graph
+                    entities:
+                      - sensor.smartshunt500a_battery_power
+                    stat_types:
+                      - mean
+                      - min
+                      - max
+                    days_to_show: 5
+        columns: 2
+      - type: vertical-stack
+        cards:
+          - type: custom:text-divider-row
+            text: Breakdown Ah drawn
+          - square: false
+            type: grid
+            columns: 2
+            cards:
+              - type: entity
+                entity: sensor.utilitymeter_smartshunt500a_total_ah_drawn_daily
+                icon: mdi:current-dc
+                unit: Ah
+                name: UtilMet-Total Ah Drawn Daily
+              - type: entity
+                entity: sensor.utilitymeter_smartshunt500a_total_ah_drawn_weekly
+                icon: mdi:current-dc
+                unit: Ah
+                state_color: false
+                name: UtilMet-Total Ah Drawn Weekly
+              - type: entity
+                entity: sensor.utilitymeter_smartshunt500a_total_ah_drawn_monthly
+                icon: mdi:current-dc
+                unit: Ah
+                name: UtilMet-Total Ah Drawn Monthly
+              - type: entity
+                entity: sensor.utilitymeter_smartshunt500a_total_ah_drawn_yearly
+                icon: mdi:current-dc
+                unit: Ah
+                name: UtilMet-Total Ah Drawn Yearly
+      - type: custom:text-divider-row
+        text: Historical
+      - type: entities
+        entities:
+          - entity: sensor.smartshunt500a_battery_remaining_time
+          - entity: sensor.smartshunt500a_battery_history_discharged_energy
+            name: Discharged Energy
+          - entity: sensor.smartshunt500a_battery_history_last_discharge
+            name: Last Discharge
+          - entity: sensor.smartshunt500a_battery_history_deepest_discharge
+            name: Deepest Discharge
+          - entity: sensor.smartshunt500a_battery_history_avg_discharge
+            name: Avg Discharge
+          - entity: >-
+              sensor.smartshunt500a_battery_history_seconds_since_last_full_charge
+            name: Seconds since Last Full Charge
+          - entity: sensor.smartshunt500a_battery_history_time_since_last_full_charge
+            name: Time since Last Full Charge
+          - entity: sensor.smartshunt500a_battery_history_total_ah_drawn
+            name: Total Ah Drawn
+          - entity: sensor.smartshunt500a_battery_history_charge_cycles
+            name: Charge Cycles
+          - entity: sensor.smartshunt500a_battery_history_maximum_voltage
+            name: Maximum Voltage
+          - entity: sensor.smartshunt500a_battery_history_full_discharges
+            name: Full Discharges
+          - entity: sensor.smartshunt500a_battery_history_minimum_voltage
+            name: Minimum Voltage
+          - entity: sensor.smartshunt500a_battery_history_charged_energy
+            name: Charged Energy
+    layout:
+      grid-template-columns: 100%
+    type: custom:grid-layout
+    icon: mdi:meter-electric
+    theme: dracula
+  - title: Battery Shelf
+    path: ss-battery-shelf
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - square: false
+            type: grid
+            cards: []
+            columns: 1
+            title: jk_bms_3
+          - square: false
+            type: grid
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: gauge
+                    entity: >-
+                      sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_bat_capacity_state_of_charge
+                    name: jk_bms_1
+                    unit: '%'
+                    needle: true
+                    severity:
+                      green: 50
+                      yellow: 30
+                      red: 0
+                    card_mod:
+                      style:
+                        .: |
+                          .name {
+                            font-size: 10px !important;
+                            background-color: ;
+                            }
+                        ha-gauge$: |
+                          svg {
+                          transform: scale(0.9) translateY(0px);
+                          overflow: visible;
+                          }
+                          svg text {
+                          transform: scale(0.9) translateY(0px);
+                          }   
+                  - type: entities
+                    entities:
+                      - entity: >-
+                          number.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_bat_capacity_total_settings
+                        name: Total Capacity
+                        secondary_info: last-updated
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_bat_capacity_remaining
+                        name: Remaining
+                        secondary_info: last-updated
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_bat_capacity_total_charging_cycle
+                        name: Cycle Capacity
+                        secondary_info: last-updated
+              - type: horizontal-stack
+                cards:
+                  - type: entities
+                    entities:
+                      - entity: >-
+                          number.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_balancing_trigger_volt
+                        name: Balancing Trigger Volt
+                        secondary_info: last-updated
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_balancing_current
+                        name: Balancing Current
+                        secondary_info: last-updated
+                      - entity: >-
+                          number.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_max_balancing_current
+                        name: Max Balancing Current
+                        secondary_info: last-updated
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_delta_volt
+                        name: Cell Delta Volt
+                        secondary_info: last-updated
+                  - type: entities
+                    entities:
+                      - entity: sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_bat_volt
+                        name: Voltage
+                        secondary_info: last-updated
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_bat_current
+                        name: Current
+                        secondary_info: last-updated
+                      - entity: sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_bat_power
+                        name: Power
+                        secondary_info: last-updated
+              - type: vertical-stack
+                cards:
+                  - entities:
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_01
+                        name: 1
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_02
+                        name: 2
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_03
+                        name: 3
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_04
+                        name: 4
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_05
+                        name: 5
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_06
+                        name: 6
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_07
+                        name: 7
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_08
+                        name: 8
+                    title: Direction
+                    direction: up
+                    height: 150px
+                    stack: horizontal
+                    type: custom:bar-card
+                    severity:
+                      - color: Red
+                        from: 2.5
+                        to: 2.64
+                      - color: Orange
+                        from: 2.65
+                        to: 2.9
+                      - color: Green
+                        from: 2.91
+                        to: 3.45
+                      - color: Red
+                        from: 3.46
+                        to: 3.65
+                    bar-card-min: 2.5
+                    bar-card-max: 3.7
+                    indicator: inside
+                    name: outside
+                    icon: 'off'
+                    entity_row: true
+                    min: 2.5
+                    max: 3.65
+                  - entities:
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_09
+                        name: 9
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_10
+                        name: 10
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_11
+                        name: 11
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_12
+                        name: 12
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_13
+                        name: 13
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_14
+                        name: 14
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_15
+                        name: 15
+                      - entity: >-
+                          sensor.06_esp32_jk_bms_hub_rs485_01_jk_bms_1_cell_volt_16
+                        name: 16
+                    title: Direction
+                    direction: up
+                    height: 150px
+                    stack: horizontal
+                    type: custom:bar-card
+                    severity:
+                      - color: Red
+                        from: 2.5
+                        to: 2.64
+                      - color: Orange
+                        from: 2.65
+                        to: 2.9
+                      - color: Green
+                        from: 2.91
+                        to: 3.45
+                      - color: Red
+                        from: 3.46
+                        to: 3.65
+                    bar-card-min: 2.5
+                    bar-card-max: 3.7
+                    indicator: inside
+                    name: outside
+                    icon: 'off'
+                    entity_row: true
+                    min: 2.5
+                    max: 3.65
+            columns: 1
+            title: jk_bms_1
+          - square: false
+            type: grid
+            cards: []
+            columns: 1
+            title: jk_bms_4
+          - square: false
+            type: grid
+            cards: []
+            columns: 1
+            title: jk_bms_2
+        columns: 2
+    subview: true
+    theme: dracula
+    icon: mdi:library-shelves
+    badges:
+      - type: custom:button-card
+        name: Home
+        label: o
+        styles:
+          card:
+            - height: 20px
+            - width: 500px
+          name:
+            - font-size: 11px
+        tap_action:
+          action: navigate
+          navigation_path: ss-main
+    layout:
+      width: 100%
+    type: custom:grid-layout
+  - title: Solar system - Inverter
+    path: ss-inverter
+    cards: []
+    icon: mdi:select-inverse
+    theme: dracula
+    type: custom:grid-layout
+    subview: true
+  - title: dd
+    path: dd
+    cards: []
+    badges:
+      - type: custom:button-card
+        name: Home
+        label: o
+        styles:
+          card:
+            - height: 20px
+            - width: 500px
+          name:
+            - font-size: 11px
+        tap_action:
+          action: navigate
+          navigation_path: ss-main

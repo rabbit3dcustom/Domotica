@@ -1,0 +1,138 @@
+####################################################################################################################
+############# MULTIPLUS II 5500W
+####################################################################################################################
+
+# PROBLEMS
+####################################################################################################################
+
+- unique_id: victron_cerbo_multiplus_01_leds_overload
+  name: Led Overload
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/Overload" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  device_class: problem
+  icon: mdi:information-outline  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}
+
+- unique_id: victron_cerbo_multiplus_01_leds_lowbattery
+  name: Led Low Battery
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/LowBattery" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  device_class: problem
+  icon: mdi:information-outline  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}
+
+- unique_id: victron_cerbo_multiplus_01_leds_temperature
+  name: Led Temperature
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/Temperature" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  device_class: problem
+  icon: mdi:information-outline  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}    
+
+
+# STATES
+####################################################################################################################
+- unique_id: victron_cerbo_multiplus_01_leds_inverter             
+  name: Led Inverter
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/Inverter" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  # device_class: none
+  icon: mdi:information-outline  
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"} 
+
+- unique_id: victron_cerbo_multiplus_01_leds_float
+  name: Led Float
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/Float" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  # device_class: none
+  icon: mdi:information-outline 
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"} 
+
+- unique_id: victron_cerbo_multiplus_01_leds_bulk
+  name: Led Bulk
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/Bulk" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  # device_class: none
+  icon: mdi:information-outline 
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}     
+
+- unique_id: victron_cerbo_multiplus_01_leds_absorption
+  name: Led Absorption
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/Absorption" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  # device_class: none
+  icon: mdi:information-outline 
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}         
+
+- unique_id: victron_cerbo_multiplus_01_leds_mains
+  name: Led Mains
+  state_topic: "victron_env/N/c0619ab3baad/vebus/276/Leds/Mains" 
+  value_template: "{{ value_json.value }}"
+  payload_on: "1"
+  payload_off: "0"
+  # device_class: none
+  icon: mdi:information-outline 
+  device: {
+    identifiers: [
+      "Victron Multiplus II 48/5000/70-50 - 01 "
+    ],
+    manufacturer: "Victron Energy",
+    model: "Multiplus II 48/5000/70-50",
+    name: "Multiplus II - 01"}      
+    

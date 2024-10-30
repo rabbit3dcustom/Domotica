@@ -1,0 +1,29 @@
+
+####################################################################################################################
+############# Buttons
+####################################################################################################################
+
+# - name: 01-SNZB-01-MagicLights-Button
+#   icon: mdi:dip-switch
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-SNZB-01-MagicLights-Button/SENSOR"
+#   value_template: >
+#     {% if 'Power' in value_json %} {{ value_json.Power }}
+#     {% else %} {{ states('sensor.01_snzb_01_magiclights_button') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 01-SNZB-01-MagicLights-Button-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-SNZB-01-MagicLights-Button/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.01_snzb_01_magiclights_button_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+  

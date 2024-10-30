@@ -1,0 +1,175 @@
+ #sensor:
+################################################
+######  HISTORY STATS - RANDOM
+################################################
+
+- platform: history_stats
+  name: kk ON today
+  entity_id: binary_sensor.21_snzb_04_washer_door_opening
+  state: "on"
+  type: time  
+  start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+  end: "{{ now() }}"  
+  # start: "{{ today_at('00:00') }}"  
+
+  ################################################
+  ######  HISTORY STATS - 3D PRINTING
+  ################################################
+  # Hours in printing state on for Asun3Pro
+  # - platform: history_stats
+  #   name: HistStat-Asun3Pro-Total printing time
+  #   # id: histstat_asun3pro_total_printing_time
+  #   entity_id: binary_sensor.asun3pro_octoprint_printing
+  #   state: "on"
+  #   type: time
+  #   start: "{{ 0 }}"
+  #   #end: '{{ now().replace(hour=0, minute=0, second=0, microsecond=0) }}'
+  #   end: "{{ now() }}"
+  #   #duration:
+  #   #days: 365
+
+  # Hours in printing state on for Asun3Pro
+# - platform: history_stats
+#   name: Hist-Stats-Asun3Pro-Total printing time Today
+#   unique_id: hist_stats_asun3pro_total_printing_time_today
+#   entity_id: binary_sensor.asun3pro_octoprint_printing
+#   state: "on"
+#   type: time
+#   start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+#   end: "{{ now() }}"
+#   # start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+#   # start: "{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) ) }}"
+#   # end: "{{ as_timestamp( now() ) }}"
+
+################################################
+
+  # Hours in printing state on for EmiliaA10M
+  # - platform: history_stats
+  #   name: HistStat-EmiliaA10M-Total printing time
+  #   # id: histstat_emiliaA10m_total_printing_time
+  #   entity_id: binary_sensor.emiliaa10m_octoprint_printing
+  #   state: "on"
+  #   type: time
+  #   start: "{{ 0 }}"
+  #   #end: '{{ now().replace(hour=0, minute=0, second=0, microsecond=0) }}'
+  #   end: "{{ now() }}"
+  #   #duration:
+  #   #days: 365
+
+#   # Hours in printing state on for EmiliaA10M
+# - platform: history_stats
+#   name: Hist-Stats-EmiliaA10M-Total printing time Today
+#   unique_id: hist_stats_emiliaa10m_total_printing_time_today
+#   entity_id: binary_sensor.emiliaa10m_octoprint_printing
+#   state: "on"
+#   type: time
+#   start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+#   end: "{{ now() }}"
+
+    ################################################
+
+# # Hours in printing state on for ChispiA10M
+# - platform: history_stats
+#   name: Hist-Stats-ChispiA10M-Total printing time Today
+#   unique_id: hist_stats_chispia10m_total_printing_time_today
+#   entity_id: binary_sensor.chispia10m_octoprint_printing
+#   state: "on"
+#   type: time
+#   start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+#   end: "{{ now() }}"
+
+    ################################################
+
+  # Hours in printing state on for ItaEnder3
+  # - platform: history_stats
+  #   name: HistStat-ItaEnder3-Total printing time
+  #   # id: histstat_itaender3_total_printing_time
+  #   entity_id: binary_sensor.itaender3_octoprint_printing
+  #   state: "on"
+  #   type: time
+  #   start: "{{ 0 }}"
+  #   #end: '{{ now().replace(hour=0, minute=0, second=0, microsecond=0) }}'
+  #   end: "{{ now() }}"
+  #   #duration:
+  #   #days: 365
+
+#   # Hours in printing state on for ItaEnder3
+# - platform: history_stats
+#   name: Hist-Stats-ItaEnder3-Total printing time Today
+#   unique_id: hist_stats_itaender3_total_printing_time_today
+#   entity_id: binary_sensor.itaender3_octoprint_printing
+#   state: "on"
+#   type: time
+#   start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0) }}"
+#   end: "{{ now() }}"  
+
+  ################################################
+
+  # # Hours in printing state on for RhinoBox
+  # - platform: history_stats
+  #   name: HistStat-RhinoBox-Total printing time
+  #   # id: histstat_rhinoBox_total_printing_time
+  #   entity_id: binary_sensor.rhinobox_octoprint_printing
+  #   state: "on"
+  #   type: time
+  #   start: "{{ 0 }}"
+  #   #end: '{{ now().replace(hour=0, minute=0, second=0, microsecond=0) }}'
+  #   end: "{{ now() }}"
+  #   #duration:
+  #   #days: 365
+
+
+
+  ################################################
+  ######  HISTORY STATS - SMART SHUNT 500a
+  ################################################
+
+  # No needed the historical_stats for smartshunt500a_battery_history_total_ah_drawn because this is just cumulative.
+
+
+
+  ################################################
+  ######  HISTORY STATS - XXXXXXXX
+  ################################################
+
+
+
+
+  ###################################################################################
+  ######  RIEMANN INTEGRATION - SOLAR PRODUCTION
+  ###################################################################################
+
+  # - platform: integration  
+  #   unique_id: riemann_total_solar_kwh
+  #   name: Riemann total solar kwh
+  #   source: sensor.cerbo_gx_live_solar_production # victron_cerbo_live_solar_production
+  #   unit_prefix: k
+  #   round: 3
+
+  # - platform: integration
+  #   unique_id: total_power_consumed
+  #   name: Riemann total_power_consumed
+  #   source: sensor.total_power_consuming
+  #   unit_prefix: k
+  #   round: 3  
+
+  # - platform: integration
+  #   unique_id: total_battery_in_kwh
+  #   name: Riemann total_battery_in_kwh
+  #   source: sensor.live_battery_in
+  #   unit_prefix: k
+  #   round: 3
+
+  # - platform: integration
+  #   unique_id: total_battery_out_kwh
+  #   name: Riemann total_battery_out_kwh
+  #   source: sensor.live_battery_out
+  #   unit_prefix: k
+  #   round: 3
+
+
+
+
+  # ###################################################################################
+  # ######  RIEMANN INTEGRATION - XXXXXXXX
+  # ###################################################################################

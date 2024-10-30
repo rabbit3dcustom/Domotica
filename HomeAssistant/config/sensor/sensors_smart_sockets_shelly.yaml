@@ -1,0 +1,61 @@
+###################################################################################
+######  RIEMANN INTEGRATION - SHELLY
+###################################################################################
+# RIEMANN INTEGRATION - SHELLY PLUG S 01
+- platform: integration  
+  unique_id: riemann_01_shelly_plug_s_washer_totalconsumption  
+  name: Riemann-01-Shelly-plug-s-Washer-TotalConsumption
+  source: sensor.01_shelly_plug_s_washer_power
+  # icon: mdi:chart-histogram
+  unit_prefix: k
+  round: 2
+  max_sub_interval:
+    minutes: 5  
+
+###################################################################################
+# RIEMANN INTEGRATION - SHELLY PLUG S 02
+- platform: integration  
+  unique_id: riemann_02_shelly_plug_s_dishwasher_totalconsumption
+  name: Riemann-02-Shelly-plug-s-DishWasher-TotalConsumption
+  source: sensor.02_shelly_plug_s_dishwasher_switch_0_power
+  # icon: mdi:chart-histogram
+  unit_prefix: k
+  round: 2    
+  max_sub_interval:
+    minutes: 5  
+
+###################################################################################
+# RIEMANN INTEGRATION - SHELLY PLUG S 03
+- platform: integration  
+  unique_id: riemann_03_shelly_plug_s_fridge_totalconsumption
+  name: Riemann-03-Shelly-plug-s-Fridge-TotalConsumption
+  source: sensor.03_shelly_plug_s_fridge_switch_0_power
+  # icon: mdi:chart-histogram
+  unit_prefix: k
+  round: 2    
+  max_sub_interval:
+    minutes: 5  
+
+###################################################################################
+# RIEMANN INTEGRATION - SHELLY PLUG S 04
+- platform: integration  
+  unique_id: riemann_04_shellyplug_s_nonmandat_totalconsumption
+  name: Riemann-04-ShellyPlug-S-NonMandat-TotalConsumption
+  source: sensor.04_shellyplug_s_nonmandat_switch_0_power
+  # icon: mdi:chart-histogram
+  unit_prefix: k
+  round: 2    
+  max_sub_interval:
+    minutes: 5  
+
+###################################################################################
+# RIEMANN INTEGRATION - SHELLY PLUG S 05
+- platform: integration  
+  unique_id: riemann_05_shellyplug_s_swimmingpool_totalconsumption
+  name: Riemann-05-ShellyPlug-S-SwimmingPool-TotalConsumption
+  source: sensor.05_shellyplug_s_swimmingpool_switch_0_power
+  # icon: mdi:chart-histogram
+  unit_prefix: k
+  round: 2    
+  max_sub_interval:
+    minutes: 5  

@@ -1,0 +1,56 @@
+  # ###################################################################################
+  # ######  UTITILY METERS - BATTERY CONSUMPTION
+  # ###################################################################################
+  
+  # ######  UTITILY METERS - BATTERY CONSUMPTION - BATTERY KWH INPUT
+  # ###################################################################################
+  util_meter_daily_total_battery_input_kwh:
+    source: sensor.riemann_total_battery_in_kwh
+    name: Util-Meter Daily Total Battery Input Kwh
+    cycle: weekly
+    periodically_resetting: true
+
+  util_meter_weekly_total_battery_input_kwh:
+    source: sensor.riemann_total_battery_in_kwh
+    name: Util-Meter Weekly Total Battery Input Kwh
+    cycle: weekly
+    periodically_resetting: true
+
+  util_meter_monthly_total_battery_input_kwh:
+    source: sensor.riemann_total_battery_in_kwh
+    name: Util-Meter Monthly Total Battery Input Kwh
+    cycle: monthly
+    periodically_resetting: true    
+
+  util_meter_yearly_total_battery_input_kwh:
+    source: sensor.riemann_total_battery_in_kwh
+    name: Util-Meter Yearly Total Battery Input Kwh
+    cycle: yearly
+    periodically_resetting: true    
+
+
+  # ######  UTITILY METERS - BATTERY CONSUMPTION - BATTERY KWH OUTPUT
+  # ###################################################################################
+  util_meter_daily_total_battery_output_kwh:
+    source: sensor.riemann_total_battery_out_kwh
+    name: Util-Meter Daily Total Battery Output Kwh
+    cycle: weekly
+    periodically_resetting: true
+
+  util_meter_weekly_total_battery_output_kwh:
+    source: sensor.riemann_total_battery_out_kwh
+    name: Util-Meter Weekly Total Battery Output Kwh
+    cycle: weekly
+    periodically_resetting: true
+
+  util_meter_monthly_total_battery_output_kwh:
+    source: sensor.riemann_total_battery_out_kwh
+    name: Util-Meter Monthly Total Battery Output Kwh
+    cycle: monthly
+    periodically_resetting: true    
+
+  util_meter_yearly_total_battery_output_kwh:
+    source: sensor.riemann_total_battery_out_kwh
+    name: Util-Meter Yearly Total Battery Output Kwh
+    cycle: yearly
+    periodically_resetting: true        

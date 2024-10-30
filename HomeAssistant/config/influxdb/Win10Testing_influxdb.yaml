@@ -1,0 +1,7 @@
+  host: 192.168.1.110
+  port: 8086
+  database: !secret remote_influx_database
+  username: !secret remote_influx_username
+  password: !secret remote_influx_password
+  max_retries: 3
+  default_measurement: state

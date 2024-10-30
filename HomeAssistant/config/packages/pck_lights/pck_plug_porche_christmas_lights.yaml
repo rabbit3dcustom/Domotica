@@ -1,0 +1,141 @@
+###################################################################################
+input_datetime:
+###################################################################################
+  enable_christmas_lights_at_time:
+    name: "Enable christmas lights at" #20:00
+    has_time: true
+    has_date: false
+    # initial: "20:00"
+  disable_christmas_lights_at_time:
+    name: "Disable christmas lights at" #06:00
+    has_time: true
+    has_date: false
+    # initial: "00:00"  
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  - alias: Lights - Turn on - Christmas lights when porche button is double pressed
+    description: ""
+    trigger:
+      - device_id: 9d139c9acd8681657c6cc159ba5c147d
+        domain: zha
+        platform: device
+        type: remote_button_double_press
+        subtype: button
+    condition:
+      - condition: device
+        type: is_off
+        device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+        entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+        domain: switch
+        enabled: false      
+      - condition: state
+        entity_id: switch.03_christmastlights_esp32_rele_test
+        state: "off"
+        enabled: true        
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+      - service: switch.turn_on
+        target:
+          entity_id: switch.03_christmastlights_esp32_rele_test
+      - service: switch.turn_on
+        target:
+          entity_id: switch.01_s26r2_plug_lights          
+    mode: single
+
+###################################################################################
+
+  - alias: Lights - Turn off - Christmas lights when porche button is double pressed
+    description: ""
+    trigger:
+      - device_id: 9d139c9acd8681657c6cc159ba5c147d
+        domain: zha
+        platform: device
+        type: remote_button_double_press
+        subtype: button
+    condition:
+      - condition: device
+        type: is_on
+        device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+        entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+        domain: switch
+        enabled: false
+      - condition: state
+        entity_id: switch.03_christmastlights_esp32_rele_test
+        state: "on"
+        enabled: true        
+    action:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+      - service: switch.turn_off
+        target:
+          entity_id: switch.03_christmastlights_esp32_rele_test      
+      - service: switch.turn_off
+        target:
+          entity_id: switch.01_s26r2_plug_lights              
+    mode: single 
+###################################################################################
+
+  - alias: Lights - Turn on - Christmas lights when dusk
+    description: ""
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: 0
+    condition:
+      - condition: device
+        type: is_off
+        device_id: ba9beb4df84180945aee5c118f757bf1
+        entity_id: switch.03_zbminil2_christmas_plug_switch_switch #c56d0f8c65ef19471cfccdc92285faae
+        domain: switch
+        enabled: false
+      - condition: state
+        entity_id: switch.03_christmastlights_esp32_rele_test
+        state: "off"
+        enabled: true        
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+      - service: switch.turn_on
+        target:
+          entity_id: switch.03_christmastlights_esp32_rele_test
+      - service: switch.turn_on
+        target:
+          entity_id: switch.01_s26r2_plug_lights          
+    mode: single
+###################################################################################
+
+  - alias: Lights - Turn off - Christmas lights when dawn
+    description: ""
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: 0
+    condition:
+      - condition: device
+        type: is_on
+        device_id: ba9beb4df84180945aee5c118f757bf1
+        entity_id: switch.03_zbminil2_christmas_plug_switch_switch #c56d0f8c65ef19471cfccdc92285faae
+        domain: switch
+        enabled: false
+      - condition: state
+        entity_id: switch.03_christmastlights_esp32_rele_test
+        state: "on"
+        enabled: true
+    action:
+      - service: switch.turn_off
+        target:          
+          entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+      - service: switch.turn_off
+        target:
+          entity_id: switch.03_christmastlights_esp32_rele_test
+      - service: switch.turn_off
+        target:
+          entity_id: switch.01_s26r2_plug_lights          
+    mode: single 

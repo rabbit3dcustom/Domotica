@@ -1,0 +1,197 @@
+###################################################################################
+###################################################################################
+timer:
+###################################################################################
+  timer_garage_lights_on:
+    name: Timer-garage-lights-on
+    icon: mdi:camera-timer
+    duration: "00:05:00"
+    restore: true
+
+###################################################################################
+input_datetime:
+###################################################################################
+  enable_garage_lights_at_time:
+    name: "Enable garage lights at" #The lights will be automatically swith on from this hour
+    has_time: true
+    has_date: false
+    # initial: "18:00"
+  disable_garage_lights_at_time:
+    name: "Disable garage lights at" #The lights will be blocked to be automatically swith on from this hour
+    has_time: true
+    has_date: false
+    # initial: "08:00"        
+
+###################################################################################
+###################################################################################
+automation:
+###################################################################################
+  # - alias: Lights - Turn on - Garage lights when garage button pressed  # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - device_id: b20e89dcbf8f7951adf644a9b10f5d0f
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_short_press
+  #       subtype: button
+  #       enabled: true                 
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: ba9beb4df84180945aee5c118f757bf1
+  #       entity_id: switch.03_zbminil2_garage_lights_switch_switch
+  #       domain: switch
+  #       enabled: true    
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.03_zbminil2_garage_lights_switch_switch
+  #       enabled: true                   
+  #   mode: single
+###################################################################################
+
+  # - alias: Lights - Turn on - Garage lights when main door opended  # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - type: opened
+  #       platform: device
+  #       device_id: 75f79bdfcd8b96584b313f57b4a0e5a9
+  #       entity_id: binary_sensor.26_snzb_04_garagemaindoor_door_opening
+  #       domain: binary_sensor
+  #       enabled: true                 
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: ba9beb4df84180945aee5c118f757bf1
+  #       entity_id: switch.03_zbminil2_garage_lights_switch_switch 
+  #       domain: switch
+  #       enabled: true 
+  #     - condition: and
+  #       conditions:
+  #         - condition: time
+  #           after: input_datetime.enable_garage_lights_at_time
+  #           before: input_datetime.disable_garage_lights_at_time              
+  #       enabled: true            
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.03_zbminil2_garage_lights_switch_switch
+  #     - service: timer.start
+  #       data: {}            
+  #       target:
+  #         entity_id: timer.timer_garage_lights_on          
+  #       enabled: true                   
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Lights - Turn on - Garage lights when garage presence on # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - type: occupied
+  #       platform: device
+  #       device_id: 9dabbb34c923b9c3faea8fed7ac0bec3
+  #       entity_id: binary_sensor.01_snzb_06p_presencegarage_occupancy
+  #       domain: binary_sensor
+  #       enabled: true                 
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: ba9beb4df84180945aee5c118f757bf1
+  #       entity_id: switch.03_zbminil2_garage_lights_switch_switch 
+  #       domain: switch
+  #       enabled: true 
+  #     - condition: and
+  #       conditions:
+  #         - condition: time
+  #           after: input_datetime.enable_garage_lights_at_time
+  #           before: input_datetime.disable_garage_lights_at_time              
+  #       enabled: true            
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.03_zbminil2_garage_lights_switch_switch
+  #     - service: timer.start
+  #       data: {}            
+  #       target:
+  #         entity_id: timer.timer_garage_lights_on          
+  #       enabled: true                   
+  #   mode: single    
+
+###################################################################################
+  # - alias: Lights - Turn off - Timer - Garage lights when garage timer idle # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   mode: single    
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - timer.timer_garage_lights_on
+  #       to: idle
+  #       enabled: true
+  #   condition:
+  #     - condition: device
+  #       type: is_on
+  #       device_id: ba9beb4df84180945aee5c118f757bf1
+  #       entity_id: switch.03_zbminil2_garage_lights_switch_switch 
+  #       domain: switch
+  #       enabled: true         
+  #   action:
+  #     - service: switch.turn_off
+  #       data: {}      
+  #       target:
+  #         entity_id: switch.03_zbminil2_garage_lights_switch_switch
+  #       enabled: true          
+###################################################################################
+  # - alias: Lights - Turn off - Garage lights when garage button pressed  # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - device_id: b20e89dcbf8f7951adf644a9b10f5d0f
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_short_press
+  #       subtype: button
+  #       enabled: true         
+  #   condition:
+  #     - condition: device
+  #       type: is_on
+  #       device_id: ba9beb4df84180945aee5c118f757bf1
+  #       entity_id: switch.03_zbminil2_garage_lights_switch_switch 
+  #       domain: switch
+  #       enabled: true 
+  #   action:
+  #     - service: switch.turn_off
+  #       target:
+  #         entity_id: switch.03_zbminil2_garage_lights_switch_switch
+  #       enabled: true                   
+  #   mode: single
+
+
+###################################################################################
+
+  # - alias: Lights - Turn on - Timer - Garage lights when garage button double pressed
+  #   description: ""
+  #   trigger:
+  #     - device_id: 9d139c9acd8681657c6cc159ba5c147d
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_double_press
+  #       subtype: button
+  #       enabled: true                 
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+  #       domain: switch
+  #       enabled: true 
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.03_zbminil2_christmas_plug_switch_switch
+  #     - service: timer.start
+  #       data: {}            
+  #       target:
+  #         entity_id: timer.timer_garage_lights_on          
+  #       enabled: true                   
+  #   mode: single
+###################################################################################

@@ -1,0 +1,14 @@
+- sensor:
+  - name: Template SmartShunt500a Battery History Total ah drawn positive
+    unique_id: template_smartshunt500a_battery_history_total_ah_drawn_positive
+    # state_class: measurement
+    # device_class: power
+    # unit_of_measurement: "Ah"
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% if states('sensor.smartshunt500a_battery_history_total_ah_drawn') %}     
+        {% set positive_value = states('sensor.smartshunt500a_battery_history_total_ah_drawn')|float * -1 | round(2)%}
+        {{ positive_value | round(2) }} 
+      {% else %}
+        {{ 0 |float | round(2)}} 
+      {% endif %} 

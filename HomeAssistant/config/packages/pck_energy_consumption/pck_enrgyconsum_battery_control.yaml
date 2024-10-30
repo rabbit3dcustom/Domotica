@@ -1,0 +1,297 @@
+# ###################################################################################
+# ###################################################################################
+# input_number:
+#   number_ampere_preset:
+#     name: Number-Ampere-preset
+#     icon: mdi:battery-high
+#     min: 0
+#     max: 360
+#     initial: 127.5
+#     step: 0.1
+#     mode: box
+#     unit_of_measurement: Ah
+
+# ###################################################################################
+# ###################################################################################
+# # The integration sensor can't be placed in a package. Move it to the "sensor.yaml"
+# # integration:
+# #   riemann_01_shelly_plug_s_washer_totalconsumption:  
+
+
+# ###################################################################################
+# ###################################################################################
+# mqtt:
+#   sensor:
+#     - name: kg140f_01_mqtt_filter
+#       # friendly_name: "KG140F-01-MQTT-FILTER"
+#       # icon: mdi:window-open-variant
+#       # {"SerialReceived":":R50=1,\n:r50=1,87,1648,178,121914,118577,421533,949563,124,0,0,1,188,0,\r\n:R51=1,\n:r51=1,147,0,0,0,0,0,100,0,0,1275,100,100,100,0,0,1,\r\n"}
+#       # {% if 'SerialReceived' in value_json %} -> Assure that the MQTT message is valid.
+#       # {% if '\n:r50=1,' in value_json %} -> Only gets the SerialReceived with the Address = 1 for this KG140F-01(address = 1). Not working yet.
+#       state_topic: "tele/tasmota_D1-Mini-01-ESP8266-Shunt-PowerBank/RESULT"
+#       value_template: >
+#         {% if 'SerialReceived' in value_json %}
+#             {{  value_json | regex_findall_index("r50=([^:]+):R51") }}
+#         {% endif %}
+#       # availability_topic: "tele/tasmota_03-ESP32-Shunt-PowerBank/LWT"
+#       # payload_available: "Online"
+#       # payload_not_available: "Offline"
+#       # qos: 0
+
+# ###################################################################################
+# ###################################################################################
+# automation:
+# ###################################################################################
+#   - alias: Battery state - KG140F-01- Publish MQTT cleaned and checked values 
+#     description: ""
+#     trigger:
+#       - platform: state
+#         entity_id:
+#           - sensor.kg140f_01_mqtt_filter
+#         enabled: false
+#       - platform: time_pattern
+#         seconds: /5
+#         enabled: true
+#     condition: []
+#     action:
+#       - service: mqtt.publish
+#         data:
+#           qos: 0
+#           retain: true
+#           # topic: >-
+#           #     {{ "tele/KG140F-"  ~ '{:02}' | format (states('sensor.kg140f_01_mqtt_filter').split(',')[1]) ~ "/RESULT" }}   # this should be plc/set/ac_mode[0]                    
+#           topic: tele/KG140F-01/RESULT
+#           payload: >-
+#             {% set t = states('sensor.kg140f_01_mqtt_filter') %}
+#             {% set maxAmp = (states('input_number.number_ampere_preset')|float * 1000|float) | float%}
+#             {% if (t.split(',') | count) == 15 %}
+#               {% if (t.split(',')[4] | float) <= maxAmp %}
+#                 {{ states('sensor.kg140f_01_mqtt_filter') }}
+#               {% endif %}
+#             {% endif %}
+#       - service: mqtt.publish
+#         enabled: false
+#         data:
+#           qos: 0
+#           retain: true
+#           topic: tele/KG140F-01/BAD
+#           payload: >-
+#             {% set t = states('sensor.kg140f_01_mqtt_filter') %} {% if (t.split(',')
+#             | count) != 15 %}
+#               {{ states('sensor.kg140f_01_mqtt_filter') }}
+#             {% endif %}
+#     mode: single
+# ###################################################################################
+#   # - alias: Battery state - Turn on - Battery charger  # not used any more... no DALY
+#   #   description: ""
+#   #   mode: single
+#   #   trigger:
+#   #     - type: battery_level
+#   #       platform: device
+#   #       device_id: b191e909390176eaa12d7ee1abc2d363
+#   #       entity_id: sensor.02_dalybmss_esp32_battery_level
+#   #       domain: sensor
+#   #       below: 55
+#   #       #enabled: false
+#   #     - platform: numeric_state
+#   #       entity_id:
+#   #         - sensor.kg140f_01_battery_level
+#   #       below: 55
+#   #   condition:
+#   #     - condition: device
+#   #       type: is_off
+#   #       device_id: 03d28742dcd5da5601c91b6558391a4a
+#   #       entity_id: switch.04_basicr2_chargerprinterbattery
+#   #       domain: switch
+#   #   action:
+#   #     - type: turn_on
+#   #       device_id: 03d28742dcd5da5601c91b6558391a4a
+#   #       entity_id: switch.04_basicr2_chargerprinterbattery
+#   #       domain: switch
+
+# ###################################################################################
+# ###################################################################################
+# template:
+# # "1,210,1643,165,120191,109358,401245,857439,125,0,0,1,262,0,\r\n"
+#   - trigger:
+#       - platform: mqtt
+#         # topic: tele/tasmota_03-ESP32-Shunt-PowerBank/RESULT
+#         topic: tele/KG140F-01/RESULT
+#     sensor:
+#       - name: KG140F-01-Address
+#         # unit_of_measurement: ""
+#         state: "{{ (trigger.payload.split(',')[0] | float) }}"
+
+#       - name: KG140F-01-Checksum
+#         # unit_of_measurement: "V"
+#         state: "{{ (trigger.payload.split(',')[1] | float) }}"
+
+#       - name: KG140F-01-Voltage
+#         unit_of_measurement: "V"
+#         icon: mdi:flash
+#         state: "{{ (trigger.payload.split(',')[2] | float/100) }}"  
+
+#       - name: KG140F-01-CurrentAmpere
+#         unit_of_measurement: "Ah"
+#         state: "{{ (trigger.payload.split(',')[3] | float/100) }}"
+
+#       - name: KG140F-01-RemainingAh
+#         unit_of_measurement: "Ah"
+#         icon: mdi:gauge
+#         state: "{{ (trigger.payload.split(',')[4] | float/1000) }}"
+
+#       - name: KG140F-01-ElapsedAH
+#         unit_of_measurement: "Ah"
+#         state: "{{ (trigger.payload.split(',')[5] | float/1000) }}"
+
+#       - name: KG140F-01-AccumChrgCapacity
+#         unit_of_measurement: "Kwh"
+#         state: "{{ (trigger.payload.split(',')[6] | float/100000) }}"        
+
+#       - name: KG140F-01-RunningTimeSeconds
+#         unit_of_measurement: "s"
+#         state: "{{ (trigger.payload.split(',')[7] | float) }}"
+
+#       - name: KG140F-01-RunningTimeHours
+#         unit_of_measurement: "h"
+#         state: "{{ (trigger.payload.split(',')[7] | float/60/60) }}"        
+
+#       - name: KG140F-01-Temperature
+#         unit_of_measurement: "ºC"
+#         state: "{{ (trigger.payload.split(',')[8] | float-100) }}"        
+
+#       - name: KG140F-01-Pending
+#         # unit_of_measurement: ""
+#         state: "{{ (trigger.payload.split(',')[9] | float) }}"
+
+#       - name: KG140F-01-OutputStatus
+#         # unit_of_measurement: ""
+#         state: "{{ (trigger.payload.split(',')[10] | float) }}"
+
+#       - name: KG140F-01-CurrentDirection
+#         # unit_of_measurement: ""
+#         state: "{{ (trigger.payload.split(',')[11] | float) }}"        
+
+#       - name: KG140F-01-BatteryLifeMinutes
+#         unit_of_measurement: "min"
+#         state: "{{ (trigger.payload.split(',')[12] | float) }}"
+
+#       - name: KG140F-01-BatteryLifeHours
+#         unit_of_measurement: "h"
+#         state: "{{ (trigger.payload.split(',')[12] | float/60) }}"
+
+#       - name: KG140F-01-Ohm      
+#         unit_of_measurement: "mΩ"
+#         state: "{{ (trigger.payload.split(',')[13] | float/100) }}"
+# ###################################################################################
+# ###################################################################################
+# sensor:
+# # Calculate current power
+#   - platform: template
+#     sensors:
+#       kg140f_01_currentpower:
+#         value_template: >
+#             {% set t = states('sensor.kg140f_01_currentdirection') | float(0) %}
+#             {% if t == 0 %}
+#               {{ '%0.2f' | format ( -1 |float * 
+#                                     ( 
+#                                       states('sensor.kg140f_01_voltage') | float * 
+#                                       states('sensor.kg140f_01_currentampere') | float 
+#                                     )
+#                                   )
+#               }}
+#             {% elif t == 1 %}
+#               {{ '%0.2f' | format 
+#                               ( 
+#                                 states('sensor.kg140f_01_voltage') | float * 
+#                                 states('sensor.kg140f_01_currentampere') | float 
+#                               )
+#               }}
+#             {% else %}
+#               {{ '%0.2f' | format 
+#                               ( 
+#                                 states('sensor.kg140f_01_voltage') | float * 
+#                                 states('sensor.kg140f_01_currentampere') | float 
+#                               )
+#               }}              
+#             {% endif %}           
+#         unit_of_measurement: 'W'
+#         friendly_name: KG140F-01 Current Power
+      
+#       kg140f_01_ampereconsumption:
+#         value_template: >
+#             {% set t = states('sensor.kg140f_01_currentdirection') | float(0) %}
+#             {% if t == 0 %}
+#               {{ '%0.2f' | format ( -1 |float * states('sensor.kg140f_01_currentampere') | float ) }}
+#             {% elif t == 1 %}
+#               {{states('sensor.kg140f_01_currentampere')|float }}
+#             {% else %}
+#               {{states('sensor.kg140f_01_currentampere')|float }}
+#             {% endif %}          
+#         unit_of_measurement: 'Ah'
+#         # icon: mdi:current-dc
+#         friendly_name: KG140F-01 Ampere Consumption
+
+#       kg140f_01_battery_level:
+#         value_template: >
+#           {{ '%0.2f' | format
+#                         (
+#                           (states('sensor.kg140f_01_remainingah') | float * 100 ) /
+#                           states('input_number.number_ampere_preset') | float
+#                         )
+#           }}       
+#         unit_of_measurement: '%'
+#         # icon: mdi:percent
+#         friendly_name: KG140F-01 Battery Level
+
+#       daly150a_powerwall_currentpower:
+#         value_template: >
+#           {{ '%0.2f' | format
+#                         (
+#                           states('sensor.02_dalybmss_esp32_battery_voltage') | float * 
+#                           states('sensor.02_dalybmss_esp32_battery_current') | float
+#                         )
+#           }}
+#         unit_of_measurement: 'W'
+#         friendly_name: Daly150a-Powerwall-CurrentPower
+
+#       daly150a_powerwall_max_deviation:
+#         value_template: >
+#           {{ '%0.2f' | format
+#                         (
+#                           states('sensor.02_dalybmss_esp32_max_cell_voltage') | float - 
+#                           states('sensor.02_dalybmss_esp32_min_cell_voltage') | float
+#                         )
+#           }}
+#         unit_of_measurement: 'mV'
+#         friendly_name: Daly150a-Powerwall-Max-Deviation        
+
+
+
+
+#     # {% set t = states('sensor.sensor_testing_mqtt_filter') %}
+#     # {% if has_value('sensor.sensor_testing_mqtt_filter') %}    
+#     #   {% if has_value(t.split(',')[1]) %}
+#     #     {{ states('sensor.sensor_testing_mqtt_filter') }}
+#     #   {% endif %}      
+#     # {% endif %}
+
+
+#     #     {% set t = states('sensor.sensor_testing_mqtt_filter') %}
+#     # {% if states('sensor.sensor_testing_mqtt_filter') is defined and ',' in states('sensor.sensor_testing_mqtt_filter') %}
+#     #   {% set t = states('sensor.sensor_testing_mqtt_filter').split(',')[1] %}
+#     #   {{ t }}
+#     # {% endif %}
+
+#     # service: mqtt.publish
+#     # data:
+#     #   qos: 0
+#     #   retain: true
+#     #   topic: tele/BatteryMonitor/RESULT
+#     #   payload: >-
+#     #     {% set t = states('sensor.sensor_testing_mqtt_filter') %}
+#     #     {% if (t.split(',') | count) == 15 %}
+#     #       {{ states('sensor.sensor_testing_mqtt_filter') }}
+#     #     {% endif %}  
+
+

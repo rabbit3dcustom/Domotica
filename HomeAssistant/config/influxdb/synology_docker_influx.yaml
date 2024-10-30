@@ -1,0 +1,8 @@
+  api_version: 2
+  ssl: false
+  host: 192.168.1.4
+  port: 49154
+  token: AW-XzTjYJsRiUBdHaLH2ABE121lcHqgQAXrdIAxC1LLZPLJW8xtKrYzsyeSe0MWmVFQHXlF2i2DNsNlhJCzmBQ==
+  organization: conejoosHome
+  bucket: HomeAssistant
+  

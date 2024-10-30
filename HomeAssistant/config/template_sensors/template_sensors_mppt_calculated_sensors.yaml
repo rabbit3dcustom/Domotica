@@ -1,0 +1,120 @@
+################################################
+# CALCULATED SENSORS
+################################################
+
+###################################################################################
+###################################################################################
+# MPPT GarageSouth 150-70 (SmartSolar Charger MPPT 150/70 rev2)
+###################################################################################        
+
+# MPPT GarageSouth - Photo Voltaic meassurements
+###################################################################################
+# 2024-08-04-Cant be calculate. pv_current: not exists in the cerboGX venusOS version, only in raspberry venusOS version.
+# - sensor:
+#   - name: MPPT GarageSouth 150-70 PV Power
+#     unique_id: victron_solar_charger_garage_south_pv_power
+#     state_class: measurement
+#     device_class: power
+#     unit_of_measurement: "W"      
+#     # The name of the sensors are the (mqtt) device_name + the sensor_name
+#     state: >
+#       {% set current = states('sensor.mppt_150_70_garagesouth_pv_current') | round(2) %} 
+#       {% set voltage = states('sensor.mppt_150_70_garagesouth_pv_voltage') | round(2) %}
+#       {% set total = current * voltage %}       
+#       {{total | round(0) }}      
+
+# 2024-08-04-Current must be calculated. pv_power: Exists in the cerboGX venusOS version, not in raspberry venusOS version.
+- sensor:
+  - name: MPPT GarageSouth 150-70 PV Current
+    unique_id: victron_solar_charger_garage_south_pv_current
+    state_class: measurement
+    device_class: current
+    unit_of_measurement: "A"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% if states('sensor.mppt_150_70_garagesouth_pv_voltage') | is_number %}
+        {% set voltage = states('sensor.mppt_150_70_garagesouth_pv_voltage') | round(2) %}
+      {% endif %} 
+      {% if states('sensor.mppt_150_70_garagesouth_pv_power') | is_number %}      
+        {% set power = states('sensor.mppt_150_70_garagesouth_pv_power') | round(2) %}
+      {% endif %}         
+      {% set total = power / voltage %}
+      {% if total | is_number %}      
+        {{ total | round(2) }}      
+      {% else %}
+        {{ states('sensor.victron_solar_charger_garage_south_pv_current') | round(2) }}   
+      {% endif %}       
+
+# MPPT GarageSouth - DC meassurements
+###################################################################################
+- sensor:
+  - name: MPPT GarageSouth 150-70 DC Power
+    unique_id: victron_solar_charger_garage_south_dc_power
+    state_class: measurement
+    device_class: power
+    unit_of_measurement: "W"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% set current = states('sensor.mppt_150_70_garagesouth_dc_current') | round(2) %} 
+      {% set voltage = states('sensor.mppt_150_70_garagesouth_dc_voltage') | round(2) %}
+      {% set total = current * voltage %}       
+      {{total | round(0) }}       
+
+
+###################################################################################
+###################################################################################
+# MPPT GarageNorth 150-70 (SmartSolar MPPT VE.Can 150/70 rev2)
+###################################################################################
+
+# MPPT GarageNorth - Photo Voltaic meassurements
+###################################################################################
+# 2024-08-04-Cant be calculate. pv_current: not exists in the cerboGX venusOS version, only in raspberry venusOS version.
+# - sensor:
+#   - name: MPPT GarageNorth 150-70 PV Power
+#     unique_id: victron_solar_charger_garage_north_pv_power
+#     state_class: measurement
+#     device_class: power
+#     unit_of_measurement: "W"      
+#     # The name of the sensors are the (mqtt) device_name + the sensor_name
+#     state: >
+#       {% set current = states('sensor.mppt_150_70tr_garagenorth_pv_current') | round(2) %}
+#       {% set voltage = states('sensor.mppt_150_70tr_garagenorth_pv_voltage') | round(2) %}
+#       {% set total = current * voltage %}       
+#       {{total | round(0) }}
+
+# 2024-08-04-Current must be calculated. pv_power: Exists in the cerboGX venusOS version, not in raspberry venusOS version.
+- sensor:
+  - name: MPPT GarageNorth 150-70tr PV Current
+    unique_id: victron_solar_charger_garage_north_pv_current
+    state_class: measurement
+    device_class: current
+    unit_of_measurement: "A"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% if states('sensor.mppt_150_70tr_garagenorth_pv_voltage') | is_number %}
+        {% set voltage = states('sensor.mppt_150_70tr_garagenorth_pv_voltage') | round(2) %}
+      {% endif %} 
+      {% if states('sensor.mppt_150_70tr_garagenorth_pv_power') | is_number %}      
+        {% set power = states('sensor.mppt_150_70tr_garagenorth_pv_power') | round(2) %}
+      {% endif %}         
+      {% set total = power / voltage %}
+      {% if total | is_number %}      
+        {{total | round(2) }}      
+      {% else %}
+        {{ states('sensor.victron_solar_charger_garage_north_pv_current') | round(2) }}         
+      {% endif %} 
+
+# MPPT GarageNorth - DC meassurements
+###################################################################################
+- sensor:
+  - name: MPPT GarageNorth 150-70tr DC Power
+    unique_id: victron_solar_charger_garage_north_dc_power
+    state_class: measurement
+    device_class: power
+    unit_of_measurement: "W"      
+    # The name of the sensors are the (mqtt) device_name + the sensor_name
+    state: >
+      {% set current = states('sensor.mppt_150_70tr_garagenorth_dc_current') | round(2) %}
+      {% set voltage = states('sensor.mppt_150_70tr_garagenorth_dc_voltage') | round(2) %}
+      {% set total = current * voltage %}       
+      {{total | round(0) }}      

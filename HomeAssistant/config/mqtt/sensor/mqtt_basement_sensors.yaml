@@ -1,0 +1,59 @@
+####################################################################################################################
+############# Door/Window SENSORS
+####################################################################################################################
+# - name: 01-SNZB-04-GarageIndoor-Door
+#   icon: mdi:door-open
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-SNZB-04-GarageIndoor-Door/SENSOR"
+#   value_template: >
+#     {% if 'Contact' in value_json %} {{ value_json.Contact }}
+#     {% else %} {{ states('sensor.01_snzb_04_garageindoor_door') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 01-SNZB-04-GarageIndoor-Door-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-SNZB-04-GarageIndoor-Door/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.01_snzb_04_garageindoor_door_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+####################################################################################################################
+
+
+
+
+####################################################################################################################
+############# Motion SENSORS
+####################################################################################################################
+
+# - name: 01-SNZB-03-BasementHall-Motion
+#   icon: mdi:bullseye
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-SNZB-03-BasementHall-Motion/SENSOR"
+#   value_template: >
+#     {% if 'Occupancy' in value_json %} {{ value_json.Occupancy }}
+#     {% else %} {{ states('sensor.01_snzb_03_basementhall_motion') }}
+#     {% endif %}  
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+
+# - name: 01-SNZB-03-BasementHall-Motion-Battery
+#   icon: mdi:battery
+#   state_topic: "tele/tasmota_01-SonoffZigbeePro/01-SNZB-03-BasementHall-Motion/SENSOR"
+#   value_template: >
+#     {% if 'BatteryPercentage' in value_json %} {{ value_json.BatteryPercentage }}
+#     {% else %} {{ states('sensor.01_snzb_03_basementhall_motion_battery') }}
+#     {% endif %}
+#   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"
+#   qos: 0
+####################################################################################################################

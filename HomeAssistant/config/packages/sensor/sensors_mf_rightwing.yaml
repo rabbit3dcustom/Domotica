@@ -1,0 +1,14 @@
+###################################################################################
+###################################################################################
+binary_sensor:
+###################################################################################
+  - platform: group
+    name: "Group MF-Right wing"
+    device_class: opening
+    entities:
+      - binary_sensor.05_snzb_04_mainbathroom_window_opening
+      - binary_sensor.10_snzb_04_mainroom_window_opening
+      - binary_sensor.11_snzb_04_dressingroom_window_opening
+      - binary_sensor.01_office_contactsensor
+      - binary_sensor.02_snzb_04_sleepingroom_window_opening
+      - binary_sensor.02_bathroom_contactsensor

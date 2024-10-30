@@ -1,0 +1,12 @@
+./influx config create --config-name config.yaml --host-url http://localhost:8086 --org ConejoosHome --active
+
+
+--token API_TOKEN \  
+
+  ./influx auth create -o ConejoosHome --all-access
+
+
+
+
+
+  

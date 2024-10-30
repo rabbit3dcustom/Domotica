@@ -1,0 +1,405 @@
+###################################################################################
+###################################################################################
+timer:
+###################################################################################
+  # timer_basementhall_lights_on:
+  #   name: Timer-basementhall-lights-on
+  #   icon: mdi:camera-timer
+  #   duration: "00:03:00"
+  #   restore: true
+
+  timer_basementhall_lights_lock:
+    name: Timer-basementhall-lights-lock
+    icon: mdi:camera-timer
+    duration: "00:00:02"
+    restore: true  
+
+###################################################################################
+input_datetime:
+###################################################################################
+  enable_basement_hall_lights_at_time:
+    name: "Enable basement hall lights at" #20:00
+    has_time: true
+    has_date: false
+    # initial: "20:00"
+  disable_basement_hall_lights_at_time:
+    name: "Disable basement hall lights at" #00:00
+    has_time: true
+    has_date: false
+    # initial: "00:00"    
+###################################################################################
+input_number:
+###################################################################################
+
+
+###################################################################################
+input_boolean:
+###################################################################################
+  tgl_basemen_lights_with_timer:
+    name: tgl_Basement lights with timer
+    icon: mdi:security 
+    initial: "on"
+  tgl_basement_lights_lock:
+    name: tgl_Basement lights with timer
+    icon: mdi:security 
+    initial: "off"     
+
+###################################################################################
+###################################################################################
+# automation:
+###################################################################################
+  # - alias: Lights - Turn on - basement hall lights
+  #   description: ""
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - binary_sensor.01_snzb_03_basementhall_motion_motion
+  #       to: "on"
+  #   condition:
+  #     - condition: and
+  #       conditions:
+  #         - condition: time
+  #           after: input_datetime.enable_basement_hall_lights_at_time
+  #           before: input_datetime.disable_basement_hall_lights_at_time        
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #     - service: timer.start
+  #       data: {}            
+  #       target:
+  #         entity_id: timer.timer_basementhall_lights_on
+  #   mode: single
+###################################################################################
+  # - alias: Lights - Turn off - basement hall lights with timer
+  #   description: ""
+  #   mode: single    
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - timer.timer_basementhall_lights_on
+  #       to: idle
+  #   condition:
+  #     - condition: state
+  #       entity_id: input_boolean.tgl_basemen_lights_with_timer
+  #       state: "on"        
+  #   action:
+  #     - service: switch.turn_off
+  #       data: {}      
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+###################################################################################
+  # - alias: Lights - Turn off - basement hall lights with motion sensor off
+  #   description: ""
+  #   mode: single    
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - binary_sensor.01_snzb_03_basementhall_motion_motion
+  #       to: "off"
+  #   condition:
+  #     - condition: state
+  #       entity_id: input_boolean.tgl_basemen_lights_with_timer
+  #       state: "off"       
+  #   action:
+  #     - service: switch.turn_off
+  #       data: {}      
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch          
+###################################################################################
+  # - alias: Lights - Turn on - stairs to basement when basement hall lights is on  # MIGRATE INSIDE HOME ASSITANT
+      # description: ""
+      # trigger:
+      #   - platform: device
+      #     type: turned_on
+      #     device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+      #     entity_id: switch.01_zbminil2_basementhall_switch_switch
+      #     domain: switch
+      # condition:
+      #   - condition: state
+      #     entity_id: input_boolean.tgl_basement_lights_lock
+      #     state: "off"
+      #     enabled: false
+      #   - condition: device
+      #     type: is_off
+      #     device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+      #     entity_id: switch.01_zbminil2_basementhall_switch_switch
+      #     domain: switch
+      #     enabled: false
+      #   - condition: state
+      #     entity_id: timer.timer_basementhall_lights_lock
+      #     state: idle
+      # action:
+      #   - type: turn_on
+      #     device_id: 3bdab8fe7d5516745479dd7a898a7069
+      #     entity_id: light.01_zbmini_stairsbasement_switch_light
+      #     domain: light
+      #   - service: timer.start
+      #     data: {}
+      #     target:
+      #       entity_id: timer.timer_basementhall_lights_lock
+      # mode: single
+
+###################################################################################
+  # - alias: Lights - Turn off - stairs to basement when basement hall lights is off  # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - platform: device
+  #       type: turned_off
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #       domain: switch
+  #   condition:
+  #     - condition: state
+  #       entity_id: input_boolean.tgl_basement_lights_lock
+  #       state: "off"
+  #       enabled: false
+  #     - condition: device
+  #       type: is_on
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #       domain: switch
+  #       enabled: false
+  #     - condition: state
+  #       entity_id: timer.timer_basementhall_lights_lock
+  #       state: idle
+  #   action:
+  #     - type: turn_off
+  #       device_id: 3bdab8fe7d5516745479dd7a898a7069
+  #       entity_id: light.01_zbmini_stairsbasement_switch_light
+  #       domain: light
+  #     - service: timer.start
+  #       data: {}
+  #       target:
+  #         entity_id: timer.timer_basementhall_lights_lock
+  #   mode: single
+#######################################################
+  # - alias: Lights - Turn on - basement hall lights when stairs to basement is on # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - platform: device
+  #       type: turned_on
+  #       device_id: 3bdab8fe7d5516745479dd7a898a7069
+  #       entity_id: light.01_zbmini_stairsbasement_switch_light
+  #       domain: light
+  #   condition:
+  #     - condition: state
+  #       entity_id: input_boolean.tgl_basement_lights_lock
+  #       state: "off"
+  #       enabled: false
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 3bdab8fe7d5516745479dd7a898a7069
+  #       entity_id: light.01_zbmini_stairsbasement_switch_light
+  #       domain: light
+  #       enabled: false
+  #     - condition: state
+  #       entity_id: timer.timer_basementhall_lights_lock
+  #       state: idle
+  #   action:
+  #     - type: turn_on
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #       domain: switch
+  #     - service: timer.start
+  #       data: {}
+  #       target:
+  #         entity_id: timer.timer_basementhall_lights_lock
+  #   mode: single
+
+
+###################################################################################
+  # - alias: Lights - Turn off - basement hall lights when stairs to basement is off # MIGRATE INSIDE HOME ASSITANT
+  #   description: ""
+  #   trigger:
+  #     - platform: device
+  #       type: turned_off
+  #       device_id: 3bdab8fe7d5516745479dd7a898a7069
+  #       entity_id: light.01_zbmini_stairsbasement_switch_light
+  #       domain: light
+  #   condition:
+  #     - condition: state
+  #       entity_id: input_boolean.tgl_basement_lights_lock
+  #       state: "off"
+  #       enabled: false
+  #     - condition: device
+  #       type: is_on
+  #       device_id: 3bdab8fe7d5516745479dd7a898a7069
+  #       entity_id: light.01_zbmini_stairsbasement_switch_light
+  #       domain: light
+  #       enabled: false
+  #     - condition: state
+  #       entity_id: timer.timer_basementhall_lights_lock
+  #       state: idle
+  #   action:
+  #     - type: turn_off
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #       domain: switch
+  #     - service: timer.start
+  #       data: {}
+  #       target:
+  #         entity_id: timer.timer_basementhall_lights_lock
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Lights - Turn on - basement hall lights when magic button pressed
+  #   description: ""
+  #   trigger:
+  #     - device_id: 2d9fdcefe586410ba96b90a280a3ffff
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_short_press
+  #       subtype: button
+  #   condition:
+  #     - condition: device
+  #       type: is_off
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #       domain: switch
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #   mode: single
+
+###################################################################################
+
+  # - alias: Lights - Turn off - basement hall lights when magic button pressed
+  #   description: ""
+  #   trigger:
+  #     - device_id: 2d9fdcefe586410ba96b90a280a3ffff
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_short_press
+  #       subtype: button
+  #   condition:
+  #     - condition: device
+  #       type: is_on
+  #       device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #       entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #       domain: switch
+  #   action:
+  #     - service: switch.turn_off
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #   mode: single    
+
+###################################################################################
+
+  # - alias: Lights - Turn on - Stairs and basement hall lights when magic button double pressed
+  #   description: ""
+  #   trigger:
+  #     - device_id: 2d9fdcefe586410ba96b90a280a3ffff
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_double_press
+  #       subtype: button
+  #   condition:
+  #     - condition: and
+  #       conditions:
+  #         - condition: device
+  #           type: is_off
+  #           device_id: 3bdab8fe7d5516745479dd7a898a7069
+  #           entity_id: light.01_zbmini_stairsbasement_switch_light
+  #           domain: light
+  #         - condition: device
+  #           type: is_off
+  #           device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #           entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #           domain: switch    
+  #   action:
+  #     - service: input_boolean.turn_on
+  #       data: {}
+  #       target:
+  #         entity_id: input_boolean.tgl_basement_lights_lock    
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #     - service: light.turn_on
+  #       target:
+  #         entity_id: light.01_zbmini_stairsbasement_switch_light
+  #     - delay:
+  #         hours: 0
+  #         minutes: 0
+  #         seconds: 10
+  #         milliseconds: 0
+  #     - service: input_boolean.turn_off
+  #       data: {}
+  #       target:
+  #         entity_id: input_boolean.tgl_basement_lights_lock  
+  #   mode: single    
+
+###################################################################################
+
+  # - alias: Lights - Turn off - Stairs and basement hall lights when magic button double pressed
+  #   description: ""
+  #   trigger:
+  #     - device_id: 2d9fdcefe586410ba96b90a280a3ffff
+  #       domain: zha
+  #       platform: device
+  #       type: remote_button_double_press
+  #       subtype: button
+  #   condition:
+  #     - condition: and
+  #       conditions:
+  #         - condition: device
+  #           type: is_on
+  #           device_id: 3bdab8fe7d5516745479dd7a898a7069
+  #           entity_id: light.01_zbmini_stairsbasement_switch_light
+  #           domain: light
+  #         - condition: device
+  #           type: is_on
+  #           device_id: 57e5c92cc8ebddce2dd65f2a226b0f03
+  #           entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #           domain: switch    
+  #   action:
+  #     - service: input_boolean.turn_on
+  #       data: {}
+  #       target:
+  #         entity_id: input_boolean.tgl_basement_lights_lock     
+  #     - service: switch.turn_off
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #     - service: light.turn_off
+  #       target:
+  #         entity_id: light.01_zbmini_stairsbasement_switch_light
+  #     - delay:
+  #         hours: 0
+  #         minutes: 0
+  #         seconds: 10
+  #         milliseconds: 0
+  #     - service: input_boolean.turn_off
+  #       data: {}
+  #       target:
+  #         entity_id: input_boolean.tgl_basement_lights_lock 
+  #   mode: single 
+
+    ###################################################################################
+  # - alias: Turn on - Basement hall lights on when Magic button is pressed single.
+  #   description: ""
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - input_select.dropdwn_magic_lights_button_status
+  #       to: "Single"
+  #   action:
+  #     - service: switch.turn_on
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #   mode: single
+
+    ###################################################################################
+  # - alias: Turn off-Basement hall lights off when Magic button is pressed double.
+  #   description: ""
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - input_select.dropdwn_magic_lights_button_status
+  #       to: "Double"
+  #   action:
+  #     - service: switch.turn_off
+  #       target:
+  #         entity_id: switch.01_zbminil2_basementhall_switch_switch
+  #   mode: single

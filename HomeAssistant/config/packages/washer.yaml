@@ -1,0 +1,153 @@
+
+###################################################################################
+###################################################################################
+
+# FULLY MIGRATE INSIDE HOME ASSITANT
+
+###################################################################################
+###################################################################################
+
+input_select:
+  washingmachine_status: # MIGRATE INSIDE HOME ASSITANT
+    name: Washingmachine Status
+    options:
+    - "Off"
+    - "Working"
+    - "Finished"
+    initial: "Off"
+    icon: mdi:washing-machine
+
+##################################################################################
+##### El Shelly consume solo con la lavadora puesta: 5.0w/6.0w 
+##### Programa de sintéticos: Calentar a 30ºC. Inicio a las 9:54
+##### Programa de sintéticos: Calentar a 30ºC. Inicio hasta 120w
+##### Programa de sintéticos: Calentar a 30ºC. Al calentar 2176w. Duración 2min.
+##### Programa de sintéticos: Calentar a 30ºC. Mientras lava hasta 190w.
+##### Programa de sintéticos: Calentar a 30ºC. Mientras aclara hasta 390w.
+##### Programa de sintéticos: Calentar a 30ºC. Mientras centrifuga hasta 450w.
+##### Programa de sintéticos: Calentar a 30ºC. Fin a las 12:20
+# -------------
+##### Programa de mezcla: Calentar a 40ºC. Inicio a las 12:39
+##### Programa de mezcla: Calentar a 40ºC. Inicio hasta 120w
+##### Programa de mezcla: Calentar a 40ºC. Al calentar 2500w. Duración 12:45 - 12:53
+##### Programa de mezcla: Calentar a 40ºC. Mientras lava hasta 255w.
+##### Programa de mezcla: Calentar a 40ºC. Mientras centrifuga hasta 400w.
+##### Programa de mezcla: Calentar a 40ºC. Fin a las 13:50
+
+##################################################################################
+
+
+automation:
+  - alias: Washer - Action - Set washing machine to running # MIGRATE INSIDE HOME ASSITANT
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.01_shelly_plug_s_washer_power
+      above: '8'
+      for:
+        minutes: 2
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washingmachine_status
+          option: "Working"
+##################################################################################
+
+  - alias: Washer - Action - Set washing machine as finished # MIGRATE INSIDE HOME ASSITANT
+    description: ""
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.01_shelly_plug_s_washer_power
+        below: '4'
+        for:
+          minutes: 2
+    condition:
+      - condition: state
+        entity_id: input_select.washingmachine_status
+        state: "Working"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washingmachine_status
+          option: "Finished"
+##################################################################################
+
+  - alias: Washer - Notify - Washing machine finished # MIGRATE INSIDE HOME ASSITANT
+    trigger:
+      - platform: state
+        entity_id: input_select.washingmachine_status
+        to: "Finished"
+    action:
+      - service: notify.ha_rabbitbot
+        data:
+          message: Washer end cleaning clothes
+          title: Washer
+      - device_id: e5a40244e500cb783d26149f22f52485
+        domain: mobile_app
+        type: notify
+        message: Washer end cleaning clothes
+        title: Washer              
+    # - service: tts.cloud_say
+    #   data:
+    #     cache: true
+    #     entity_id: media_player.googlehome2507
+    #     message: Hola, parece que la lavadora ha terminado. ¿Podrías echarle un vistazo?
+    #     language: es-ES
+    #     options:
+    #       voice: EstrellaNeural
+    # - service: notify.mobile_app_iphone_carlos_13
+    #   data:
+    #     message: La lavadora ha terminado
+    #     title: LAVADORA
+##################################################################################
+
+  - alias: Washer - Notify - Washer still close # MIGRATE INSIDE HOME ASSITANT
+    mode: single
+    trigger:
+      - platform: time_pattern
+        minutes: /5
+    condition:
+      - condition: state
+        entity_id: input_select.washingmachine_status
+        state: "Finished"
+    action:
+      - service: notify.ha_rabbitbot
+        data:
+          message: Washer still close... please open it.
+          title: Washer
+      - device_id: e5a40244e500cb783d26149f22f52485
+        domain: mobile_app
+        type: notify
+        message: Washer still close... please open it.
+        title: Washer              
+      # - service: notify.mobile_app_iphone_carlos_13
+      #   data:
+      #     message: La lavadora sigue pendiente de abrir
+      #     title: LAVADORA
+      # - service: tts.cloud_say
+      #   data:
+      #     cache: true
+      #     entity_id: media_player.googlehome2507
+      #     message: Hola. Siento molestarte, pero nadie se ha ocupado de la lavadora... y ya sabes... luego huele mal la ropa
+      #     language: es-ES
+      #     options:
+      #       voice: EstrellaNeural
+##################################################################################
+
+  - alias: Washer - Action - Washer open # MIGRATE INSIDE HOME ASSITANT
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.21_snzb_04_washer_door_opening
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_select.washingmachine_status
+        state: "Finished"
+    action:
+      - service: input_select.select_option
+        data:
+          option: "Off"
+        target:
+          entity_id: input_select.washingmachine_status
+##################################################################################

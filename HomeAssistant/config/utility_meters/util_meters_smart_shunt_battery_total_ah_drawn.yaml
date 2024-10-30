@@ -1,0 +1,43 @@
+  # ###################################################################################
+  # ######  UTITILY METERS - SMART SHUNT 500a - TOTAL AH DRAWN
+  # ###################################################################################  
+  utilitymeter_smartshunt500a_total_ah_drawn_daily:
+    name: UtilityMeter-SmartShunt500A-total_ah_drawn-Daily
+    source: sensor.template_smartshunt500a_battery_history_total_ah_drawn_positive
+    cycle: daily
+    offset: 0
+    tariffs: []
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true
+
+  utilitymeter_smartshunt500a_total_ah_drawn_weekly:
+    name: UtilityMeter-SmartShunt500A-total_ah_drawn-Weekly
+    source: sensor.template_smartshunt500a_battery_history_total_ah_drawn_positive
+    cycle: weekly
+    offset: 0
+    tariffs: []
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true    
+
+  utilitymeter_smartshunt500a_total_ah_drawn_monthly:
+    name: UtilityMeter-SmartShunt500A-total_ah_drawn-Monthly
+    source: sensor.template_smartshunt500a_battery_history_total_ah_drawn_positive
+    cycle: monthly
+    offset: 0
+    tariffs: []
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true        
+
+  utilitymeter_smartshunt500a_total_ah_drawn_yearly:
+    name: UtilityMeter-SmartShunt500A-total_ah_drawn-Yearly
+    source: sensor.template_smartshunt500a_battery_history_total_ah_drawn_positive
+    cycle: yearly
+    offset: 0
+    tariffs: []
+    delta_values: false
+    net_consumption: false
+    periodically_resetting: true       
+

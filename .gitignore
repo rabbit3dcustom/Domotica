@@ -1,0 +1,11 @@
+bms/
+backup/
+!backup/
+Tasmota/Backup/
+HomeAssistant/ESPHome/secrets/secrets.yaml
+HomeAssistant/config/secrets.yaml
+HomeAssistant/config/!backup/
+*.yaml_
+**home-assistant_v2.db
+HomeAssistant/!Examples/
+Tasmota/Firmware/

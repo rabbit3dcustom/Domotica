@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "energy",
+  "data": {
+    "energy_sources": [
+      {
+        "type": "grid",
+        "flow_from": [
+          {
+            "stat_energy_from": "sensor.daily_consumption",
+            "stat_cost": null,
+            "entity_energy_price": null,
+            "number_energy_price": null
+          }
+        ],
+        "flow_to": [],
+        "cost_adjustment_day": 0.0
+      }
+    ],
+    "device_consumption": [
+      {
+        "stat_consumption": "sensor.consumo"
+      },
+      {
+        "stat_consumption": "sensor.01shellyem_01_main_energy"
+      },
+      {
+        "stat_consumption": "sensor.01shellyem_02_lights_energy"
+      },
+      {
+        "stat_consumption": "sensor.02shellyem_enchufes_azul_energy"
+      },
+      {
+        "stat_consumption": "sensor.02shellyem_enchufes_plata_energy"
+      },
+      {
+        "stat_consumption": "sensor.03shellyem_basement_main_energy"
+      },
+      {
+        "stat_consumption": "sensor.03shellyem_basement_plugs_energy"
+      }
+    ]
+  }
+}

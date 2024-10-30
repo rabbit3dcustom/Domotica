@@ -1,0 +1,24 @@
+#In the automation change the entity_id with the name of the sensor.
+##############
+NAME                                                    -   ENDITY_ID                           -   DEVICE_ID
+binary_sensor.01_snzb_06p_presencegarage_occupancy      -   bb1b1bf5a0809674e6e35e75a76c5b4a    -   9dabbb34c923b9c3faea8fed7ac0bec3
+binary_sensor.02_bathroom_contactsensor                 -   5c69f605a3417430001bfa3618669885    -   5c69f605a3417430001bfa3618669885
+binary_sensor.02_snzb_04_sleepingroom_window_opening    -   4ca2d920f155045fd822c15b7303afa8    -   22b1358c43dc1e3be474fbd7d10525a7
+binary_sensor.10_snzb_04_mainroom_window_opening        -   f4330909270fba21becaee621d89f74e    -   a007eaa6ac2a614d000575e822eac4b8
+binary_sensor.26_snzb_04_garagemaindoor_door_opening    -   679429108602ebb0cb00fed13bf1084e    -   75f79bdfcd8b96584b313f57b4a0e5a9
+light.01_zbmini_stairsbasement_switch_light             -   33cecf3db16e3fe18d06f6daf374b642    -   3bdab8fe7d5516745479dd7a898a7069
+sensor.02_snzb_01_porchelights_button                   -   9d139c9acd8681657c6cc159ba5c147d
+sensor.02_dalybmss_esp32_battery_level                  -   700495b41b659f875b6102ee39aac7ca    -   b191e909390176eaa12d7ee1abc2d363
+sensor.03_snzb_01_garagelights_button                   -   b20e89dcbf8f7951adf644a9b10f5d0f
+sensor.25_snzb_04_bsmntstrgroom_window                  -   a82e52d82d582c019e73d1221639e33e    -   517c7f0fb78c09d26d759a32ab6ff63c
+switch.01_zbminil2_basementhall_switch_switch           -   3a3b8b9eb46c984aa460023f4c8e26f9    -   57e5c92cc8ebddce2dd65f2a226b0f03
+switch.01_trvzb_sleepingroom_switch                     -   bd07a530112468573493db57be866787    -   7ce0e0a7def8f6693b4072bb1851bf4a
+switch.02_zbminil2_porchelights_switch_switch                                                   -   57e5c92cc8ebddce2dd65f2a226b0f03
+switch.02_trvzb_mainroom_switch                         -   fcb1e72f332265c65f7ffa1d2f0487cc    -   228670188383e0b212ac87524485974f
+switch.03_zbminil2_garage_lights_switch_switch          -   c56d0f8c65ef19471cfccdc92285faae    -   ba9beb4df84180945aee5c118f757bf1
+switch.04_basicr2_chargerprinterbattery                 -   3cb3dbd5a9a24e47a14009aed02b382c    -   03d28742dcd5da5601c91b6558391a4a
+sensor.sun_solar_elevation                              -   6d6494223d51afdbe95b10da156913ee
+
+
+03-SNZB-01-GarageLights-Button                          -                                       -   b20e89dcbf8f7951adf644a9b10f5d0f
+

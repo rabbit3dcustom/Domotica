@@ -10,3 +10,4 @@ HomeAssistant/config/!backup/
 HomeAssistant/!Examples/
 Tasmota/Firmware/
 HomeAssistant/config/mqtt/**
+HomeAssistant/config/mqtt/

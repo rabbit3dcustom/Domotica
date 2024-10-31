@@ -24,7 +24,7 @@
 #   availability_topic: "tele/tasmota_01-SonoffZigbeePro/LWT"
 #   payload_available: "Online"
 #   payload_not_available: "Offline"
-#   qos: 0
+#   qos: 0 
 
 ####################################################################################################################
 

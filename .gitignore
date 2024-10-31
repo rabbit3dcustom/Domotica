@@ -11,3 +11,4 @@ HomeAssistant/!Examples/
 Tasmota/Firmware/
 HomeAssistant/config/mqtt/**
 HomeAssistant/config/mqtt/
+HomeAssistant/config/packages/pck_solar_production/pck_solar_production_mppt_adjust_amps_charger.yaml
